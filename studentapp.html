@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VHELPCC - VIT Chennai Campus Services Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Cursor Trail Effect */
+        .cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.1s ease;
+        }
+
+        /* Optimized Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .logo:hover::before {
+            left: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        /* Particle System */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-particle 20s linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+            background: linear-gradient(45deg, #fff, #f1c40f, #fff, #e74c3c, #fff);
+            background-size: 400% 400%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow-shimmer 4s ease-in-out infinite, hero-title 1s ease-out;
+            will-change: background-position;
+        }
+
+        @keyframes rainbow-shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes hero-title {
+            0% { opacity: 0; transform: translateY(-30px) scale(0.8); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .hero .tagline {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            opacity: 0;
+            animation: fade-up 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: white;
+            padding: 20px 45px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: bounce-in 1s ease-out 1s forwards;
+            will-change: transform;
+        }
+
+        .demo-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 20px 45px;
+            font-size: 1.3rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: bounce-in 1s ease-out 1.2s forwards;
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .demo-btn:hover::before {
+            left: 100%;
+        }
+
+        .demo-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        @keyframes bounce-in {
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+            50% { transform: translateY(-5px) scale(1.05); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Floating Elements */
+        .floating-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.1);
+            animation: float-icon 12s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+        .floating-icon:nth-child(3) { top: 80%; left: 70%; animation-delay: 4s; }
+        .floating-icon:nth-child(4) { top: 30%; right: 25%; animation-delay: 6s; }
+        .floating-icon:nth-child(5) { top: 70%; left: 20%; animation-delay: 8s; }
+
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        /* Interactive Statistics */
+        .stats {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 80px 0;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: transform 0.6s ease;
+            opacity: 0;
+        }
+
+        .stat-item:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(20px, 20px);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Interactive Counter Animation */
+        @keyframes count-up {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .counting {
+            animation: count-up 0.6s ease-out;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 4rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transform: translateX(-50%);
+            transition: width 0.8s ease;
+            border-radius: 2px;
+        }
+
+        .section-title.visible::after {
+            width: 100px;
+        }
+
+        /* Enhanced About Section */
+        .about {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .about-text h3 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .phone-mockup {
+            position: relative;
+            max-width: 350px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        .phone-frame {
+            width: 350px;
+            height: 700px;
+            background: linear-gradient(145deg, #2c3e50, #34495e);
+            border-radius: 40px;
+            padding: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .phone-frame:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-preview {
+            position: absolute;
+            inset: 0;
+            background: white;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .app-content {
+            flex: 1;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-preview {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-preview:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-preview-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Enhanced Features Section */
+        .features {
+            background: white;
+            position: relative;
+        }
+
+        .feature-showcase {
+            display: grid;
+            gap: 120px;
+            margin-top: 5rem;
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            padding: 40px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-item:nth-child(even) .feature-content {
+            order: 2;
+        }
+
+        .feature-item:nth-child(even) .feature-screenshot {
+            order: 1;
+        }
+
+        .feature-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-content p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .feature-benefits {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .feature-benefits li {
+            padding: 12px 0;
+            color: #555;
+            position: relative;
+            padding-left: 35px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-benefits li:hover {
+            color: #667eea;
+            transform: translateX(10px);
+        }
+
+        .feature-benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feature-screenshot {
+            position: relative;
+        }
+
+        .screenshot-container {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px dashed #dee2e6;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s ease;
+            cursor: pointer;
+        }
+
+        .screenshot-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: transform 3s ease;
+        }
+
+        .screenshot-container:hover::before {
+            transform: rotate(45deg) translate(50px, 50px);
+        }
+
+        .screenshot-container:hover {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            transform: scale(1.02);
+        }
+
+        .screenshot-placeholder {
+            text-align: center;
+            color: #6c757d;
+            position: relative;
+            z-index: 1;
+        }
+
+        .screenshot-placeholder h4 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: #495057;
+        }
+
+        .screenshot-placeholder p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-icon-large {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-icon-large:hover {
+            transform: rotateY(180deg) scale(1.1);
+        }
+
+        /* Tech Stack Section with Interactive Elements */
+        .tech-stack {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-stack::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: move-bg 20s linear infinite;
+        }
+
+        @keyframes move-bg {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+
+        .tech-stack .section-title {
+            color: white;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tech-category {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-category::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .tech-category:hover::before {
+            opacity: 1;
+            top: -50%;
+            left: -50%;
+        }
+
+        .tech-category:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .tech-category h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: white;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .tech-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .tech-badge:hover::before {
+            left: 100%;
+        }
+
+        .tech-badge:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Enhanced Screenshots Gallery */
+        .screenshots {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 4rem;
+        }
+
+        .screenshot-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .screenshot-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .screenshot-card:hover::before {
+            opacity: 1;
+        }
+
+        .screenshot-image {
+            height: 250px;
+            background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 4rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshot-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: transform 0.6s ease;
+            opacity: 0;
+        }
+
+        .screenshot-card:hover .screenshot-image::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(50px, 50px);
+        }
+
+        .screenshot-card:hover .screenshot-image {
+            transform: scale(1.1);
+        }
+
+        .screenshot-info {
+            padding: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .screenshot-info h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #333;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .screenshot-info p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 80px 0 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: rotate-slow 30s linear infinite;
+        }
+
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .social-icons {
+            margin: 40px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .social-icon:hover::before {
+            left: 100%;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1) rotateY(180deg);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        /* Intersection Observer Delays */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+        .delay-500 { transition-delay: 0.5s; }
+        .delay-600 { transition-delay: 0.6s; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero {
+                padding-top: 120px;
+                min-height: 90vh;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.3rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .download-btn, .demo-btn {
+                width: 80%;
+                max-width: 300px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .feature-item {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                padding: 30px 20px;
+            }
+
+            .feature-item:nth-child(even) .feature-content {
+                order: 1;
+            }
+
+            .feature-item:nth-child(even) .feature-screenshot {
+                order: 2;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .phone-frame {
+                width: 280px;
+                height: 560px;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.1rem;
+            }
+
+            .download-btn, .demo-btn {
+                padding: 15px 35px;
+                font-size: 1.1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .phone-frame {
+                width: 250px;
+                height: 500px;
+            }
+
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading VHELPCC...</div>
+        </div>
+    </div>
+
+    <!-- Cursor Trail -->
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" id="logo">VHELPCC</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#tech">Technology</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+            </ul>
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="particles" id="particles"></div>
+        <div class="floating-icons">
+            <div class="floating-icon">🔧</div>
+            <div class="floating-icon">🍕</div>
+            <div class="floating-icon">🔍</div>
+            <div class="floating-icon">📱</div>
+            <div class="floating-icon">⚡</div>
+        </div>
+        <div class="hero-content">
+            <h1>VHELPCC</h1>
+            <p class="tagline">VIT Chennai Campus Services Platform</p>
+            <div class="hero-buttons">
+                <a href="#" class="download-btn" id="downloadBtn">📱 Download APK</a>
+                <a href="#features" class="demo-btn">🚀 View Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item fade-in delay-100" data-target="3">
+                <span class="stat-number" id="stat1">0</span>
+                <div class="stat-label">Core Services</div>
+            </div>
+            <div class="stat-item fade-in delay-200" data-target="5">
+                <span class="stat-number" id="stat2">0</span>
+                <div class="stat-label">User Roles</div>
+            </div>
+            <div class="stat-item fade-in delay-300" data-target="100">
+                <span class="stat-number" id="stat3">0</span>
+                <div class="stat-label">% Secure</div>
+            </div>
+            <div class="stat-item fade-in delay-400" data-target="24">
+                <span class="stat-number" id="stat4">0</span>
+                <div class="stat-label">/7 Available</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">About VHELPCC</h2>
+            <div class="about-content">
+                <div class="about-text slide-left">
+                    <h3>Your All-in-One Campus Solution</h3>
+                    <p>VHELPCC is a comprehensive platform designed specifically for VIT Chennai students and staff. Our app streamlines campus services by bringing together repair services, food delivery, and lost & found functionality in one convenient location.</p>
+                    <p>Built with modern technology and user experience in mind, VHELPCC makes campus life easier through intuitive design, real-time updates, and secure authentication. Whether you need to fix your laptop, order food, or find a lost item, we've got you covered.</p>
+                    <ul class="feature-benefits">
+                        <li>Seamless user experience across all devices</li>
+                        <li>Real-time order tracking and updates</li>
+                        <li>Secure JWT-based authentication</li>
+                        <li>Multi-role access control system</li>
+                    </ul>
+                </div>
+                <div class="phone-mockup slide-right">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="app-preview">
+                                <div class="app-header">VHELPCC</div>
+                                <div class="app-content">
+                                    <div class="feature-preview">
+                                        <div class="feature-preview-icon">🔧</div>
+                                        <div>
+                                            <div style="font-weight: 600; color: #333;">Repair Services</div>
+                                            <div style="font-size: 0.9rem; color: #666;">Quick & Reliable</div>
+                                        </div>
+                                    </div>
+                                    <div class="feature-preview">
+                                        <div class="feature-preview-icon">🍕</div>
+                                        <div>
+                                            <div style="font-weight: 600; color: #333;">Food Delivery</div>
+                                            <div style="font-size: 0.9rem; color: #666;">Multiple Restaurants</div>
+                                        </div>
+                                    </div>
+                                    <div class="feature-preview">
+                                        <div class="feature-preview-icon">🔍</div>
+                                        <div>
+                                            <div style="font-weight: 600; color: #333;">Lost & Found</div>
+                                            <div style="font-size: 0.9rem; color: #666;">Find Your Items</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features" id="features">
+        <div class="container">
+            <h2 class="section-title fade-in">Core Features</h2>
+            <div class="feature-showcase">
+                <div class="feature-item fade-in">
+                    <div class="feature-content">
+                        <h3>Repair Services</h3>
+                        <p>Submit hardware or facility repair requests directly via the app. Track progress and receive notifications when your issue is resolved.</p>
+                        <ul class="feature-benefits">
+                            <li>Quick request submission</li>
+                            <li>View repair history</li>
+                            <li>Automatic progress updates</li>
+                            <li>Photo documentation support</li>
+                        </ul>
+                    </div>
+                    <div class="feature-screenshot">
+                        <div class="screenshot-container">
+                            <div class="screenshot-placeholder">
+                                <div class="feature-icon-large">🔧</div>
+                                <h4>Repair Module Preview</h4>
+                                <p>Visualizes ticket creation, tracking, and resolution process</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-content">
+                        <h3>Food Delivery</h3>
+                        <p>Browse local campus eateries, order food, and get real-time order tracking until your meal arrives at your location.</p>
+                        <ul class="feature-benefits">
+                            <li>Restaurant selection & menus</li>
+                            <li>Secure online payments</li>
+                            <li>Live order tracking</li>
+                            <li>Delivery time estimates</li>
+                        </ul>
+                    </div>
+                    <div class="feature-screenshot">
+                        <div class="screenshot-container">
+                            <div class="screenshot-placeholder">
+                                <div class="feature-icon-large">🍕</div>
+                                <h4>Food Delivery Preview</h4>
+                                <p>Experience seamless ordering and delivery tracking</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-content">
+                        <h3>Lost &amp; Found</h3>
+                        <p>Report lost items, search reported finds, and manage claims securely and efficiently with photo verification.</p>
+                        <ul class="feature-benefits">
+                            <li>Easy reporting of lost/found items</li>
+                            <li>Photo uploads for verification</li>
+                            <li>Admin moderation system</li>
+                            <li>Secure claim process</li>
+                        </ul>
+                    </div>
+                    <div class="feature-screenshot">
+                        <div class="screenshot-container">
+                            <div class="screenshot-placeholder">
+                                <div class="feature-icon-large">🔍</div>
+                                <h4>Lost &amp; Found Preview</h4>
+                                <p>Browse, claim, and report missing items with ease</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="section tech-stack" id="tech">
+        <div class="container">
+            <h2 class="section-title fade-in">Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-category scale-in delay-100">
+                    <h3>Frontend</h3>
+                    <div class="tech-list">
+                        <span class="tech-badge">React Native</span>
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript (ES6+)</span>
+                        <span class="tech-badge">Responsive Design</span>
+                    </div>
+                </div>
+                <div class="tech-category scale-in delay-200">
+                    <h3>Backend</h3>
+                    <div class="tech-list">
+                        <span class="tech-badge">Node.js</span>
+                        <span class="tech-badge">Express.js</span>
+                        <span class="tech-badge">MongoDB</span>
+                        <span class="tech-badge">JWT Auth</span>
+                        <span class="tech-badge">RESTful APIs</span>
+                    </div>
+                </div>
+                <div class="tech-category scale-in delay-300">
+                    <h3>Other Tools</h3>
+                    <div class="tech-list">
+                        <span class="tech-badge">Firebase</span>
+                        <span class="tech-badge">Cloud Storage</span>
+                        <span class="tech-badge">GitHub Actions</span>
+                        <span class="tech-badge">Docker</span>
+                        <span class="tech-badge">Socket.io</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Gallery Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <h2 class="section-title fade-in">App Screenshots</h2>
+            <div class="screenshots-grid">
+                <div class="screenshot-card fade-in delay-100">
+                    <div class="screenshot-image">
+                        📱
+                    </div>
+                    <div class="screenshot-info">
+                        <h4>Home Dashboard</h4>
+                        <p>Intuitive interface for quick service access and navigation throughout the app.</p>
+                    </div>
+                </div>
+                <div class="screenshot-card fade-in delay-200">
+                    <div class="screenshot-image">
+                        🛠️
+                    </div>
+                    <div class="screenshot-info">
+                        <h4>Repair Tracking</h4>
+                        <p>Real-time monitoring of ongoing repair requests with detailed status updates.</p>
+                    </div>
+                </div>
+                <div class="screenshot-card fade-in delay-300">
+                    <div class="screenshot-image">
+                        🍔
+                    </div>
+                    <div class="screenshot-info">
+                        <h4>Order Food</h4>
+                        <p>Browse menus, place orders, and track delivery from multiple campus vendors.</p>
+                    </div>
+                </div>
+                <div class="screenshot-card fade-in delay-400">
+                    <div class="screenshot-image">
+                        🔎
+                    </div>
+                    <div class="screenshot-info">
+                        <h4>Lost & Found Board</h4>
+                        <p>Comprehensive system to browse, claim, or report missing items with photos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>VHELPCC</h3>
+            <p>Empowering VIT Chennai with cutting-edge digital campus solutions. Secure, reliable, and built for the community by the community.</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon" title="Twitter">🐦</a>
+                <a href="#" class="social-icon" title="LinkedIn">💼</a>
+                <a href="#" class="social-icon" title="Email">📧</a>
+                <a href="#" class="social-icon" title="GitHub">💻</a>
+            </div>
+            <p style="margin-top: 30px; opacity: 0.7;">&copy; 2025 VHELPCC. All rights reserved. Made with ❤️ for VIT Chennai.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" title="Back to Top">↑</button>
+
+    <script>
+        // Global variables
+        let particles = [];
+        let cursorTrails = [];
+        
+        // Loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loading = document.getElementById('loading');
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                    initializeApp();
+                }, 500);
+            }, 1500);
+        });
+
+        // Initialize app after loading
+        function initializeApp() {
+            setupScrollAnimations();
+            setupParticleSystem();
+            setupCursorTrail();
+            setupNavigation();
+            setupCounters();
+            setupInteractiveElements();
+        }
+
+        // Intersection Observer for animations
+        function setupScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Trigger counter animations
+                        if (entry.target.classList.contains('stat-item')) {
+                            animateCounter(entry.target);
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in, .slide-left, .slide-right, .scale-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Particle system
+        function setupParticleSystem() {
+            const particlesContainer = document.getElementById('particles');
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 6 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                particlesContainer.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 25000);
+            }
+
+            // Create initial particles
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createParticle, i * 1000);
+            }
+
+            // Continue creating particles
+            setInterval(createParticle, 2000);
+        }
+
+        // Cursor trail effect
+        function setupCursorTrail() {
+            const trail = document.getElementById('cursorTrail');
+            let mouseX = 0, mouseY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                trail.style.opacity = '1';
+                trail.style.left = mouseX + 'px';
+                trail.style.top = mouseY + 'px';
+                
+                // Create trailing effect
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        const trailClone = trail.cloneNode();
+                        trailClone.style.opacity = '0.3';
+                        trailClone.style.transform = 'scale(0.8)';
+                        document.body.appendChild(trailClone);
+                        
+                        setTimeout(() => {
+                            if (trailClone.parentNode) {
+                                trailClone.parentNode.removeChild(trailClone);
+                            }
+                        }, 200);
+                    }, i * 50);
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                trail.style.opacity = '0';
+            });
+        }
+
+        // Navigation functionality
+        function setupNavigation() {
+            const navbar = document.getElementById('navbar');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            const backToTop = document.getElementById('backToTop');
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                    backToTop.classList.add('visible');
+                } else {
+                    navbar.classList.remove('scrolled');
+                    backToTop.classList.remove('visible');
+                }
+            });
+
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenuBtn.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Back to top functionality
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                                        top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Collapse mobile navigation after link click (improves user UX on mobile)
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        // Count-up stats logic—runs once when intersected
+        function setupCounters() {
+            document.querySelectorAll('.stat-item').forEach(item => {
+                item.dataset.counted = "false";
+            });
+        }
+
+        function animateCounter(statItem) {
+            if (statItem.dataset.counted === "true") return;
+            statItem.dataset.counted = "true";
+            const numberSpan = statItem.querySelector('.stat-number');
+            const target = +statItem.getAttribute('data-target');
+            let count = 0;
+            const increment = Math.ceil(target / 40);
+
+            function update() {
+                count += increment;
+                if (count >= target) {
+                    numberSpan.textContent = target;
+                } else {
+                    numberSpan.textContent = count;
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        // Placeholder for custom interactive features
+        function setupInteractiveElements() {
+            // Add any further interactive logic here if needed
+        }
+    </script>
+</body>
+</html>
