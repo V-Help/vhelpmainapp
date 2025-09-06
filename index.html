@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VHELPCC - VIT Chennai Campus Services Platform</title>
     <style>
         * {
@@ -80,14 +80,14 @@
             transform: scale(1);
         }
 
-        /* Navigation */
+        /* Enhanced Navigation */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 15px 0;
+            backdrop-filter: blur(25px);
+            padding: 18px 0;
             z-index: 1000;
             transition: all 0.3s ease;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -95,8 +95,8 @@
 
         .navbar.scrolled {
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
-            transform: translateY(0);
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
         }
 
         .nav-container {
@@ -109,9 +109,12 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
             position: relative;
             overflow: hidden;
@@ -195,7 +198,7 @@
             transform: rotate(45deg) translate(-5px, -6px);
         }
 
-        /* Hero Section */
+        /* Enhanced Hero Section */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -216,7 +219,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.2);
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
             z-index: 1;
         }
 
@@ -268,13 +274,14 @@
             font-weight: 700;
             margin-bottom: 1rem;
             letter-spacing: -2px;
-            background: linear-gradient(45deg, #fff, #f1c40f, #fff, #e74c3c, #fff);
+            background: linear-gradient(45deg, #fff, #f39c12, #fff, #e74c3c, #fff);
             background-size: 400% 400%;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: rainbow-shimmer 4s ease-in-out infinite, hero-title 1s ease-out;
             will-change: background-position;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         @keyframes rainbow-shimmer {
@@ -344,7 +351,7 @@
             overflow: hidden;
         }
 
-        .demo-btn::before {
+        .demo-btn::before, .download-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -355,7 +362,7 @@
             transition: left 0.6s ease;
         }
 
-        .demo-btn:hover::before {
+        .demo-btn:hover::before, .download-btn:hover::before {
             left: 100%;
         }
 
@@ -365,30 +372,15 @@
             transform: translateY(-3px);
         }
 
-        @keyframes bounce-in {
-            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
-            50% { transform: translateY(-5px) scale(1.05); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .download-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s ease;
-        }
-
         .download-btn:hover {
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
         }
 
-        .download-btn:hover::before {
-            left: 100%;
+        @keyframes bounce-in {
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+            50% { transform: translateY(-5px) scale(1.05); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         /* Floating Elements */
@@ -414,27 +406,31 @@
         .floating-icon:nth-child(3) { top: 80%; left: 70%; animation-delay: 4s; }
         .floating-icon:nth-child(4) { top: 30%; right: 25%; animation-delay: 6s; }
         .floating-icon:nth-child(5) { top: 70%; left: 20%; animation-delay: 8s; }
+        .floating-icon:nth-child(6) { top: 40%; left: 30%; animation-delay: 10s; }
+        .floating-icon:nth-child(7) { top: 15%; right: 40%; animation-delay: 12s; }
 
         @keyframes float-icon {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-30px) rotate(10deg); }
         }
 
-        /* Interactive Statistics */
+        /* Enhanced Statistics Section */
         .stats {
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
             backdrop-filter: blur(20px);
-            padding: 80px 0;
-            margin-top: -40px;
+            padding: 100px 0;
+            margin-top: -50px;
             position: relative;
             z-index: 10;
+            border-radius: 50px 50px 0 0;
+            box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.1);
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 50px;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -443,10 +439,13 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            padding: 20px;
-            border-radius: 15px;
+            padding: 30px 20px;
+            border-radius: 20px;
             position: relative;
             overflow: hidden;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .stat-item::before {
@@ -456,7 +455,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
             transform: rotate(45deg);
             transition: transform 0.6s ease;
             opacity: 0;
@@ -468,22 +467,28 @@
         }
 
         .stat-item:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.9);
         }
 
         .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #667eea;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: block;
             position: relative;
             z-index: 1;
+            margin-bottom: 10px;
         }
 
         .stat-label {
-            color: #666;
-            font-size: 1.1rem;
+            color: #555;
+            font-size: 1.2rem;
+            font-weight: 500;
             margin-top: 10px;
             position: relative;
             z-index: 1;
@@ -539,7 +544,7 @@
 
         /* Enhanced About Section */
         .about {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
             position: relative;
             overflow: hidden;
         }
@@ -549,10 +554,12 @@
             position: absolute;
             top: -50%;
             right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+            width: 150%;
+            height: 150%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
         }
 
         @keyframes rotate {
@@ -563,26 +570,44 @@
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 100px;
             align-items: center;
             position: relative;
             z-index: 2;
         }
 
         .about-text {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #666;
+            font-size: 1.3rem;
+            line-height: 1.9;
+            color: #555;
         }
 
         .about-text h3 {
             color: #333;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
             background: linear-gradient(135deg, #667eea, #764ba2);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .about-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
         }
 
         .phone-mockup {
@@ -680,15 +705,34 @@
         }
 
         /* Enhanced Features Section */
-        .features {
-            background: white;
+        .features, .additional-features {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
             position: relative;
+            overflow: hidden;
+        }
+
+        .features::before, .additional-features::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -25%;
+            width: 100%;
+            height: 150%;
+            background: radial-gradient(ellipse, rgba(102, 126, 234, 0.03) 0%, transparent 70%);
+            animation: float-bg 15s ease-in-out infinite;
+        }
+
+        @keyframes float-bg {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
         }
 
         .feature-showcase {
             display: grid;
             gap: 120px;
             margin-top: 5rem;
+            position: relative;
+            z-index: 2;
         }
 
         .feature-item {
@@ -696,15 +740,19 @@
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             align-items: center;
-            padding: 40px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
+            padding: 50px;
+            border-radius: 30px;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
         .feature-item:hover {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
         }
 
         .feature-item:nth-child(even) .feature-content {
@@ -716,18 +764,19 @@
         }
 
         .feature-content h3 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 1.5rem;
             color: #333;
             background: linear-gradient(135deg, #667eea, #764ba2);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 700;
         }
 
         .feature-content p {
-            font-size: 1.2rem;
-            color: #666;
+            font-size: 1.3rem;
+            color: #555;
             line-height: 1.8;
             margin-bottom: 2rem;
         }
@@ -738,17 +787,19 @@
         }
 
         .feature-benefits li {
-            padding: 12px 0;
-            color: #555;
+            padding: 15px 0;
+            color: #444;
             position: relative;
-            padding-left: 35px;
-            font-size: 1.1rem;
+            padding-left: 40px;
+            font-size: 1.15rem;
             transition: all 0.3s ease;
+            border-radius: 8px;
         }
 
         .feature-benefits li:hover {
             color: #667eea;
-            transform: translateX(10px);
+            background: rgba(102, 126, 234, 0.05);
+            padding-left: 50px;
         }
 
         .feature-benefits li::before {
@@ -757,88 +808,39 @@
             left: 0;
             color: #27ae60;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            width: 30px;
+            height: 30px;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .feature-screenshot {
             position: relative;
-        }
-
-        .screenshot-container {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 25px;
-            padding: 40px;
-            text-align: center;
-            min-height: 500px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            border: 3px dashed #dee2e6;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.6s ease;
-            cursor: pointer;
+            align-items: center;
         }
 
-        .screenshot-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: transform 3s ease;
-        }
-
-        .screenshot-container:hover::before {
-            transform: rotate(45deg) translate(50px, 50px);
-        }
-
-        .screenshot-container:hover {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            transform: scale(1.02);
-        }
-
-        .screenshot-placeholder {
-            text-align: center;
-            color: #6c757d;
-            position: relative;
-            z-index: 1;
-        }
-
-        .screenshot-placeholder h4 {
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-            color: #495057;
-        }
-
-        .screenshot-placeholder p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-
-        .feature-icon-large {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .feature-image {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
             border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: white;
-            margin: 0 auto 1.5rem;
-            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            object-fit: cover;
         }
 
-        .feature-icon-large:hover {
-            transform: rotateY(180deg) scale(1.1);
+        .feature-image:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
         }
 
-        /* Tech Stack Section with Interactive Elements */
+        /* Enhanced Tech Stack Section */
         .tech-stack {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -853,23 +855,28 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: move-bg 20s linear infinite;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.05)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.05)"/></svg>');
+            animation: move-bg 25s linear infinite;
         }
 
         @keyframes move-bg {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100px); }
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+            100% { transform: translateY(0) scale(1); }
         }
 
         .tech-stack .section-title {
             color: white;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
         }
 
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 60px;
             margin-top: 4rem;
             position: relative;
             z-index: 2;
@@ -877,10 +884,10 @@
 
         .tech-category {
             background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(25px);
+            padding: 50px;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             transition: all 0.4s ease;
             cursor: pointer;
             position: relative;
@@ -894,7 +901,7 @@
             left: -100%;
             width: 300%;
             height: 300%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
             transition: all 0.6s ease;
             opacity: 0;
         }
@@ -906,24 +913,26 @@
         }
 
         .tech-category:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-15px) scale(1.03);
             background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         .tech-category h3 {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+            font-size: 2rem;
+            margin-bottom: 30px;
             color: white;
             text-align: center;
             position: relative;
             z-index: 1;
+            font-weight: 600;
         }
 
         .tech-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 18px;
             justify-content: center;
             position: relative;
             z-index: 1;
@@ -933,9 +942,9 @@
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(15px);
             color: white;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 1rem;
+            padding: 14px 25px;
+            border-radius: 30px;
+            font-size: 1.05rem;
             font-weight: 500;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -960,120 +969,169 @@
         }
 
         .tech-badge:hover {
-            transform: translateY(-3px) scale(1.05);
+            transform: translateY(-4px) scale(1.08);
             background: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
-        /* Enhanced Screenshots Gallery */
+        /* Enhanced Screenshots Gallery with Phone Mockups */
         .screenshots {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 100px 0;
             position: relative;
-        }
-
-        .screenshots-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-top: 4rem;
-        }
-
-        .screenshot-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            transform-style: preserve-3d;
-        }
-
-        .screenshot-card:hover {
-            transform: translateY(-15px) rotateX(5deg);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
-        }
-
-        .screenshot-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1;
-        }
-
-        .screenshot-card:hover::before {
-            opacity: 1;
-        }
-
-        .screenshot-image {
-            height: 250px;
-            background: linear-gradient(135deg, #e9ecef, #f8f9fa);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6c757d;
-            font-size: 4rem;
-            transition: all 0.3s ease;
-            position: relative;
             overflow: hidden;
         }
 
-        .screenshot-image::before {
+        .screenshots::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: transform 0.6s ease;
-            opacity: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            animation: rotate-slow 40s linear infinite;
         }
 
-        .screenshot-card:hover .screenshot-image::before {
-            opacity: 1;
-            transform: rotate(45deg) translate(50px, 50px);
+        .screenshots .section-title {
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .screenshot-card:hover .screenshot-image {
-            transform: scale(1.1);
-        }
-
-        .screenshot-info {
-            padding: 25px;
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 60px;
+            margin-top: 4rem;
             position: relative;
             z-index: 2;
         }
 
+        .screenshot-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-15px) scale(1.02);
+        }
+
+        /* Phone Mockup Container */
+        .phone-mockup-container {
+            position: relative;
+            width: 280px;
+            height: 560px;
+            margin-bottom: 30px;
+        }
+
+        .phone-mockup-frame {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #2c3e50, #34495e);
+            border-radius: 35px;
+            padding: 20px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .screenshot-card:hover .phone-mockup-frame {
+            box-shadow: 
+                0 35px 70px rgba(0, 0, 0, 0.5),
+                inset 0 2px 4px rgba(255, 255, 255, 0.15);
+            transform: rotateY(5deg);
+        }
+
+        .phone-mockup-frame::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 6px;
+            background: linear-gradient(45deg, #555, #666);
+            border-radius: 3px;
+            z-index: 10;
+        }
+
+        .phone-mockup-frame::after {
+            content: '';
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            border: 3px solid #555;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .phone-screen-container {
+            width: 100%;
+            height: calc(100% - 40px);
+            margin-top: 20px;
+            background: #000;
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .screenshot-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .screenshot-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .screenshot-card:hover .screenshot-image img {
+            transform: scale(1.05);
+        }
+
+        .screenshot-info {
+            text-align: center;
+            color: white;
+            max-width: 300px;
+        }
+
         .screenshot-info h4 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             margin-bottom: 15px;
-            color: #333;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
         }
 
         .screenshot-info p {
-            color: #666;
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.6;
             font-size: 1rem;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
         }
 
         /* Enhanced Footer */
         .footer {
             background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
-            padding: 80px 0 50px;
+            padding: 100px 0 60px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -1086,8 +1144,10 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
-            animation: rotate-slow 30s linear infinite;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(118, 75, 162, 0.08) 0%, transparent 50%);
+            animation: rotate-slow 40s linear infinite;
         }
 
         @keyframes rotate-slow {
@@ -1098,37 +1158,49 @@
         .footer-content {
             position: relative;
             z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         .footer h3 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            font-size: 3rem;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f39c12);
+            background-size: 300% 300%;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease-in-out infinite;
+            font-weight: 700;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .footer p {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             opacity: 0.9;
+            line-height: 1.7;
         }
 
         .social-icons {
-            margin: 40px 0;
+            margin: 50px 0;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
         }
 
         .social-icon {
             display: inline-flex;
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             align-items: center;
@@ -1136,9 +1208,10 @@
             border-radius: 50%;
             text-decoration: none;
             transition: all 0.4s ease;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .social-icon::before {
@@ -1157,8 +1230,8 @@
         }
 
         .social-icon:hover {
-            transform: translateY(-5px) scale(1.1) rotateY(180deg);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            transform: translateY(-8px) scale(1.15) rotateY(180deg);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
         }
 
         /* Back to Top Button */
@@ -1331,6 +1404,11 @@
                 height: 560px;
             }
 
+            .phone-mockup-container {
+                width: 250px;
+                height: 500px;
+            }
+
             .screenshots-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -1367,6 +1445,11 @@
             .phone-frame {
                 width: 250px;
                 height: 500px;
+            }
+
+            .phone-mockup-container {
+                width: 220px;
+                height: 440px;
             }
 
             .back-to-top {
@@ -1423,7 +1506,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#tech">Technology</a></li>
+                <li><a href="#additional-features">More Features</a></li>
                 <li><a href="#screenshots">Screenshots</a></li>
             </ul>
             <div class="mobile-menu-btn" id="mobileMenuBtn">
@@ -1443,6 +1526,8 @@
             <div class="floating-icon">🔍</div>
             <div class="floating-icon">📱</div>
             <div class="floating-icon">⚡</div>
+            <div class="floating-icon">📚</div>
+            <div class="floating-icon">🎯</div>
         </div>
         <div class="hero-content">
             <h1>VHELPCC</h1>
@@ -1455,27 +1540,8 @@
     </section>
 
     <!-- Statistics Section -->
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-item fade-in delay-100" data-target="3">
-                <span class="stat-number" id="stat1">0</span>
-                <div class="stat-label">Core Services</div>
-            </div>
-            <div class="stat-item fade-in delay-200" data-target="5">
-                <span class="stat-number" id="stat2">0</span>
-                <div class="stat-label">User Roles</div>
-            </div>
-            <div class="stat-item fade-in delay-300" data-target="100">
-                <span class="stat-number" id="stat3">0</span>
-                <div class="stat-label">% Secure</div>
-            </div>
-            <div class="stat-item fade-in delay-400" data-target="24">
-                <span class="stat-number" id="stat4">0</span>
-                <div class="stat-label">/7 Available</div>
-            </div>
-        </div>
-    </section>
-
+    
+    
     <!-- About Section -->
     <section class="section about" id="about">
         <div class="container">
@@ -1483,52 +1549,23 @@
             <div class="about-content">
                 <div class="about-text slide-left">
                     <h3>Your All-in-One Campus Solution</h3>
-                    <p>VHELPCC is a comprehensive platform designed specifically for VIT Chennai students and staff. Our app streamlines campus services by bringing together repair services, food delivery, and lost & found functionality in one convenient location.</p>
-                    <p>Built with modern technology and user experience in mind, VHELPCC makes campus life easier through intuitive design, real-time updates, and secure authentication. Whether you need to fix your laptop, order food, or find a lost item, we've got you covered.</p>
+                    <p>VHELPCC is a comprehensive platform designed specifically for VIT Chennai students and staff. Our app streamlines campus services by bringing together repair services, food delivery, lost & found functionality, and much more in one convenient location.</p>
+                    <p>Built with modern technology and user experience in mind, VHELPCC makes campus life easier through intuitive design, real-time updates, and secure authentication. Whether you need to fix your laptop, order food, find a lost item, access study materials, join clubs, or buy used goods, we've got you covered.</p>
                     <ul class="feature-benefits">
                         <li>Seamless user experience across all devices</li>
-                        <li>Real-time order tracking and updates</li>
+                        <li>Real-time tracking and updates</li>
                         <li>Secure JWT-based authentication</li>
                         <li>Multi-role access control system</li>
                     </ul>
                 </div>
                 <div class="phone-mockup slide-right">
-                    <div class="phone-frame">
-                        <div class="phone-screen">
-                            <div class="app-preview">
-                                <div class="app-header">VHELPCC</div>
-                                <div class="app-content">
-                                    <div class="feature-preview">
-                                        <div class="feature-preview-icon">🔧</div>
-                                        <div>
-                                            <div style="font-weight: 600; color: #333;">Repair Services</div>
-                                            <div style="font-size: 0.9rem; color: #666;">Quick & Reliable</div>
-                                        </div>
-                                    </div>
-                                    <div class="feature-preview">
-                                        <div class="feature-preview-icon">🍕</div>
-                                        <div>
-                                            <div style="font-weight: 600; color: #333;">Food Delivery</div>
-                                            <div style="font-size: 0.9rem; color: #666;">Multiple Restaurants</div>
-                                        </div>
-                                    </div>
-                                    <div class="feature-preview">
-                                        <div class="feature-preview-icon">🔍</div>
-                                        <div>
-                                            <div style="font-weight: 600; color: #333;">Lost & Found</div>
-                                            <div style="font-size: 0.9rem; color: #666;">Find Your Items</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <img src="image1.jpeg" alt="VHELPCC App Preview" class="feature-image">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Core Features Section -->
     <section class="section features" id="features">
         <div class="container">
             <h2 class="section-title fade-in">Core Features</h2>
@@ -1545,13 +1582,7 @@
                         </ul>
                     </div>
                     <div class="feature-screenshot">
-                        <div class="screenshot-container">
-                            <div class="screenshot-placeholder">
-                                <div class="feature-icon-large">🔧</div>
-                                <h4>Repair Module Preview</h4>
-                                <p>Visualizes ticket creation, tracking, and resolution process</p>
-                            </div>
-                        </div>
+                        <img src="image2.jpeg" alt="Repair Services Interface" class="feature-image">
                     </div>
                 </div>
                 <div class="feature-item fade-in">
@@ -1566,18 +1597,12 @@
                         </ul>
                     </div>
                     <div class="feature-screenshot">
-                        <div class="screenshot-container">
-                            <div class="screenshot-placeholder">
-                                <div class="feature-icon-large">🍕</div>
-                                <h4>Food Delivery Preview</h4>
-                                <p>Experience seamless ordering and delivery tracking</p>
-                            </div>
-                        </div>
+                        <img src="image3.jpeg" alt="Food Delivery Interface" class="feature-image">
                     </div>
                 </div>
                 <div class="feature-item fade-in">
                     <div class="feature-content">
-                        <h3>Lost &amp; Found</h3>
+                        <h3>Lost & Found</h3>
                         <p>Report lost items, search reported finds, and manage claims securely and efficiently with photo verification.</p>
                         <ul class="feature-benefits">
                             <li>Easy reporting of lost/found items</li>
@@ -1587,13 +1612,76 @@
                         </ul>
                     </div>
                     <div class="feature-screenshot">
-                        <div class="screenshot-container">
-                            <div class="screenshot-placeholder">
-                                <div class="feature-icon-large">🔍</div>
-                                <h4>Lost &amp; Found Preview</h4>
-                                <p>Browse, claim, and report missing items with ease</p>
-                            </div>
-                        </div>
+                        <img src="image4.jpeg" alt="Lost & Found Interface" class="feature-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Features Section -->
+    <section class="section additional-features" id="additional-features">
+        <div class="container">
+            <h2 class="section-title fade-in">Additional Features</h2>
+            <div class="feature-showcase">
+                <div class="feature-item fade-in">
+                    <div class="feature-content">
+                        <h3>Study Materials</h3>
+                        <p>Access lecture notes, assignment solutions, and other academic resources shared by professors and students.</p>
+                        <ul class="feature-benefits">
+                            <li>Downloadable PDFs and videos</li>
+                            <li>Organized by courses and semesters</li>
+                            <li>Upload your own study materials</li>
+                            <li>Search by subject and topic</li>
+                        </ul>
+                    </div>
+                    <div class="feature-screenshot">
+                        <img src="image5.jpeg" alt="Study Materials Interface" class="feature-image">
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-content">
+                        <h3>Clubs</h3>
+                        <p>Explore and join campus clubs, organizations, and societies to enhance your college life.</p>
+                        <ul class="feature-benefits">
+                            <li>Club event calendar</li>
+                            <li>Membership and communication tools</li>
+                            <li>Discover new interests and networking</li>
+                            <li>Event registration and notifications</li>
+                        </ul>
+                    </div>
+                    <div class="feature-screenshot">
+                        <img src="image6.jpeg" alt="Clubs and Societies Interface" class="feature-image">
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-content">
+                        <h3>Old Goods Market</h3>
+                        <p>Buy and sell used items within the campus community, including textbooks, gadgets, and Softwares.</p>
+                        <ul class="feature-benefits">
+                            <li>Safe and secure transactions</li>
+                            <li>Item listing and searching</li>
+                            <li>Ratings and reviews for sellers</li>
+                            <li>Category-based browsing</li>
+                        </ul>
+                    </div>
+                    <div class="feature-screenshot">
+                        <img src="image7.jpeg" alt="Old Goods Market Interface" class="feature-image">
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-content">
+                        <h3>Faculty Information</h3>
+                        <p>Get detailed profiles, office hours, and contact info for professors and staff members.</p>
+                        <ul class="feature-benefits">
+                            <li>Search by department and name</li>
+                            <li>Direct messaging and appointments</li>
+                            <li>Faculty announcements and updates</li>
+                            <li>Office hours and availability</li>
+                        </ul>
+                    </div>
+                    <div class="feature-screenshot">
+                        <img src="image8.jpeg" alt="Faculty Information Interface" class="feature-image">
                     </div>
                 </div>
             </div>
@@ -1601,43 +1689,7 @@
     </section>
 
     <!-- Tech Stack Section -->
-    <section class="section tech-stack" id="tech">
-        <div class="container">
-            <h2 class="section-title fade-in">Technology Stack</h2>
-            <div class="tech-grid">
-                <div class="tech-category scale-in delay-100">
-                    <h3>Frontend</h3>
-                    <div class="tech-list">
-                        <span class="tech-badge">React Native</span>
-                        <span class="tech-badge">HTML5</span>
-                        <span class="tech-badge">CSS3</span>
-                        <span class="tech-badge">JavaScript (ES6+)</span>
-                        <span class="tech-badge">Responsive Design</span>
-                    </div>
-                </div>
-                <div class="tech-category scale-in delay-200">
-                    <h3>Backend</h3>
-                    <div class="tech-list">
-                        <span class="tech-badge">Node.js</span>
-                        <span class="tech-badge">Express.js</span>
-                        <span class="tech-badge">MongoDB</span>
-                        <span class="tech-badge">JWT Auth</span>
-                        <span class="tech-badge">RESTful APIs</span>
-                    </div>
-                </div>
-                <div class="tech-category scale-in delay-300">
-                    <h3>Other Tools</h3>
-                    <div class="tech-list">
-                        <span class="tech-badge">Firebase</span>
-                        <span class="tech-badge">Cloud Storage</span>
-                        <span class="tech-badge">GitHub Actions</span>
-                        <span class="tech-badge">Docker</span>
-                        <span class="tech-badge">Socket.io</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Screenshots Gallery Section -->
     <section class="screenshots" id="screenshots">
@@ -1645,8 +1697,14 @@
             <h2 class="section-title fade-in">App Screenshots</h2>
             <div class="screenshots-grid">
                 <div class="screenshot-card fade-in delay-100">
-                    <div class="screenshot-image">
-                        📱
+                    <div class="phone-mockup-container">
+                        <div class="phone-mockup-frame">
+                            <div class="phone-screen-container">
+                                <div class="screenshot-image">
+                                    <img src="image9.jpeg" alt="Home Dashboard Screenshot">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screenshot-info">
                         <h4>Home Dashboard</h4>
@@ -1654,8 +1712,14 @@
                     </div>
                 </div>
                 <div class="screenshot-card fade-in delay-200">
-                    <div class="screenshot-image">
-                        🛠️
+                    <div class="phone-mockup-container">
+                        <div class="phone-mockup-frame">
+                            <div class="phone-screen-container">
+                                <div class="screenshot-image">
+                                    <img src="image10.jpeg" alt="Repair Tracking Screenshot">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screenshot-info">
                         <h4>Repair Tracking</h4>
@@ -1663,8 +1727,14 @@
                     </div>
                 </div>
                 <div class="screenshot-card fade-in delay-300">
-                    <div class="screenshot-image">
-                        🍔
+                    <div class="phone-mockup-container">
+                        <div class="phone-mockup-frame">
+                            <div class="phone-screen-container">
+                                <div class="screenshot-image">
+                                    <img src="image11.jpeg" alt="Food Ordering Screenshot">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screenshot-info">
                         <h4>Order Food</h4>
@@ -1672,12 +1742,48 @@
                     </div>
                 </div>
                 <div class="screenshot-card fade-in delay-400">
-                    <div class="screenshot-image">
-                        🔎
+                    <div class="phone-mockup-container">
+                        <div class="phone-mockup-frame">
+                            <div class="phone-screen-container">
+                                <div class="screenshot-image">
+                                    <img src="image12.jpeg" alt="Lost & Found Screenshot">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screenshot-info">
                         <h4>Lost & Found Board</h4>
                         <p>Comprehensive system to browse, claim, or report missing items with photos.</p>
+                    </div>
+                </div>
+                <div class="screenshot-card fade-in delay-500">
+                    <div class="phone-mockup-container">
+                        <div class="phone-mockup-frame">
+                            <div class="phone-screen-container">
+                                <div class="screenshot-image">
+                                    <img src="image13.jpeg" alt="Study Resources Screenshot">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-info">
+                        <h4>Study Resources</h4>
+                        <p>Access and share academic materials organized by courses and semesters.</p>
+                    </div>
+                </div>
+                <div class="screenshot-card fade-in delay-600">
+                    <div class="phone-mockup-container">
+                        <div class="phone-mockup-frame">
+                            <div class="phone-screen-container">
+                                <div class="screenshot-image">
+                                    <img src="image14.jpeg" alt="Campus Clubs Screenshot">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-info">
+                        <h4>Campus Clubs</h4>
+                        <p>Discover and join student organizations with event calendars and communication tools.</p>
                     </div>
                 </div>
             </div>
@@ -1772,7 +1878,7 @@
                     }
                 }, 25000);
             }
-
+            
             // Create initial particles
             for (let i = 0; i < 15; i++) {
                 setTimeout(createParticle, i * 1000);
@@ -1845,12 +1951,11 @@
             backToTop.addEventListener('click', () => {
                 window.scrollTo({
                     top: 0,
-                                        top: 0,
                     behavior: 'smooth'
                 });
             });
 
-            // Collapse mobile navigation after link click (improves user UX on mobile)
+            // Collapse mobile navigation after link click
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     if (navLinks.classList.contains('active')) {
@@ -1861,7 +1966,7 @@
             });
         }
 
-        // Count-up stats logic—runs once when intersected
+        // Count-up stats logic
         function setupCounters() {
             document.querySelectorAll('.stat-item').forEach(item => {
                 item.dataset.counted = "false";
@@ -1888,9 +1993,9 @@
             update();
         }
 
-        // Placeholder for custom interactive features
+        // Interactive elements
         function setupInteractiveElements() {
-            // Add any further interactive logic here if needed
+            // Add any additional interactive features here
         }
     </script>
 </body>
