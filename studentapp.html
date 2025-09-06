@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VHELPCC - VIT Chennai Campus Services Platform</title>
     <style>
         * {
@@ -12,72 +12,15 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: #1a1a1a;
             overflow-x: hidden;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
         }
 
         html {
             scroll-behavior: smooth;
-        }
-
-        /* Cursor Trail Effect */
-        .cursor-trail {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.1s ease;
-        }
-
-        /* Optimized Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .slide-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s ease;
-        }
-
-        .slide-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s ease;
-        }
-
-        .slide-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scale-in {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.6s ease;
-        }
-
-        .scale-in.visible {
-            opacity: 1;
-            transform: scale(1);
         }
 
         /* Enhanced Navigation */
@@ -85,88 +28,94 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(25px);
-            padding: 18px 0;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
             z-index: 1000;
             transition: all 0.3s ease;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.1);
+            background: rgba(15, 15, 35, 0.98);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
             padding: 15px 0;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #0099cc, #0066ff);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-decoration: none;
             position: relative;
-            overflow: hidden;
+            letter-spacing: -1px;
         }
 
-        .logo::before {
+        .logo::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
+            bottom: -5px;
+            left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
-            transition: left 0.6s ease;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, #0066ff);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
-        .logo:hover::before {
-            left: 100%;
+        .logo:hover::after {
+            transform: scaleX(1);
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 35px;
+            gap: 40px;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #ffffff;
             font-weight: 500;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
             position: relative;
-            padding: 8px 0;
+            padding: 8px 16px;
+            border-radius: 8px;
         }
 
-        .nav-links a::after {
+        .nav-links a::before {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            transition: width 0.3s ease;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 102, 255, 0.2));
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover::before {
+            opacity: 1;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: #00d4ff;
             transform: translateY(-2px);
         }
 
@@ -181,9 +130,10 @@
         .mobile-menu-btn span {
             width: 25px;
             height: 3px;
-            background: #333;
+            background: #ffffff;
             margin: 3px 0;
             transition: 0.3s;
+            border-radius: 2px;
         }
 
         .mobile-menu-btn.active span:nth-child(1) {
@@ -198,10 +148,8 @@
             transform: rotate(45deg) translate(-5px, -6px);
         }
 
-        /* Enhanced Hero Section */
+        /* Hero Section - Completely Redesigned */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -210,6 +158,7 @@
             position: relative;
             overflow: hidden;
             padding-top: 80px;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 30%, #16213e 60%, #0d1421 100%);
         }
 
         .hero::before {
@@ -220,351 +169,264 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 102, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(102, 51, 153, 0.1) 0%, transparent 50%);
             z-index: 1;
         }
 
-        /* Particle System */
-        .particles {
+        /* Animated Background Elements */
+        .hero-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             z-index: 1;
         }
 
-        .particle {
+        .floating-shape {
             position: absolute;
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 102, 255, 0.05));
             border-radius: 50%;
-            pointer-events: none;
-            animation: float-particle 20s linear infinite;
+            animation: float 15s ease-in-out infinite;
         }
 
-        @keyframes float-particle {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
+        .floating-shape:nth-child(1) { top: 20%; left: 10%; width: 80px; height: 80px; animation-delay: 0s; }
+        .floating-shape:nth-child(2) { top: 60%; right: 15%; width: 60px; height: 60px; animation-delay: 2s; }
+        .floating-shape:nth-child(3) { top: 80%; left: 70%; width: 100px; height: 100px; animation-delay: 4s; }
+        .floating-shape:nth-child(4) { top: 30%; right: 25%; width: 40px; height: 40px; animation-delay: 1s; }
+        .floating-shape:nth-child(5) { top: 70%; left: 20%; width: 70px; height: 70px; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-30px) rotate(180deg); opacity: 1; }
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 900px;
-            padding: 0 20px;
+            max-width: 1200px;
+            padding: 0 30px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 102, 255, 0.2));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .hero h1 {
-            font-size: 5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: -2px;
-            background: linear-gradient(45deg, #fff, #f39c12, #fff, #e74c3c, #fff);
-            background-size: 400% 400%;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            margin-bottom: 30px;
+            letter-spacing: -3px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 30%, #0066ff 70%, #ffffff 100%);
+            background-size: 300% 300%;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: rainbow-shimmer 4s ease-in-out infinite, hero-title 1s ease-out;
-            will-change: background-position;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: hero-gradient 4s ease-in-out infinite;
         }
 
-        @keyframes rainbow-shimmer {
+        @keyframes hero-gradient {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
 
-        @keyframes hero-title {
-            0% { opacity: 0; transform: translateY(-30px) scale(0.8); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
         .hero .tagline {
-            font-size: 1.6rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            opacity: 0;
-            animation: fade-up 1s ease-out 0.5s forwards;
-        }
-
-        @keyframes fade-up {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 50px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 25px;
+            gap: 30px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 80px;
         }
 
         .download-btn {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            background: linear-gradient(135deg, #00d4ff, #0066ff);
             color: white;
-            padding: 20px 45px;
-            font-size: 1.3rem;
+            padding: 20px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
             border: none;
-            border-radius: 50px;
+            border-radius: 60px;
             cursor: pointer;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
             transition: all 0.4s ease;
-            opacity: 0;
-            animation: bounce-in 1s ease-out 1s forwards;
-            will-change: transform;
         }
 
         .demo-btn {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            padding: 20px 45px;
-            font-size: 1.3rem;
+            padding: 20px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
+            border-radius: 60px;
             cursor: pointer;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
             transition: all 0.4s ease;
-            opacity: 0;
-            animation: bounce-in 1s ease-out 1.2s forwards;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
         }
 
-        .demo-btn::before, .download-btn::before {
+        .download-btn::before, .demo-btn::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transition: left 0.6s ease;
         }
 
-        .demo-btn:hover::before, .download-btn:hover::before {
+        .download-btn:hover::before, .demo-btn:hover::before {
             left: 100%;
-        }
-
-        .demo-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-3px);
         }
 
         .download-btn:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.5);
         }
 
-        @keyframes bounce-in {
-            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
-            50% { transform: translateY(-5px) scale(1.05); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+        .demo-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
         }
 
-        /* Floating Elements */
-        .floating-icons {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .floating-icon {
-            position: absolute;
-            font-size: 2rem;
-            color: rgba(255, 255, 255, 0.1);
-            animation: float-icon 12s ease-in-out infinite;
-        }
-
-        .floating-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
-        .floating-icon:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
-        .floating-icon:nth-child(3) { top: 80%; left: 70%; animation-delay: 4s; }
-        .floating-icon:nth-child(4) { top: 30%; right: 25%; animation-delay: 6s; }
-        .floating-icon:nth-child(5) { top: 70%; left: 20%; animation-delay: 8s; }
-        .floating-icon:nth-child(6) { top: 40%; left: 30%; animation-delay: 10s; }
-        .floating-icon:nth-child(7) { top: 15%; right: 40%; animation-delay: 12s; }
-
-        @keyframes float-icon {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
-        }
-
-        /* Enhanced Statistics Section */
+        /* Stats Section - Enhanced */
         .stats {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.1) 100%);
             backdrop-filter: blur(20px);
             padding: 100px 0;
             margin-top: -50px;
             position: relative;
             z-index: 10;
             border-radius: 50px 50px 0 0;
-            box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 50px;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 30px;
         }
 
         .stat-item {
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 30px 20px;
-            border-radius: 20px;
+            transition: all 0.4s ease;
+            padding: 40px 30px;
+            border-radius: 25px;
             position: relative;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.7);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: transform 0.6s ease;
-            opacity: 0;
-        }
-
-        .stat-item:hover::before {
-            opacity: 1;
-            transform: rotate(45deg) translate(20px, 20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .stat-item:hover {
             transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.2);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 102, 255, 0.1));
         }
 
         .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d4ff, #0066ff);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: block;
-            position: relative;
-            z-index: 1;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .stat-label {
-            color: #555;
-            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.3rem;
             font-weight: 500;
-            margin-top: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Interactive Counter Animation */
-        @keyframes count-up {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .counting {
-            animation: count-up 0.6s ease-out;
         }
 
         /* Section Styling */
         .section {
-            padding: 100px 0;
+            padding: 120px 0;
             position: relative;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 30px;
         }
 
         .section-title {
             text-align: center;
-            font-size: 3rem;
-            font-weight: 600;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
             margin-bottom: 4rem;
-            color: #333;
+            color: #ffffff;
             position: relative;
+            letter-spacing: -1px;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: -20px;
             left: 50%;
-            width: 0;
+            width: 100px;
             height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #00d4ff, #0066ff);
             transform: translateX(-50%);
-            transition: width 0.8s ease;
             border-radius: 2px;
         }
 
-        .section-title.visible::after {
-            width: 100px;
-        }
-
-        /* Enhanced About Section */
+        /* About Section - Dark Theme */
         .about {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0f0f23 100%);
             position: relative;
             overflow: hidden;
-        }
-
-        .about::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 150%;
-            height: 150%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
-            animation: rotate 30s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .about-content {
@@ -572,167 +434,92 @@
             grid-template-columns: 1fr 1fr;
             gap: 100px;
             align-items: center;
-            position: relative;
-            z-index: 2;
         }
 
         .about-text {
-            font-size: 1.3rem;
-            line-height: 1.9;
-            color: #555;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .about-text h3 {
-            color: #333;
-            font-size: 2.5rem;
+            color: #ffffff;
+            font-size: 3rem;
             margin-bottom: 2rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #00d4ff, #0066ff);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 700;
-            position: relative;
-        }
-
-        .about-text h3::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 2px;
+            font-weight: 800;
+            line-height: 1.2;
         }
 
         .about-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
             margin-bottom: 1.5rem;
-            text-align: justify;
+            color: rgba(255, 255, 255, 0.8);
         }
 
-        .phone-mockup {
+        .feature-benefits {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .feature-benefits li {
+            padding: 18px 0;
+            color: rgba(255, 255, 255, 0.9);
             position: relative;
-            max-width: 350px;
-            margin: 0 auto;
-            cursor: pointer;
-        }
-
-        .phone-frame {
-            width: 350px;
-            height: 700px;
-            background: linear-gradient(145deg, #2c3e50, #34495e);
-            border-radius: 40px;
-            padding: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .phone-frame:hover {
-            transform: translateY(-10px) rotateY(5deg);
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4);
-        }
-
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+            padding-left: 50px;
             font-size: 1.1rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .app-preview {
-            position: absolute;
-            inset: 0;
-            background: white;
-            border-radius: 25px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .app-header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 25px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.3rem;
-        }
-
-        .app-content {
-            flex: 1;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .feature-preview {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 20px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            border-left: 5px solid #667eea;
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .feature-preview:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-preview-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .feature-benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-weight: bold;
+            font-size: 1.5rem;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 102, 255, 0.1));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
+            border: 2px solid rgba(0, 212, 255, 0.3);
         }
 
-        /* Enhanced Features Section */
-        .features, .additional-features {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        .phone-mockup {
             position: relative;
-            overflow: hidden;
+            max-width: 400px;
+            margin: 0 auto;
         }
 
-        .features::before, .additional-features::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -25%;
+        .feature-image {
             width: 100%;
-            height: 150%;
-            background: radial-gradient(ellipse, rgba(102, 126, 234, 0.03) 0%, transparent 70%);
-            animation: float-bg 15s ease-in-out infinite;
+            height: auto;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @keyframes float-bg {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(5deg); }
+        .feature-image:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 40px 100px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Features Section - Dark Theme */
+        .features, .additional-features {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0d1421 100%);
+            position: relative;
         }
 
         .feature-showcase {
             display: grid;
             gap: 120px;
             margin-top: 5rem;
-            position: relative;
-            z-index: 2;
         }
 
         .feature-item {
@@ -740,19 +527,18 @@
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             align-items: center;
-            padding: 50px;
+            padding: 60px;
             border-radius: 30px;
-            transition: all 0.4s ease;
-            background: rgba(255, 255, 255, 0.7);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
         }
 
         .feature-item:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: translateY(-10px) scale(1.01);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 102, 255, 0.05));
+            transform: translateY(-10px);
+            border-color: rgba(0, 212, 255, 0.3);
         }
 
         .feature-item:nth-child(even) .feature-content {
@@ -764,248 +550,34 @@
         }
 
         .feature-content h3 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 1.5rem;
-            color: #333;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #ffffff;
+            background: linear-gradient(135deg, #00d4ff, #0066ff);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .feature-content p {
-            font-size: 1.3rem;
-            color: #555;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
             line-height: 1.8;
             margin-bottom: 2rem;
         }
 
-        .feature-benefits {
-            list-style: none;
-            margin: 2rem 0;
-        }
-
-        .feature-benefits li {
-            padding: 15px 0;
-            color: #444;
-            position: relative;
-            padding-left: 40px;
-            font-size: 1.15rem;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-        }
-
-        .feature-benefits li:hover {
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.05);
-            padding-left: 50px;
-        }
-
-        .feature-benefits li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #27ae60;
-            font-weight: bold;
-            font-size: 1.4rem;
-            width: 30px;
-            height: 30px;
-            background: rgba(39, 174, 96, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .feature-screenshot {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .feature-image {
-            width: 100%;
-            max-width: 450px;
-            height: auto;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s ease;
-            object-fit: cover;
-        }
-
-        .feature-image:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Enhanced Tech Stack Section */
-        .tech-stack {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tech-stack::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.05)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.05)"/></svg>');
-            animation: move-bg 25s linear infinite;
-        }
-
-        @keyframes move-bg {
-            0% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-30px) scale(1.05); }
-            100% { transform: translateY(0) scale(1); }
-        }
-
-        .tech-stack .section-title {
-            color: white;
-            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 60px;
-            margin-top: 4rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .tech-category {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(25px);
-            padding: 50px;
-            border-radius: 30px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tech-category::before {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: -100%;
-            width: 300%;
-            height: 300%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
-            transition: all 0.6s ease;
-            opacity: 0;
-        }
-
-        .tech-category:hover::before {
-            opacity: 1;
-            top: -50%;
-            left: -50%;
-        }
-
-        .tech-category:hover {
-            transform: translateY(-15px) scale(1.03);
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        .tech-category h3 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: white;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            font-weight: 600;
-        }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .tech-badge {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-            color: white;
-            padding: 14px 25px;
-            border-radius: 30px;
-            font-size: 1.05rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .tech-badge::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .tech-badge:hover::before {
-            left: 100%;
-        }
-
-        .tech-badge:hover {
-            transform: translateY(-4px) scale(1.08);
-            background: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Enhanced Screenshots Gallery with Phone Mockups */
+        /* Screenshots Section */
         .screenshots {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 100px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .screenshots::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
-            animation: rotate-slow 40s linear infinite;
-        }
-
-        .screenshots .section-title {
-            color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            padding: 120px 0;
         }
 
         .screenshots-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 60px;
             margin-top: 4rem;
-            position: relative;
-            z-index: 2;
         }
 
         .screenshot-card {
@@ -1020,11 +592,10 @@
             transform: translateY(-15px) scale(1.02);
         }
 
-        /* Phone Mockup Container */
         .phone-mockup-container {
             position: relative;
-            width: 280px;
-            height: 560px;
+            width: 300px;
+            height: 600px;
             margin-bottom: 30px;
         }
 
@@ -1032,67 +603,20 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(145deg, #2c3e50, #34495e);
-            border-radius: 35px;
-            padding: 20px;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.4),
-                inset 0 2px 4px rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
+            border-radius: 40px;
+            padding: 25px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
             transition: all 0.4s ease;
-        }
-
-        .screenshot-card:hover .phone-mockup-frame {
-            box-shadow: 
-                0 35px 70px rgba(0, 0, 0, 0.5),
-                inset 0 2px 4px rgba(255, 255, 255, 0.15);
-            transform: rotateY(5deg);
-        }
-
-        .phone-mockup-frame::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 6px;
-            background: linear-gradient(45deg, #555, #666);
-            border-radius: 3px;
-            z-index: 10;
-        }
-
-        .phone-mockup-frame::after {
-            content: '';
-            position: absolute;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 50px;
-            border: 3px solid #555;
-            border-radius: 50%;
-            z-index: 10;
+            border: 3px solid rgba(255, 255, 255, 0.1);
         }
 
         .phone-screen-container {
             width: 100%;
-            height: calc(100% - 40px);
-            margin-top: 20px;
+            height: calc(100% - 50px);
+            margin-top: 25px;
             background: #000;
-            border-radius: 25px;
+            border-radius: 30px;
             overflow: hidden;
-            position: relative;
-        }
-
-        .screenshot-image {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
         }
 
         .screenshot-image img {
@@ -1102,77 +626,44 @@
             transition: all 0.3s ease;
         }
 
-        .screenshot-card:hover .screenshot-image img {
-            transform: scale(1.05);
-        }
-
         .screenshot-info {
             text-align: center;
-            color: white;
+            color: #ffffff;
             max-width: 300px;
         }
 
         .screenshot-info h4 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
-            color: white;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            font-weight: 600;
+            color: #ffffff;
+            font-weight: 700;
         }
 
         .screenshot-info p {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.6;
-            font-size: 1rem;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            font-size: 1.1rem;
         }
 
-        /* Enhanced Footer */
+        /* Footer - Dark Theme */
         .footer {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
+            background: linear-gradient(135deg, #0d1421, #1a1a2e);
             color: white;
             padding: 100px 0 60px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 30% 40%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(118, 75, 162, 0.08) 0%, transparent 50%);
-            animation: rotate-slow 40s linear infinite;
-        }
-
-        @keyframes rotate-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .footer-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer h3 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 25px;
-            background: linear-gradient(45deg, #667eea, #764ba2, #f39c12);
-            background-size: 300% 300%;
+            background: linear-gradient(135deg, #00d4ff, #0066ff, #00d4ff);
+            background-size: 200% 200%;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradient-shift 3s ease-in-out infinite;
-            font-weight: 700;
+            font-weight: 800;
         }
 
         @keyframes gradient-shift {
@@ -1186,7 +677,7 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.8);
             line-height: 1.7;
         }
 
@@ -1194,64 +685,48 @@
             margin: 50px 0;
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 30px;
         }
 
         .social-icon {
             display: inline-flex;
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00d4ff, #0066ff);
             color: white;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
+            border-radius: 20px;
             text-decoration: none;
             transition: all 0.4s ease;
-            font-size: 1.6rem;
+            font-size: 2rem;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .social-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .social-icon:hover::before {
-            left: 100%;
         }
 
         .social-icon:hover {
-            transform: translateY(-8px) scale(1.15) rotateY(180deg);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+            transform: translateY(-8px) scale(1.15);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4);
         }
 
-        /* Back to Top Button */
+        /* Back to Top */
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #00d4ff, #0066ff);
             color: white;
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s ease;
             z-index: 1000;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
         }
 
         .back-to-top.visible {
@@ -1261,61 +736,24 @@
 
         .back-to-top:hover {
             transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
         }
 
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            transition: opacity 0.5s ease;
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
         }
 
-        .loading-content {
-            text-align: center;
-            color: white;
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            font-size: 1.5rem;
-            font-weight: 300;
-        }
-
-        /* Intersection Observer Delays */
-        .delay-100 { transition-delay: 0.1s; }
-        .delay-200 { transition-delay: 0.2s; }
-        .delay-300 { transition-delay: 0.3s; }
-        .delay-400 { transition-delay: 0.4s; }
-        .delay-500 { transition-delay: 0.5s; }
-        .delay-600 { transition-delay: 0.6s; }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 0;
+            .nav-container {
+                padding: 0 20px;
             }
 
             .nav-links {
@@ -1324,11 +762,11 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: rgba(255, 255, 255, 0.98);
+                background: rgba(15, 15, 35, 0.98);
                 backdrop-filter: blur(20px);
                 flex-direction: column;
-                padding: 20px 0;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                padding: 30px 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
             }
 
             .nav-links.active {
@@ -1339,32 +777,26 @@
                 display: flex;
             }
 
-            .hero {
-                padding-top: 120px;
-                min-height: 90vh;
-            }
-
-            .hero h1 {
-                font-size: 3rem;
-            }
-
-            .hero .tagline {
-                font-size: 1.3rem;
+            .hero-content {
+                padding: 0 20px;
             }
 
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 20px;
             }
 
             .download-btn, .demo-btn {
-                width: 80%;
+                width: 100%;
                 max-width: 300px;
+                justify-content: center;
             }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 30px;
+                padding: 0 20px;
             }
 
             .about-content {
@@ -1375,7 +807,7 @@
             .feature-item {
                 grid-template-columns: 1fr;
                 gap: 50px;
-                padding: 30px 20px;
+                padding: 40px 20px;
             }
 
             .feature-item:nth-child(even) .feature-content {
@@ -1386,123 +818,60 @@
                 order: 2;
             }
 
-            .tech-grid {
+            .screenshots-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
 
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            .section {
-                padding: 80px 0;
-            }
-
-            .phone-frame {
+            .phone-mockup-container {
                 width: 280px;
                 height: 560px;
-            }
-
-            .phone-mockup-container {
-                width: 250px;
-                height: 500px;
-            }
-
-            .screenshots-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
             }
         }
 
         @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero .tagline {
-                font-size: 1.1rem;
-            }
-
-            .download-btn, .demo-btn {
-                padding: 15px 35px;
-                font-size: 1.1rem;
-            }
-
             .stats-grid {
                 grid-template-columns: 1fr;
                 gap: 25px;
             }
 
             .stat-number {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
 
-            .section-title {
-                font-size: 1.8rem;
+            .container {
+                padding: 0 20px;
             }
 
-            .phone-frame {
-                width: 250px;
-                height: 500px;
-            }
-
-            .phone-mockup-container {
-                width: 220px;
-                height: 440px;
-            }
-
-            .back-to-top {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-        }
-
-        /* Reduce motion for users who prefer it */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+            .section {
+                padding: 80px 0;
             }
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 12px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: #1a1a2e;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 4px;
+            background: linear-gradient(135deg, #00d4ff, #0066ff);
+            border-radius: 6px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, #764ba2, #667eea);
+            background: linear-gradient(135deg, #0066ff, #00d4ff);
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loading">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Loading VHELPCC...</div>
-        </div>
-    </div>
-
-    <!-- Cursor Trail -->
-    <div class="cursor-trail" id="cursorTrail"></div>
-
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo" id="logo">VHELPCC</a>
+            <a href="#" class="logo">VHELPCC</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
                 <li><a href="#features">Features</a></li>
@@ -1519,47 +888,68 @@
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
-        <div class="particles" id="particles"></div>
-        <div class="floating-icons">
-            <div class="floating-icon">🔧</div>
-            <div class="floating-icon">🍕</div>
-            <div class="floating-icon">🔍</div>
-            <div class="floating-icon">📱</div>
-            <div class="floating-icon">⚡</div>
-            <div class="floating-icon">📚</div>
-            <div class="floating-icon">🎯</div>
+        <div class="hero-bg">
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
         </div>
         <div class="hero-content">
+            <div class="hero-badge">🎓 VIT Chennai Digital Ecosystem</div>
             <h1>VHELPCC</h1>
-            <p class="tagline">VIT Chennai Campus Services Platform</p>
+            <p class="tagline">Your All-in-One VIT Chennai Campus Services Platform - Food, Repairs, Lost & Found, Study Materials, and More!</p>
             <div class="hero-buttons">
-                <a href="#" class="download-btn" id="downloadBtn">📱 Download APK</a>
-                <a href="#features" class="demo-btn">🚀 View Features</a>
+                <a href="#" class="download-btn" id="downloadBtn">📱 Download App</a>
+                <a href="#features" class="demo-btn">🚀 Explore Features</a>
             </div>
         </div>
     </section>
 
     <!-- Statistics Section -->
-    
-    
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item" data-target="15000">
+                <span class="stat-number">15K+</span>
+                <span class="stat-label">Target Students</span>
+            </div>
+            <div class="stat-item" data-target="8">
+                <span class="stat-number">8+</span>
+                <span class="stat-label">Core Services</span>
+            </div>
+            <div class="stat-item" data-target="500">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Daily Orders</span>
+            </div>
+            <div class="stat-item" data-target="2700">
+                <span class="stat-number">2.7K+</span>
+                <span class="stat-label">Active Users</span>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section class="section about" id="about">
         <div class="container">
-            <h2 class="section-title fade-in">About VHELPCC</h2>
+            <h2 class="section-title fade-in">Revolutionizing VIT Chennai Campus Life</h2>
             <div class="about-content">
-                <div class="about-text slide-left">
-                    <h3>Your All-in-One Campus Solution</h3>
-                    <p>VHELPCC is a comprehensive platform designed specifically for VIT Chennai students and staff. Our app streamlines campus services by bringing together repair services, food delivery, lost & found functionality, and much more in one convenient location.</p>
-                    <p>Built with modern technology and user experience in mind, VHELPCC makes campus life easier through intuitive design, real-time updates, and secure authentication. Whether you need to fix your laptop, order food, find a lost item, access study materials, join clubs, or buy used goods, we've got you covered.</p>
+                <div class="about-text">
+                    <h3>Your Digital Campus Companion</h3>
+                    <p>VHELPCC is a comprehensive Flutter-based mobile application that transforms how VIT Chennai students interact with campus services. Built with cutting-edge technology and designed for 15,000+ students, our platform integrates food ordering, repair services, lost & found, study materials, clubs, and marketplace features into one seamless experience.</p>
+                    <p>From ordering food from multiple campus restaurants to finding lost items, accessing study materials, joining clubs, and buying used goods - VHELPCC is your one-stop solution for everything campus-related. Built by students, for students.</p>
                     <ul class="feature-benefits">
-                        <li>Seamless user experience across all devices</li>
-                        <li>Real-time tracking and updates</li>
-                        <li>Secure JWT-based authentication</li>
-                        <li>Multi-role access control system</li>
+                        <li>Multi-restaurant food ordering with real-time tracking</li>
+                        <li>Comprehensive repair services for devices and facilities</li>
+                        <li>Smart lost & found system with photo verification</li>
+                        <li>Organized study materials and academic resources</li>
+                        <li>Campus clubs and organizations directory</li>
+                        <li>Peer-to-peer marketplace for used goods</li>
+                        <li>Faculty information and communication system</li>
+                        <li>Secure authentication with VIT email validation</li>
                     </ul>
                 </div>
-                <div class="phone-mockup slide-right">
-                    <img src="image1.jpeg" alt="VHELPCC App Preview" class="feature-image">
+                <div class="phone-mockup">
+                    <img src="image1.jpeg" alt="VHELPCC App Dashboard" class="feature-image">
                 </div>
             </div>
         </div>
@@ -1568,47 +958,52 @@
     <!-- Core Features Section -->
     <section class="section features" id="features">
         <div class="container">
-            <h2 class="section-title fade-in">Core Features</h2>
+            <h2 class="section-title fade-in">Core Campus Services</h2>
             <div class="feature-showcase">
                 <div class="feature-item fade-in">
                     <div class="feature-content">
-                        <h3>Repair Services</h3>
-                        <p>Submit hardware or facility repair requests directly via the app. Track progress and receive notifications when your issue is resolved.</p>
+                        <h3>🍕 Food Delivery System</h3>
+                        <p>Order from multiple campus restaurants with real-time menu updates, smart cart management, and live order tracking. Rate and review restaurants to help the community make better choices.</p>
                         <ul class="feature-benefits">
-                            <li>Quick request submission</li>
-                            <li>View repair history</li>
-                            <li>Automatic progress updates</li>
-                            <li>Photo documentation support</li>
-                        </ul>
-                    </div>
-                    <div class="feature-screenshot">
-                        <img src="image2.jpeg" alt="Repair Services Interface" class="feature-image">
-                    </div>
-                </div>
-                <div class="feature-item fade-in">
-                    <div class="feature-content">
-                        <h3>Food Delivery</h3>
-                        <p>Browse local campus eateries, order food, and get real-time order tracking until your meal arrives at your location.</p>
-                        <ul class="feature-benefits">
-                            <li>Restaurant selection & menus</li>
-                            <li>Secure online payments</li>
-                            <li>Live order tracking</li>
-                            <li>Delivery time estimates</li>
+                            <li>Multi-restaurant platform with live menus</li>
+                            <li>Real-time order tracking and notifications</li>
+                            <li>Smart cart with automatic restoration</li>
+                            <li>Community ratings and reviews</li>
+                            <li>Peak hour delivery optimization</li>
                         </ul>
                     </div>
                     <div class="feature-screenshot">
                         <img src="image3.jpeg" alt="Food Delivery Interface" class="feature-image">
                     </div>
                 </div>
+
                 <div class="feature-item fade-in">
                     <div class="feature-content">
-                        <h3>Lost & Found</h3>
-                        <p>Report lost items, search reported finds, and manage claims securely and efficiently with photo verification.</p>
+                        <h3>🔧 Device & Facility Repairs</h3>
+                        <p>Submit repair requests for mobiles, laptops, and campus facilities. Track progress in real-time with photo documentation and direct communication with service providers.</p>
                         <ul class="feature-benefits">
-                            <li>Easy reporting of lost/found items</li>
-                            <li>Photo uploads for verification</li>
-                            <li>Admin moderation system</li>
+                            <li>Mobile and laptop repair services</li>
+                            <li>Campus facility maintenance requests</li>
+                            <li>Real-time status tracking</li>
+                            <li>Photo documentation support</li>
+                            <li>Service provider communication</li>
+                        </ul>
+                    </div>
+                    <div class="feature-screenshot">
+                        <img src="image2.jpeg" alt="Repair Services Interface" class="feature-image">
+                    </div>
+                </div>
+
+                <div class="feature-item fade-in">
+                    <div class="feature-content">
+                        <h3>🔍 Lost & Found Hub</h3>
+                        <p>Advanced lost and found system with photo verification, location-based search, and admin moderation. Connect with fellow students to recover lost items safely.</p>
+                        <ul class="feature-benefits">
+                            <li>Photo upload for item verification</li>
+                            <li>Location-based search functionality</li>
+                            <li>Admin moderation for authenticity</li>
                             <li>Secure claim process</li>
+                            <li>Community-driven recovery system</li>
                         </ul>
                     </div>
                     <div class="feature-screenshot">
@@ -1622,168 +1017,177 @@
     <!-- Additional Features Section -->
     <section class="section additional-features" id="additional-features">
         <div class="container">
-            <h2 class="section-title fade-in">Additional Features</h2>
+            <h2 class="section-title fade-in">Enhanced Campus Experience</h2>
             <div class="feature-showcase">
                 <div class="feature-item fade-in">
                     <div class="feature-content">
-                        <h3>Study Materials</h3>
-                        <p>Access lecture notes, assignment solutions, and other academic resources shared by professors and students.</p>
+                        <h3>📚 Study Materials Library</h3>
+                        <p>Access organized academic resources including lecture notes, previous year questions, and assignment solutions. Integrated PDF viewer with offline caching and Google Drive sync.</p>
                         <ul class="feature-benefits">
-                            <li>Downloadable PDFs and videos</li>
-                            <li>Organized by courses and semesters</li>
-                            <li>Upload your own study materials</li>
-                            <li>Search by subject and topic</li>
+                            <li>Year-wise and subject-wise organization</li>
+                            <li>In-app PDF viewer with offline caching</li>
+                            <li>Previous year questions database</li>
+                            <li>Teacher-specific content sections</li>
+                            <li>Google Drive integration</li>
                         </ul>
                     </div>
                     <div class="feature-screenshot">
                         <img src="image5.jpeg" alt="Study Materials Interface" class="feature-image">
                     </div>
                 </div>
+
                 <div class="feature-item fade-in">
                     <div class="feature-content">
-                        <h3>Clubs</h3>
-                        <p>Explore and join campus clubs, organizations, and societies to enhance your college life.</p>
+                        <h3>🎭 Campus Clubs & Organizations</h3>
+                        <p>Discover and join student clubs with comprehensive profiles, event management, member directories, and activity feeds to enhance your campus social life.</p>
                         <ul class="feature-benefits">
-                            <li>Club event calendar</li>
-                            <li>Membership and communication tools</li>
-                            <li>Discover new interests and networking</li>
-                            <li>Event registration and notifications</li>
+                            <li>Complete club profiles and information</li>
+                            <li>Event scheduling and promotion</li>
+                            <li>Member directories and networking</li>
+                            <li>Activity feeds and updates</li>
+                            <li>Club communication tools</li>
                         </ul>
                     </div>
                     <div class="feature-screenshot">
-                        <img src="image6.jpeg" alt="Clubs and Societies Interface" class="feature-image">
+                        <img src="image6.jpeg" alt="Clubs Interface" class="feature-image">
                     </div>
                 </div>
+
                 <div class="feature-item fade-in">
                     <div class="feature-content">
-                        <h3>Old Goods Market</h3>
-                        <p>Buy and sell used items within the campus community, including textbooks, gadgets, and Softwares.</p>
+                        <h3>🛍️ Campus Marketplace</h3>
+                        <p>Buy and sell used items within the VIT Chennai community. From textbooks to electronics, with seller verification and safety guidelines for secure transactions.</p>
                         <ul class="feature-benefits">
-                            <li>Safe and secure transactions</li>
-                            <li>Item listing and searching</li>
-                            <li>Ratings and reviews for sellers</li>
-                            <li>Category-based browsing</li>
+                            <li>Peer-to-peer commerce platform</li>
+                            <li>Category-wise item organization</li>
+                            <li>Student ID verification system</li>
+                            <li>Safety guidelines and tips</li>
+                            <li>Rating system for sellers</li>
                         </ul>
                     </div>
                     <div class="feature-screenshot">
-                        <img src="image7.jpeg" alt="Old Goods Market Interface" class="feature-image">
+                        <img src="image7.jpeg" alt="Marketplace Interface" class="feature-image">
                     </div>
                 </div>
+
                 <div class="feature-item fade-in">
                     <div class="feature-content">
-                        <h3>Faculty Information</h3>
-                        <p>Get detailed profiles, office hours, and contact info for professors and staff members.</p>
+                        <h3>👨‍🏫 Faculty Directory</h3>
+                        <p>Complete faculty information system with profiles, ratings, contact details, office hours, and subject mapping for better student-teacher connectivity.</p>
                         <ul class="feature-benefits">
-                            <li>Search by department and name</li>
-                            <li>Direct messaging and appointments</li>
-                            <li>Faculty announcements and updates</li>
-                            <li>Office hours and availability</li>
+                            <li>Comprehensive faculty profiles</li>
+                            <li>Student rating and feedback system</li>
+                            <li>Office hours and contact information</li>
+                            <li>Subject and department mapping</li>
+                            <li>Direct communication features</li>
                         </ul>
                     </div>
                     <div class="feature-screenshot">
-                        <img src="image8.jpeg" alt="Faculty Information Interface" class="feature-image">
+                        <img src="image8.jpeg" alt="Faculty Directory Interface" class="feature-image">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack Section -->
-    
-
-    <!-- Screenshots Gallery Section -->
+    <!-- Screenshots Gallery -->
     <section class="screenshots" id="screenshots">
         <div class="container">
-            <h2 class="section-title fade-in">App Screenshots</h2>
+            <h2 class="section-title fade-in">App Screenshots Gallery</h2>
             <div class="screenshots-grid">
-                <div class="screenshot-card fade-in delay-100">
+                <div class="screenshot-card fade-in">
                     <div class="phone-mockup-container">
                         <div class="phone-mockup-frame">
                             <div class="phone-screen-container">
                                 <div class="screenshot-image">
-                                    <img src="image1.jpeg" alt="Home Dashboard Screenshot">
+                                    <img src="image1.jpeg" alt="Home Dashboard">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="screenshot-info">
-                        <h4>Home Dashboard</h4>
-                        <p>Intuitive interface for quick service access and navigation throughout the app.</p>
+                        <h4>Dashboard</h4>
+                        <p>Clean, intuitive interface for quick access to all campus services</p>
                     </div>
                 </div>
-                <div class="screenshot-card fade-in delay-200">
+
+                <div class="screenshot-card fade-in">
                     <div class="phone-mockup-container">
                         <div class="phone-mockup-frame">
                             <div class="phone-screen-container">
                                 <div class="screenshot-image">
-                                    <img src="image2.jpeg" alt="Repair Tracking Screenshot">
+                                    <img src="image11.jpeg" alt="Food Ordering">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="screenshot-info">
-                        <h4>Repair Tracking</h4>
-                        <p>Real-time monitoring of ongoing repair requests with detailed status updates.</p>
+                        <h4>Food Ordering</h4>
+                        <p>Browse menus and order from multiple campus restaurants</p>
                     </div>
                 </div>
-                <div class="screenshot-card fade-in delay-300">
+
+                <div class="screenshot-card fade-in">
                     <div class="phone-mockup-container">
                         <div class="phone-mockup-frame">
                             <div class="phone-screen-container">
                                 <div class="screenshot-image">
-                                    <img src="image11.jpeg" alt="Food Ordering Screenshot">
+                                    <img src="image12.jpeg" alt="Lost & Found">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="screenshot-info">
-                        <h4>Order Food</h4>
-                        <p>Browse menus, place orders, and track delivery from multiple campus vendors.</p>
+                        <h4>Lost & Found</h4>
+                        <p>Report and search for lost items with photo verification</p>
                     </div>
                 </div>
-                <div class="screenshot-card fade-in delay-400">
+
+                <div class="screenshot-card fade-in">
                     <div class="phone-mockup-container">
                         <div class="phone-mockup-frame">
                             <div class="phone-screen-container">
                                 <div class="screenshot-image">
-                                    <img src="image12.jpeg" alt="Lost & Found Screenshot">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="screenshot-info">
-                        <h4>Lost & Found Board</h4>
-                        <p>Comprehensive system to browse, claim, or report missing items with photos.</p>
-                    </div>
-                </div>
-                <div class="screenshot-card fade-in delay-500">
-                    <div class="phone-mockup-container">
-                        <div class="phone-mockup-frame">
-                            <div class="phone-screen-container">
-                                <div class="screenshot-image">
-                                    <img src="image13.jpeg" alt="Study Resources Screenshot">
+                                    <img src="image13.jpeg" alt="Study Materials">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="screenshot-info">
                         <h4>Study Resources</h4>
-                        <p>Access and share academic materials organized by courses and semesters.</p>
+                        <p>Access organized academic materials and previous year questions</p>
                     </div>
                 </div>
-                <div class="screenshot-card fade-in delay-600">
+
+                <div class="screenshot-card fade-in">
                     <div class="phone-mockup-container">
                         <div class="phone-mockup-frame">
                             <div class="phone-screen-container">
                                 <div class="screenshot-image">
-                                    <img src="image14.jpeg" alt="Campus Clubs Screenshot">
+                                    <img src="image14.jpeg" alt="Campus Clubs">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="screenshot-info">
                         <h4>Campus Clubs</h4>
-                        <p>Discover and join student organizations with event calendars and communication tools.</p>
+                        <p>Discover and join student organizations and clubs</p>
+                    </div>
+                </div>
+
+                <div class="screenshot-card fade-in">
+                    <div class="phone-mockup-container">
+                        <div class="phone-mockup-frame">
+                            <div class="phone-screen-container">
+                                <div class="screenshot-image">
+                                    <img src="image2.jpeg" alt="Repair Services">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-info">
+                        <h4>Repair Tracking</h4>
+                        <p>Submit and track device repair requests with real-time updates</p>
                     </div>
                 </div>
             </div>
@@ -1792,16 +1196,16 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
+        <div class="container">
             <h3>VHELPCC</h3>
-            <p>Empowering VIT Chennai with cutting-edge digital campus solutions. Secure, reliable, and built for the community by the community.</p>
+            <p>Transforming VIT Chennai campus life through innovative digital solutions. Built by students, for students - creating a unified ecosystem for all your campus needs.</p>
             <div class="social-icons">
-                <a href="#" class="social-icon" title="Twitter">🐦</a>
-                <a href="#" class="social-icon" title="LinkedIn">💼</a>
-                <a href="#" class="social-icon" title="Email">📧</a>
+                <a href="mailto:vhelpvitcc@gmail.com" class="social-icon" title="Email">📧</a>
                 <a href="#" class="social-icon" title="GitHub">💻</a>
+                <a href="#" class="social-icon" title="LinkedIn">💼</a>
+                <a href="#" class="social-icon" title="Twitter">🐦</a>
             </div>
-            <p style="margin-top: 30px; opacity: 0.7;">&copy; 2025 VHELPCC. All rights reserved. Made with ❤️ for VIT Chennai.</p>
+            <p style="margin-top: 40px; opacity: 0.6; font-size: 1rem;">© 2025 VHELPCC. Made with ❤️ for VIT Chennai Community.<br>Independent project - Not officially affiliated with VIT Chennai.</p>
         </div>
     </footer>
 
@@ -1809,194 +1213,122 @@
     <button class="back-to-top" id="backToTop" title="Back to Top">↑</button>
 
     <script>
-        // Global variables
-        let particles = [];
-        let cursorTrails = [];
-        
-        // Loading screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loading = document.getElementById('loading');
-                loading.style.opacity = '0';
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                    initializeApp();
-                }, 500);
-            }, 1500);
+        // Navigation functionality
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        const backToTop = document.getElementById('backToTop');
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+                backToTop.classList.add('visible');
+            } else {
+                navbar.classList.remove('scrolled');
+                backToTop.classList.remove('visible');
+            }
         });
 
-        // Initialize app after loading
-        function initializeApp() {
-            setupScrollAnimations();
-            setupParticleSystem();
-            setupCursorTrail();
-            setupNavigation();
-            setupCounters();
-            setupInteractiveElements();
-        }
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Back to top functionality
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Close mobile menu when link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                }
+            });
+        });
 
         // Intersection Observer for animations
-        function setupScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        
-                        // Trigger counter animations
-                        if (entry.target.classList.contains('stat-item')) {
-                            animateCounter(entry.target);
-                        }
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate counters for stats
+                    if (entry.target.classList.contains('stat-item')) {
+                        animateCounter(entry.target);
                     }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.fade-in, .slide-left, .slide-right, .scale-in').forEach(el => {
-                observer.observe(el);
-            });
-        }
-
-        // Particle system
-        function setupParticleSystem() {
-            const particlesContainer = document.getElementById('particles');
-            
-            function createParticle() {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                const size = Math.random() * 6 + 2;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
-                particle.style.animationDelay = Math.random() * 5 + 's';
-                
-                particlesContainer.appendChild(particle);
-                
-                setTimeout(() => {
-                    if (particle.parentNode) {
-                        particle.parentNode.removeChild(particle);
-                    }
-                }, 25000);
-            }
-            
-            // Create initial particles
-            for (let i = 0; i < 15; i++) {
-                setTimeout(createParticle, i * 1000);
-            }
-
-            // Continue creating particles
-            setInterval(createParticle, 2000);
-        }
-
-        // Cursor trail effect
-        function setupCursorTrail() {
-            const trail = document.getElementById('cursorTrail');
-            let mouseX = 0, mouseY = 0;
-
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                
-                trail.style.opacity = '1';
-                trail.style.left = mouseX + 'px';
-                trail.style.top = mouseY + 'px';
-                
-                // Create trailing effect
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(() => {
-                        const trailClone = trail.cloneNode();
-                        trailClone.style.opacity = '0.3';
-                        trailClone.style.transform = 'scale(0.8)';
-                        document.body.appendChild(trailClone);
-                        
-                        setTimeout(() => {
-                            if (trailClone.parentNode) {
-                                trailClone.parentNode.removeChild(trailClone);
-                            }
-                        }, 200);
-                    }, i * 50);
                 }
             });
+        }, observerOptions);
 
-            document.addEventListener('mouseleave', () => {
-                trail.style.opacity = '0';
-            });
-        }
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .stat-item').forEach(el => {
+            observer.observe(el);
+        });
 
-        // Navigation functionality
-        function setupNavigation() {
-            const navbar = document.getElementById('navbar');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.getElementById('navLinks');
-            const backToTop = document.getElementById('backToTop');
-
-            // Navbar scroll effect
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                    backToTop.classList.add('visible');
-                } else {
-                    navbar.classList.remove('scrolled');
-                    backToTop.classList.remove('visible');
-                }
-            });
-
-            // Mobile menu toggle
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenuBtn.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
-
-            // Back to top functionality
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-
-            // Collapse mobile navigation after link click
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (navLinks.classList.contains('active')) {
-                        navLinks.classList.remove('active');
-                        mobileMenuBtn.classList.remove('active');
-                    }
-                });
-            });
-        }
-
-        // Count-up stats logic
-        function setupCounters() {
-            document.querySelectorAll('.stat-item').forEach(item => {
-                item.dataset.counted = "false";
-            });
-        }
-
+        // Counter animation
         function animateCounter(statItem) {
-            if (statItem.dataset.counted === "true") return;
-            statItem.dataset.counted = "true";
+            if (statItem.dataset.animated) return;
+            statItem.dataset.animated = true;
+            
             const numberSpan = statItem.querySelector('.stat-number');
-            const target = +statItem.getAttribute('data-target');
-            let count = 0;
-            const increment = Math.ceil(target / 40);
-
-            function update() {
-                count += increment;
-                if (count >= target) {
-                    numberSpan.textContent = target;
-                } else {
-                    numberSpan.textContent = count;
-                    requestAnimationFrame(update);
+            const targetText = numberSpan.textContent;
+            const targetNum = parseInt(targetText.replace(/[^\d]/g, ''));
+            
+            let currentNum = 0;
+            const increment = Math.ceil(targetNum / 50);
+            const suffix = targetText.replace(/[\d]/g, '');
+            
+            const timer = setInterval(() => {
+                currentNum += increment;
+                if (currentNum >= targetNum) {
+                    currentNum = targetNum;
+                    clearInterval(timer);
                 }
-            }
-            update();
+                numberSpan.textContent = currentNum.toLocaleString() + suffix.replace(/[\d]/g, '');
+            }, 40);
         }
 
-        // Interactive elements
-        function setupInteractiveElements() {
-            // Add any additional interactive features here
-        }
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Download button functionality
+        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('APK download will be available soon! Stay tuned for updates.');
+        });
+
+        // Add loading effect
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
     </script>
 </body>
 </html>
