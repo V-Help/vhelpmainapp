@@ -904,7 +904,7 @@
         </div>
         <div class="hero-content">
             <div class="hero-badge">🎓 VIT Chennai Digital Ecosystem</div>
-            <h1>VHELPCC</h1>
+            <h1>V HELPCC</h1>
             <p class="tagline">Your All-in-One VIT Chennai Campus Services Platform - Food, Repairs, Lost & Found, Study Materials, and More!</p>
             <div class="hero-buttons">
                 <a href="#" class="download-btn" id="downloadBtn">📱 Download App</a>
@@ -1219,151 +1219,132 @@
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" title="Back to Top">↑</button>
 
-    <script>
-        // Navigation functionality
-        const navbar = document.getElementById('navbar');
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        const backToTop = document.getElementById('backToTop');
+   <script>
+    // Navigation functionality
+    const navbar = document.getElementById('navbar');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const backToTop = document.getElementById('backToTop');
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-                backToTop.classList.add('visible');
-            } else {
-                navbar.classList.remove('scrolled');
-                backToTop.classList.remove('visible');
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+            backToTop.classList.add('visible');
+        } else {
+            navbar.classList.remove('scrolled');
+            backToTop.classList.remove('visible');
+        }
+    });
+
+    // Mobile menu toggle
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Back to top functionality
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Close mobile menu when link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
             }
         });
+    });
 
-        // Mobile menu toggle
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenuBtn.classList.toggle('active');
-            navLinks.classList.toggle('active');
+    // Intersection Observer for animations
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                if (entry.target.classList.contains('stat-item')) animateCounter(entry.target);
+            }
         });
+    }, observerOptions);
+    document.querySelectorAll('.fade-in, .stat-item').forEach(el => observer.observe(el));
 
-        // Back to top functionality
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+    // Counter animation
+    function animateCounter(statItem) {
+        if (statItem.dataset.animated) return;
+        statItem.dataset.animated = true;
+        const numberSpan = statItem.querySelector('.stat-number');
+        const targetText = numberSpan.textContent;
+        const targetNum = parseInt(targetText.replace(/[^\d]/g, ''));
+        let currentNum = 0;
+        const increment = Math.ceil(targetNum / 50);
+        const suffix = targetText.replace(/[\d]/g, '');
+        const timer = setInterval(() => {
+            currentNum += increment;
+            if (currentNum >= targetNum) { currentNum = targetNum; clearInterval(timer); }
+            numberSpan.textContent = currentNum.toLocaleString() + suffix.replace(/[\d]/g, '');
+        }, 40);
+    }
 
-        // Close mobile menu when link is clicked
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    mobileMenuBtn.classList.remove('active');
-                }
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    // Animate counters for stats
-                    if (entry.target.classList.contains('stat-item')) {
-                        animateCounter(entry.target);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Observe all animated elements
-        document.querySelectorAll('.fade-in, .stat-item').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Counter animation
-        function animateCounter(statItem) {
-            if (statItem.dataset.animated) return;
-            statItem.dataset.animated = true;
-            
-            const numberSpan = statItem.querySelector('.stat-number');
-            const targetText = numberSpan.textContent;
-            const targetNum = parseInt(targetText.replace(/[^\d]/g, ''));
-            
-            let currentNum = 0;
-            const increment = Math.ceil(targetNum / 50);
-            const suffix = targetText.replace(/[\d]/g, '');
-            
-            const timer = setInterval(() => {
-                currentNum += increment;
-                if (currentNum >= targetNum) {
-                    currentNum = targetNum;
-                    clearInterval(timer);
-                }
-                numberSpan.textContent = currentNum.toLocaleString() + suffix.replace(/[\d]/g, '');
-            }, 40);
-        }
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // FIXED - Direct Download functionality
-        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            const downloadBtn = this;
-            const originalText = downloadBtn.innerHTML;
-            
-            // Show downloading state
-            downloadBtn.innerHTML = '⏳ Starting Download...';
-            downloadBtn.classList.add('downloading');
-            
-            // Create download link and trigger it immediately
-            const apkUrl = 'https://github.com/V-Help/VHELP-USER/releases/download/v1.0.0/V.HELPCC.apk';
-            
-            // Create invisible download link
-            const downloadLink = document.createElement('a');
-            downloadLink.href = apkUrl;
-            downloadLink.download = 'VHELPCC.apk';
-            downloadLink.style.display = 'none';
-            
-            // Add to DOM and trigger download
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            
-            // Update button text
-            setTimeout(() => {
-                downloadBtn.innerHTML = '✅ Download Started!';
-            }, 500);
-            
-            // Reset button after 3 seconds
-            setTimeout(() => {
-                downloadBtn.innerHTML = originalText;
-                downloadBtn.classList.remove('downloading');
-            }, 3000);
-            
-            // Clean up the link
-            setTimeout(() => {
-                if (document.body.contains(downloadLink)) {
-                    document.body.removeChild(downloadLink);
-                }
-            }, 1000);
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
-    </script>
-</body>
-</html>
+    });
+
+    // USER APK DOWNLOAD - Vercel-friendly
+    document.getElementById('downloadBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const downloadBtn = this;
+        const originalText = downloadBtn.innerHTML;
+
+        downloadBtn.innerHTML = '⏳ Starting Download...';
+        downloadBtn.classList.add('downloading');
+
+        // Open GitHub APK link in new tab to bypass CORS/download issues
+        const apkUrl = 'https://github.com/V-Help/VHELP-USER/releases/download/v1.0.0/V.HELPCC.apk';
+        window.open(apkUrl, '_blank');
+
+        // Notification
+        const notification = document.createElement('div');
+        notification.innerHTML = '📱 Download started! Check your downloads folder.';
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            animation: slideInFromRight 0.5s ease, fadeOut 0.5s ease 2.5s forwards;
+        `;
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 3000);
+
+        // Button state reset
+        setTimeout(() => {
+            downloadBtn.innerHTML = originalText;
+            downloadBtn.classList.remove('downloading');
+        }, 3000);
+    });
+
+    // Add CSS animations for notifications
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInFromRight {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(400px); }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
