@@ -1318,7 +1318,14 @@
         // Download button functionality
         document.getElementById('downloadBtn').addEventListener('click', function(e) {
             e.preventDefault();
-            alert('APK download will be available soon! Stay tuned for updates.');
+            // Direct download of the APK file
+            const apkUrl = 'https://github.com/V-Help/VHELP-USER/releases/download/v1.0.0/V.HELPCC.apk';
+            const link = document.createElement('a');
+            link.href = apkUrl;
+            link.download = 'V.HELPCC.apk';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         });
 
         // Add loading effect
