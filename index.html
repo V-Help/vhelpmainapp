@@ -1326,13 +1326,6 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        });
-
-        // Add loading effect
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => {
                 document.body.style.opacity = '1';
             }, 100);
         });
