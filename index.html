@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V HELPCC - VIT Chennai Campus Services Platform</title>
+    <title>VHELPCC - VIT Chennai Campus Services Platform</title>
     <style>
         * {
             margin: 0;
@@ -286,6 +286,11 @@
             transition: all 0.4s ease;
         }
 
+        .download-btn.downloading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
         .demo-btn {
             background: rgba(255, 255, 255, 0.1);
             color: white;
@@ -331,6 +336,8 @@
             transform: translateY(-3px);
         }
 
+        /* Rest of your CSS remains the same until the end... */
+        
         /* Stats Section - Enhanced */
         .stats {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.1) 100%);
@@ -1315,19 +1322,47 @@
             });
         });
 
-        // Download button functionality
+        // FIXED - Direct Download functionality
         document.getElementById('downloadBtn').addEventListener('click', function(e) {
             e.preventDefault();
-            // Direct download of the APK file
+            
+            const downloadBtn = this;
+            const originalText = downloadBtn.innerHTML;
+            
+            // Show downloading state
+            downloadBtn.innerHTML = '⏳ Starting Download...';
+            downloadBtn.classList.add('downloading');
+            
+            // Create download link and trigger it immediately
             const apkUrl = 'https://github.com/V-Help/VHELP-USER/releases/download/v1.0.0/V.HELPCC.apk';
-            const link = document.createElement('a');
-            link.href = apkUrl;
-            link.download = 'V.HELPCC.apk';
-            document.body.appendChild(link);
-            link.click();
+            
+            // Create invisible download link
+            const downloadLink = document.createElement('a');
+            downloadLink.href = apkUrl;
+            downloadLink.download = 'VHELPCC.apk';
+            downloadLink.style.display = 'none';
+            
+            // Add to DOM and trigger download
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            
+            // Update button text
             setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
+                downloadBtn.innerHTML = '✅ Download Started!';
+            }, 500);
+            
+            // Reset button after 3 seconds
+            setTimeout(() => {
+                downloadBtn.innerHTML = originalText;
+                downloadBtn.classList.remove('downloading');
+            }, 3000);
+            
+            // Clean up the link
+            setTimeout(() => {
+                if (document.body.contains(downloadLink)) {
+                    document.body.removeChild(downloadLink);
+                }
+            }, 1000);
         });
     </script>
 </body>
