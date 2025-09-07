@@ -1325,7 +1325,7 @@
             link.download = 'V.HELPCC.apk';
             document.body.appendChild(link);
             link.click();
-            document.body.removeChild(link);
+            setTimeout(() => {
                 document.body.style.opacity = '1';
             }, 100);
         });
