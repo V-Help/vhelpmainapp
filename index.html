@@ -1,1409 +1,1570 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>V HELPCC - VIT Chennai Campus Services Platform</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        :root {
-            --primary-blue: #2563eb;
-            --secondary-blue: #1e40af;
-            --accent-cyan: #0891b2;
-            --dark-bg: #0f172a;
-            --darker-bg: #020617;
-            --card-bg: rgba(15, 23, 42, 0.8);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.8);
-            --text-muted: rgba(255, 255, 255, 0.6);
-            --gradient-primary: linear-gradient(135deg, #2563eb, #1e40af);
-            --gradient-accent: linear-gradient(135deg, #0891b2, #0e7490);
-            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.3);
-            --shadow-medium: 0 20px 50px rgba(0, 0, 0, 0.4);
-            --border-radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+      :root {
+        --primary-blue: #2563eb;
+        --secondary-blue: #1e40af;
+        --accent-cyan: #0891b2;
+        --dark-bg: #0f172a;
+        --darker-bg: #020617;
+        --card-bg: rgba(15, 23, 42, 0.8);
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-primary: #ffffff;
+        --text-secondary: rgba(255, 255, 255, 0.8);
+        --text-muted: rgba(255, 255, 255, 0.6);
+        --gradient-primary: linear-gradient(135deg, #2563eb, #1e40af);
+        --gradient-accent: linear-gradient(135deg, #0891b2, #0e7490);
+        --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.3);
+        --shadow-medium: 0 20px 50px rgba(0, 0, 0, 0.4);
+        --border-radius: 12px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        html {
-            scroll-behavior: smooth;
-        }
+      html {
+        scroll-behavior: smooth;
+      }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--dark-bg);
-            overflow-x: hidden;
-        }
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background: var(--dark-bg);
+        overflow-x: hidden;
+      }
 
-        /* Enhanced Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 15px 0;
-            z-index: 1000;
-            transition: var(--transition);
-            border-bottom: 1px solid var(--border-color);
-        }
+      /* Enhanced Navigation */
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 15px 0;
+        z-index: 1000;
+        transition: var(--transition);
+        border-bottom: 1px solid var(--border-color);
+      }
 
-        .navbar.scrolled {
-            background: rgba(15, 23, 42, 0.95);
-            box-shadow: var(--shadow-soft);
-            padding: 12px 0;
-        }
+      .navbar.scrolled {
+        background: rgba(15, 23, 42, 0.95);
+        box-shadow: var(--shadow-soft);
+        padding: 12px 0;
+      }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
+      .logo {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: var(--gradient-primary);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-decoration: none;
+        letter-spacing: -0.5px;
+      }
 
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 35px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: var(--transition);
+        padding: 8px 16px;
+        border-radius: 8px;
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        color: var(--text-primary);
+        background: rgba(37, 99, 235, 0.1);
+      }
+
+      .nav-links a.active {
+        color: #2563eb;
+        background: rgba(37, 99, 235, 0.15);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu-btn {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 8px;
+        gap: 4px;
+      }
+
+      .mobile-menu-btn span {
+        width: 24px;
+        height: 2px;
+        background: var(--text-primary);
+        transition: var(--transition);
+        border-radius: 2px;
+      }
+
+      .mobile-menu-btn.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .mobile-menu-btn.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-menu-btn.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          var(--dark-bg) 0%,
+          var(--darker-bg) 100%
+        );
+        padding: 100px 20px 80px;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 25% 25%,
+            rgba(37, 99, 235, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 75% 75%,
+            rgba(8, 145, 178, 0.1) 0%,
+            transparent 50%
+          );
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: rgba(37, 99, 235, 0.1);
+        border: 1px solid rgba(37, 99, 235, 0.3);
+        color: #60a5fa;
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        backdrop-filter: blur(10px);
+      }
+
+      .hero h1 {
+        font-family: "Poppins", sans-serif;
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        font-weight: 900;
+        margin-bottom: 24px;
+        letter-spacing: -2px;
+        line-height: 1.1;
+        background: linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #60a5fa 50%,
+          #2563eb 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero .tagline {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        margin-bottom: 40px;
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.5;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 60px;
+      }
+
+      .download-btn,
+      .demo-btn {
+        padding: 16px 32px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .download-btn {
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+      }
+
+      .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(37, 99, 235, 0.4);
+      }
+
+      .demo-btn {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+      }
+
+      .demo-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Stats Section */
+      .stats {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        border-radius: 24px;
+        padding: 60px 40px;
+        margin: -40px 20px 80px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 20px;
+        border-radius: var(--border-radius);
+        transition: var(--transition);
+        cursor: pointer;
+      }
+
+      .stat-item:hover {
+        background: rgba(37, 99, 235, 0.05);
+        transform: translateY(-5px);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: var(--gradient-primary);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .stat-label {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      /* Section Styling */
+      .section {
+        padding: 100px 0;
+        position: relative;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .section-title {
+        text-align: center;
+        font-family: "Poppins", sans-serif;
+        font-size: clamp(2.2rem, 4vw, 3.2rem);
+        font-weight: 800;
+        margin-bottom: 60px;
+        color: var(--text-primary);
+        letter-spacing: -1px;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        width: 60px;
+        height: 4px;
+        background: var(--gradient-primary);
+        transform: translateX(-50%);
+        border-radius: 2px;
+      }
+
+      /* About Section */
+      .about {
+        background: linear-gradient(
+          135deg,
+          var(--darker-bg) 0%,
+          var(--dark-bg) 100%
+        );
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+
+      .about-text h3 {
+        font-family: "Poppins", sans-serif;
+        color: var(--text-primary);
+        font-size: 2.2rem;
+        margin-bottom: 24px;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .about-text p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        color: var(--text-secondary);
+      }
+
+      .feature-benefits {
+        list-style: none;
+        margin: 32px 0;
+      }
+
+      .feature-benefits li {
+        padding: 12px 0;
+        color: var(--text-secondary);
+        position: relative;
+        padding-left: 40px;
+        font-size: 1rem;
+      }
+
+      .feature-benefits li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #60a5fa;
+        font-weight: bold;
+        font-size: 1.2rem;
+        width: 28px;
+        height: 28px;
+        background: rgba(37, 99, 235, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(37, 99, 235, 0.2);
+      }
+
+      .phone-mockup {
+        position: relative;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .feature-image {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: var(--shadow-medium);
+        transition: var(--transition);
+        border: 1px solid var(--border-color);
+      }
+
+      .feature-image:hover {
+        transform: scale(1.02) translateY(-8px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Features Section */
+      .features,
+      .additional-features {
+        background: var(--dark-bg);
+      }
+
+      .feature-showcase {
+        display: grid;
+        gap: 80px;
+        margin-top: 60px;
+      }
+
+      .feature-item {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        padding: 50px;
+        border-radius: 20px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        transition: var(--transition);
+      }
+
+      .feature-item:hover {
+        background: rgba(37, 99, 235, 0.05);
+        transform: translateY(-5px);
+        border-color: rgba(37, 99, 235, 0.2);
+      }
+
+      .feature-item:nth-child(even) .feature-content {
+        order: 2;
+      }
+
+      .feature-item:nth-child(even) .feature-screenshot {
+        order: 1;
+      }
+
+      .feature-content h3 {
+        font-family: "Poppins", sans-serif;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: var(--text-primary);
+        font-weight: 700;
+      }
+
+      .feature-content p {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      /* Screenshots Section */
+      .screenshots {
+        background: var(--darker-bg);
+        padding: 100px 0;
+      }
+
+      .screenshots-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 50px;
+        margin-top: 60px;
+      }
+
+      .screenshot-card {
+        text-align: center;
+        transition: var(--transition);
+        cursor: pointer;
+      }
+
+      .screenshot-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .phone-mockup-container {
+        position: relative;
+        width: 280px;
+        height: 560px;
+        margin: 0 auto 24px;
+      }
+
+      .phone-mockup-frame {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(145deg, #1e293b, #334155);
+        border-radius: 35px;
+        padding: 20px;
+        box-shadow: var(--shadow-medium);
+        border: 2px solid var(--border-color);
+      }
+
+      .phone-screen-container {
+        width: 100%;
+        height: calc(100% - 40px);
+        margin-top: 20px;
+        background: #000;
+        border-radius: 25px;
+        overflow: hidden;
+      }
+
+      .screenshot-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .screenshot-info h4 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      .screenshot-info p {
+        color: var(--text-secondary);
+        line-height: 1.5;
+        max-width: 280px;
+        margin: 0 auto;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--darker-bg);
+        color: white;
+        padding: 80px 0 40px;
+        text-align: center;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .footer h3 {
+        font-family: "Poppins", sans-serif;
+        font-size: 2.8rem;
+        margin-bottom: 24px;
+        background: var(--gradient-primary);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+      }
+
+      .footer p {
+        font-size: 1.1rem;
+        margin-bottom: 32px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      .social-icons {
+        margin: 40px 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .social-icon {
+        display: inline-flex;
+        width: 60px;
+        height: 60px;
+        background: var(--glass-bg);
+        color: var(--text-primary);
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        text-decoration: none;
+        transition: var(--transition);
+        font-size: 1.5rem;
+        border: 1px solid var(--border-color);
+        backdrop-filter: blur(10px);
+      }
+
+      .social-icon:hover {
+        background: var(--gradient-primary);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-soft);
+      }
+
+      /* Back to Top */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+        z-index: 1000;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-3px);
+      }
+
+      /* Animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Loading Animation */
+      .download-btn.loading {
+        pointer-events: none;
+        opacity: 0.8;
+      }
+
+      .download-btn.loading::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        border: 2px solid transparent;
+        border-top: 2px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-left: 10px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Notification */
+      .notification {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: var(--gradient-primary);
+        color: white;
+        padding: 16px 24px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-medium);
+        z-index: 10000;
+        transform: translateX(400px);
+        transition: var(--transition);
+      }
+
+      .notification.show {
+        transform: translateX(0);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
         .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 35px;
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(15, 23, 42, 0.95);
+          backdrop-filter: blur(20px);
+          flex-direction: column;
+          padding: 20px 0;
+          border-top: 1px solid var(--border-color);
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            padding: 8px 16px;
-            border-radius: 8px;
-            position: relative;
+        .nav-links.active {
+          display: flex;
         }
 
-        .nav-links a:hover {
-            color: var(--text-primary);
-            background: rgba(37, 99, 235, 0.1);
-        }
-
-        .nav-links a.active {
-            color: #2563eb;
-            background: rgba(37, 99, 235, 0.15);
-        }
-
-        /* Mobile Menu */
         .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 8px;
-            gap: 4px;
-        }
-
-        .mobile-menu-btn span {
-            width: 24px;
-            height: 2px;
-            background: var(--text-primary);
-            transition: var(--transition);
-            border-radius: 2px;
-        }
-
-        .mobile-menu-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .mobile-menu-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
-            padding: 100px 20px 80px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 25% 25%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(8, 145, 178, 0.1) 0%, transparent 50%);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(37, 99, 235, 0.1);
-            border: 1px solid rgba(37, 99, 235, 0.3);
-            color: #60a5fa;
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-        }
-
-        .hero h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            font-weight: 900;
-            margin-bottom: 24px;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            background: linear-gradient(135deg, #ffffff 0%, #60a5fa 50%, #2563eb 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero .tagline {
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            margin-bottom: 40px;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.5;
+          display: flex;
         }
 
         .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 60px;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
         }
 
-        .download-btn, .demo-btn {
-            padding: 16px 32px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-btn {
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
-        }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.4);
-        }
-
+        .download-btn,
         .demo-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+          width: 100%;
+          max-width: 280px;
+          justify-content: center;
         }
 
-        .demo-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Stats Section */
         .stats {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 60px 40px;
-            margin: -40px 20px 80px;
-            position: relative;
-            z-index: 10;
+          margin: -20px 10px 60px;
+          padding: 40px 20px;
         }
 
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .stat-item:hover {
-            background: rgba(37, 99, 235, 0.05);
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        /* Section Styling */
-        .section {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(2.2rem, 4vw, 3.2rem);
-            font-weight: 800;
-            margin-bottom: 60px;
-            color: var(--text-primary);
-            letter-spacing: -1px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            width: 60px;
-            height: 4px;
-            background: var(--gradient-primary);
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        .about {
-            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px;
         }
 
         .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--text-primary);
-            font-size: 2.2rem;
-            margin-bottom: 24px;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-        }
-
-        .feature-benefits {
-            list-style: none;
-            margin: 32px 0;
-        }
-
-        .feature-benefits li {
-            padding: 12px 0;
-            color: var(--text-secondary);
-            position: relative;
-            padding-left: 40px;
-            font-size: 1rem;
-        }
-
-        .feature-benefits li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #60a5fa;
-            font-weight: bold;
-            font-size: 1.2rem;
-            width: 28px;
-            height: 28px;
-            background: rgba(37, 99, 235, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(37, 99, 235, 0.2);
-        }
-
-        .phone-mockup {
-            position: relative;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .feature-image {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: var(--shadow-medium);
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
-        }
-
-        .feature-image:hover {
-            transform: scale(1.02) translateY(-8px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Features Section */
-        .features, .additional-features {
-            background: var(--dark-bg);
-        }
-
-        .feature-showcase {
-            display: grid;
-            gap: 80px;
-            margin-top: 60px;
+          grid-template-columns: 1fr;
+          gap: 50px;
         }
 
         .feature-item {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            padding: 50px;
-            border-radius: 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .feature-item:hover {
-            background: rgba(37, 99, 235, 0.05);
-            transform: translateY(-5px);
-            border-color: rgba(37, 99, 235, 0.2);
+          grid-template-columns: 1fr;
+          gap: 40px;
+          padding: 30px;
         }
 
         .feature-item:nth-child(even) .feature-content {
-            order: 2;
+          order: 1;
         }
 
         .feature-item:nth-child(even) .feature-screenshot {
-            order: 1;
-        }
-
-        .feature-content h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        .feature-content p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
-
-        /* Screenshots Section */
-        .screenshots {
-            background: var(--darker-bg);
-            padding: 100px 0;
+          order: 2;
         }
 
         .screenshots-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 50px;
-            margin-top: 60px;
-        }
-
-        .screenshot-card {
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .screenshot-card:hover {
-            transform: translateY(-10px);
+          grid-template-columns: 1fr;
+          gap: 40px;
         }
 
         .phone-mockup-container {
-            position: relative;
-            width: 280px;
-            height: 560px;
-            margin: 0 auto 24px;
-        }
-
-        .phone-mockup-frame {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(145deg, #1e293b, #334155);
-            border-radius: 35px;
-            padding: 20px;
-            box-shadow: var(--shadow-medium);
-            border: 2px solid var(--border-color);
-        }
-
-        .phone-screen-container {
-            width: 100%;
-            height: calc(100% - 40px);
-            margin-top: 20px;
-            background: #000;
-            border-radius: 25px;
-            overflow: hidden;
-        }
-
-        .screenshot-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .screenshot-info h4 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .screenshot-info p {
-            color: var(--text-secondary);
-            line-height: 1.5;
-            max-width: 280px;
-            margin: 0 auto;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--darker-bg);
-            color: white;
-            padding: 80px 0 40px;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.8rem;
-            margin-bottom: 24px;
-            background: var(--gradient-primary);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-        }
-
-        .footer p {
-            font-size: 1.1rem;
-            margin-bottom: 32px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            color: var(--text-secondary);
-            line-height: 1.6;
+          width: 260px;
+          height: 520px;
         }
 
         .social-icons {
-            margin: 40px 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+          gap: 15px;
         }
 
         .social-icon {
-            display: inline-flex;
-            width: 60px;
-            height: 60px;
-            background: var(--glass-bg);
-            color: var(--text-primary);
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px;
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 1.5rem;
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
+          width: 50px;
+          height: 50px;
+          font-size: 1.3rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+          gap: 25px;
         }
 
-        .social-icon:hover {
-            background: var(--gradient-primary);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-soft);
+        .section {
+          padding: 70px 0;
         }
 
-        /* Back to Top */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            z-index: 1000;
-            box-shadow: var(--shadow-soft);
+        .hero {
+          padding: 120px 15px 60px;
         }
 
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
+        .container {
+          padding: 0 15px;
         }
 
-        .back-to-top:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Loading Animation */
-        .download-btn.loading {
-            pointer-events: none;
-            opacity: 0.8;
-        }
-
-        .download-btn.loading::after {
-            content: '';
-            width: 20px;
-            height: 20px;
-            border: 2px solid transparent;
-            border-top: 2px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-left: 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Notification */
         .notification {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: var(--gradient-primary);
-            color: white;
-            padding: 16px 24px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-medium);
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: var(--transition);
+          left: 15px;
+          right: 15px;
+          transform: translateY(-100px);
         }
 
         .notification.show {
-            transform: translateX(0);
+          transform: translateY(0);
         }
+      }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(15, 23, 42, 0.95);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 20px 0;
-                border-top: 1px solid var(--border-color);
-            }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
 
-            .nav-links.active {
-                display: flex;
-            }
+      ::-webkit-scrollbar-track {
+        background: var(--dark-bg);
+      }
 
-            .mobile-menu-btn {
-                display: flex;
-            }
+      ::-webkit-scrollbar-thumb {
+        background: var(--gradient-primary);
+        border-radius: 4px;
+      }
 
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 16px;
-            }
-
-            .download-btn, .demo-btn {
-                width: 100%;
-                max-width: 280px;
-                justify-content: center;
-            }
-
-            .stats {
-                margin: -20px 10px 60px;
-                padding: 40px 20px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-
-            .feature-item {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 30px;
-            }
-
-            .feature-item:nth-child(even) .feature-content {
-                order: 1;
-            }
-
-            .feature-item:nth-child(even) .feature-screenshot {
-                order: 2;
-            }
-
-            .screenshots-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .phone-mockup-container {
-                width: 260px;
-                height: 520px;
-            }
-
-            .social-icons {
-                gap: 15px;
-            }
-
-            .social-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.3rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .section {
-                padding: 70px 0;
-            }
-
-            .hero {
-                padding: 120px 15px 60px;
-            }
-
-            .container {
-                padding: 0 15px;
-            }
-
-            .notification {
-                left: 15px;
-                right: 15px;
-                transform: translateY(-100px);
-            }
-
-            .notification.show {
-                transform: translateY(0);
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--dark-bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient-primary);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-blue);
-        }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-blue);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">V HELPCC</a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#about" data-section="about">About</a></li>
-                <li><a href="#features" data-section="features">Features</a></li>
-                <li><a href="#additional-features" data-section="additional-features">Services</a></li>
-                <li><a href="#screenshots" data-section="screenshots">Gallery</a></li>
-            </ul>
-            <div class="mobile-menu-btn" id="mobileMenuBtn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+      <div class="nav-container">
+        <a href="#" class="logo">V HELPCC</a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about" data-section="about">About</a></li>
+          <li><a href="#features" data-section="features">Features</a></li>
+          <li>
+            <a href="#additional-features" data-section="additional-features"
+              >Services</a
+            >
+          </li>
+          <li><a href="#screenshots" data-section="screenshots">Gallery</a></li>
+        </ul>
+        <div class="mobile-menu-btn" id="mobileMenuBtn">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-graduation-cap"></i> VIT Chennai Digital Ecosystem
-            </div>
-            <h1>V HELPCC</h1>
-            <p class="tagline">Your comprehensive VIT Chennai campus services platform - Food delivery, repairs, lost & found, study materials, clubs, and marketplace - all in one app!</p>
-            <div class="hero-buttons">
-                <button class="download-btn" id="downloadBtn">
-                    <i class="fas fa-download"></i> Download App
-                </button>
-                <a href="#features" class="demo-btn">
-                    <i class="fas fa-rocket"></i> Explore Features
-                </a>
-            </div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-graduation-cap"></i> VIT Chennai Digital Ecosystem
         </div>
+        <h1>V HELPCC</h1>
+        <p class="tagline">
+          Your comprehensive VIT Chennai campus services platform - Food
+          delivery, repairs, lost & found, study materials, clubs, and
+          marketplace - all in one app!
+        </p>
+        <div class="hero-buttons">
+          <button class="download-btn" id="downloadBtn">
+            <i class="fas fa-download"></i> Download App
+          </button>
+          <a href="#features" class="demo-btn">
+            <i class="fas fa-rocket"></i> Explore Features
+          </a>
+        </div>
+      </div>
     </section>
 
     <main>
-        <!-- Statistics Section -->
-        <section class="stats">
-            <div class="stats-grid">
-                <div class="stat-item" data-target="15000">
-                    <span class="stat-number">0</span>
-                    <span class="stat-label">Target Students</span>
-                </div>
-                <div class="stat-item" data-target="8">
-                    <span class="stat-number">0</span>
-                    <span class="stat-label">Core Services</span>
-                </div>
-                <div class="stat-item" data-target="500">
-                    <span class="stat-number">0</span>
-                    <span class="stat-label">Daily Orders</span>
-                </div>
-                <div class="stat-item" data-target="2700">
-                    <span class="stat-number">0</span>
-                    <span class="stat-label">Active Users</span>
-                </div>
+      <!-- Statistics Section -->
+      <section class="stats">
+        <div class="stats-grid">
+          <div class="stat-item" data-target="15000">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Target Students</span>
+          </div>
+          <div class="stat-item" data-target="8">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Core Services</span>
+          </div>
+          <div class="stat-item" data-target="500">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Daily Orders</span>
+          </div>
+          <div class="stat-item" data-target="2700">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Active Users</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="section about" id="about">
+        <div class="container">
+          <h2 class="section-title fade-in">
+            Revolutionizing VIT Chennai Campus Life
+          </h2>
+          <div class="about-content">
+            <div class="about-text fade-in">
+              <h3>Your Digital Campus Companion</h3>
+              <p>
+                V HELPCC is a comprehensive Flutter-based mobile application
+                designed to transform how VIT Chennai students interact with
+                campus services. Built with modern technology and user-centric
+                design, our platform serves over 15,000+ students with
+                integrated solutions.
+              </p>
+              <p>
+                From ordering food from multiple campus restaurants to finding
+                lost items, accessing study materials, joining clubs, and buying
+                used goods - V HELPCC is your one-stop solution for everything
+                campus-related. Built by students, for students.
+              </p>
+              <ul class="feature-benefits">
+                <li>Multi-restaurant food ordering with real-time tracking</li>
+                <li>
+                  Comprehensive repair services for devices and facilities
+                </li>
+                <li>Smart lost & found system with photo verification</li>
+                <li>Organized study materials and academic resources</li>
+                <li>Campus clubs and organizations directory</li>
+                <li>Peer-to-peer marketplace for used goods</li>
+                <li>Faculty information and communication system</li>
+                <li>Secure authentication with VIT email validation</li>
+              </ul>
             </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="section about" id="about">
-            <div class="container">
-                <h2 class="section-title fade-in">Revolutionizing VIT Chennai Campus Life</h2>
-                <div class="about-content">
-                    <div class="about-text fade-in">
-                        <h3>Your Digital Campus Companion</h3>
-                        <p>V HELPCC is a comprehensive Flutter-based mobile application designed to transform how VIT Chennai students interact with campus services. Built with modern technology and user-centric design, our platform serves over 15,000+ students with integrated solutions.</p>
-                        <p>From ordering food from multiple campus restaurants to finding lost items, accessing study materials, joining clubs, and buying used goods - V HELPCC is your one-stop solution for everything campus-related. Built by students, for students.</p>
-                        <ul class="feature-benefits">
-                            <li>Multi-restaurant food ordering with real-time tracking</li>
-                            <li>Comprehensive repair services for devices and facilities</li>
-                            <li>Smart lost & found system with photo verification</li>
-                            <li>Organized study materials and academic resources</li>
-                            <li>Campus clubs and organizations directory</li>
-                            <li>Peer-to-peer marketplace for used goods</li>
-                            <li>Faculty information and communication system</li>
-                            <li>Secure authentication with VIT email validation</li>
-                        </ul>
-                    </div>
-                    <div class="phone-mockup fade-in">
-                        <img src="image1.jpeg" alt="V HELPCC App Dashboard" class="feature-image">
-                    </div>
-                </div>
+            <div class="phone-mockup fade-in">
+              <img
+                src="image1.jpg"
+                alt="V HELPCC App Dashboard"
+                class="feature-image"
+              />
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <!-- Core Features Section -->
-        <section class="section features" id="features">
-            <div class="container">
-                <h2 class="section-title fade-in">Core Campus Services</h2>
-                <div class="feature-showcase">
-                    <div class="feature-item fade-in">
-                        <div class="feature-content">
-                            <h3><i class="fas fa-utensils"></i> Food Delivery System</h3>
-                            <p>Order from multiple campus restaurants with real-time menu updates, smart cart management, and live order tracking. Rate and review restaurants to help the community make better choices.</p>
-                            <ul class="feature-benefits">
-                                <li>Multi-restaurant platform with live menus</li>
-                                <li>Real-time order tracking and notifications</li>
-                                <li>Smart cart with automatic restoration</li>
-                                <li>Community ratings and reviews</li>
-                                <li>Peak hour delivery optimization</li>
-                            </ul>
-                        </div>
-                        <div class="feature-screenshot">
-                            <img src="image3.jpeg" alt="Food Delivery Interface" class="feature-image">
-                        </div>
-                    </div>
-
-                    <div class="feature-item fade-in">
-                        <div class="feature-content">
-                            <h3><i class="fas fa-tools"></i> Device & Facility Repairs</h3>
-                            <p>Submit repair requests for mobiles, laptops, and campus facilities. Track progress in real-time with photo documentation and direct communication with service providers.</p>
-                            <ul class="feature-benefits">
-                                <li>Mobile and laptop repair services</li>
-                                <li>Campus facility maintenance requests</li>
-                                <li>Real-time status tracking</li>
-                                <li>Photo documentation support</li>
-                                <li>Service provider communication</li>
-                            </ul>
-                        </div>
-                        <div class="feature-screenshot">
-                            <img src="image2.jpeg" alt="Repair Services Interface" class="feature-image">
-                        </div>
-                    </div>
-
-                    <div class="feature-item fade-in">
-                        <div class="feature-content">
-                            <h3><i class="fas fa-search"></i> Lost & Found Hub</h3>
-                            <p>Advanced lost and found system with photo verification, location-based search, and admin moderation. Connect with fellow students to recover lost items safely.</p>
-                            <ul class="feature-benefits">
-                                <li>Photo upload for item verification</li>
-                                <li>Location-based search functionality</li>
-                                <li>Admin moderation for authenticity</li>
-                                <li>Secure claim process</li>
-                                <li>Community-driven recovery system</li>
-                            </ul>
-                        </div>
-                        <div class="feature-screenshot">
-                            <img src="image4.jpeg" alt="Lost & Found Interface" class="feature-image">
-                        </div>
-                    </div>
-                </div>
+      <!-- Core Features Section -->
+      <section class="section features" id="features">
+        <div class="container">
+          <h2 class="section-title fade-in">Core Campus Services</h2>
+          <div class="feature-showcase">
+            <div class="feature-item fade-in">
+              <div class="feature-content">
+                <h3><i class="fas fa-utensils"></i> Food Delivery System</h3>
+                <p>
+                  Order from multiple campus restaurants with real-time menu
+                  updates, smart cart management, and live order tracking. Rate
+                  and review restaurants to help the community make better
+                  choices.
+                </p>
+                <ul class="feature-benefits">
+                  <li>Multi-restaurant platform with live menus</li>
+                  <li>Real-time order tracking and notifications</li>
+                  <li>Smart cart with automatic restoration</li>
+                  <li>Community ratings and reviews</li>
+                  <li>Peak hour delivery optimization</li>
+                </ul>
+              </div>
+              <div class="feature-screenshot">
+                <img
+                  src="image3.jpg"
+                  alt="Food Delivery Interface"
+                  class="feature-image"
+                />
+              </div>
             </div>
-        </section>
 
-        <!-- Additional Features Section -->
-        <section class="section additional-features" id="additional-features">
-            <div class="container">
-                <h2 class="section-title fade-in">Enhanced Campus Experience</h2>
-                <div class="feature-showcase">
-                    <div class="feature-item fade-in">
-                        <div class="feature-content">
-                            <h3><i class="fas fa-book"></i> Study Materials Library</h3>
-                            <p>Access organized academic resources including lecture notes, previous year questions, and assignment solutions. Integrated PDF viewer with offline caching and cloud sync.</p>
-                            <ul class="feature-benefits">
-                                <li>Year-wise and subject-wise organization</li>
-                                <li>In-app PDF viewer with offline caching</li>
-                                <li>Previous year questions database</li>
-                                <li>Teacher-specific content sections</li>
-                                <li>Cloud storage integration</li>
-                            </ul>
-                        </div>
-                        <div class="feature-screenshot">
-                            <img src="image5.jpeg" alt="Study Materials Interface" class="feature-image">
-                        </div>
-                    </div>
-
-                    <div class="feature-item fade-in">
-                        <div class="feature-content">
-                            <h3><i class="fas fa-users"></i> Campus Clubs & Organizations</h3>
-                            <p>Discover and join student clubs with comprehensive profiles, event management, member directories, and activity feeds to enhance your campus social life.</p>
-                            <ul class="feature-benefits">
-                                <li>Complete club profiles and information</li>
-                                <li>Event scheduling and promotion</li>
-                                <li>Member directories and networking</li>
-                                <li>Activity feeds and updates</li>
-                                <li>Club communication tools</li>
-                            </ul>
-                        </div>
-                        <div class="feature-screenshot">
-                            <img src="image6.jpeg" alt="Clubs Interface" class="feature-image">
-                        </div>
-                    </div>
-
-                    <div class="feature-item fade-in">
-                        <div class="feature-content">
-                            <h3><i class="fas fa-shopping-cart"></i> Campus Marketplace</h3>
-                            <p>Buy and sell used items within the VIT Chennai community. From textbooks to electronics, with seller verification and safety guidelines for secure transactions.</p>
-                            <ul class="feature-benefits">
-                                <li>Peer-to-peer commerce platform</li>
-                                <li>Category-wise item organization</li>
-                                <li>Student ID verification system</li>
-                                <li>Safety guidelines and tips</li>
-                                <li>Rating system for sellers</li>
-                            </ul>
-                        </div>
-                        <div class="feature-screenshot">
-                            <img src="image7.jpeg" alt="Marketplace Interface" class="feature-image">
-                        </div>
-                    </div>
-
-                    <div class="feature-item fade-in">
-                        <div class="feature-content">
-                            <h3><i class="fas fa-chalkboard-teacher"></i> Faculty Directory</h3>
-                            <p>Complete faculty information system with profiles, ratings, contact details, office hours, and subject mapping for better student-teacher connectivity.</p>
-                            <ul class="feature-benefits">
-                                <li>Comprehensive faculty profiles</li>
-                                <li>Student rating and feedback system</li>
-                                <li>Office hours and contact information</li>
-                                <li>Subject and department mapping</li>
-                                <li>Direct communication features</li>
-                            </ul>
-                        </div>
-                        <div class="feature-screenshot">
-                            <img src="image8.jpeg" alt="Faculty Directory Interface" class="feature-image">
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-item fade-in">
+              <div class="feature-content">
+                <h3><i class="fas fa-tools"></i> Device & Facility Repairs</h3>
+                <p>
+                  Submit repair requests for mobiles, laptops, and campus
+                  facilities. Track progress in real-time with photo
+                  documentation and direct communication with service providers.
+                </p>
+                <ul class="feature-benefits">
+                  <li>Mobile and laptop repair services</li>
+                  <li>Campus facility maintenance requests</li>
+                  <li>Real-time status tracking</li>
+                  <li>Photo documentation support</li>
+                  <li>Service provider communication</li>
+                </ul>
+              </div>
+              <div class="feature-screenshot">
+                <img
+                  src="image2.jpg"
+                  alt="Repair Services Interface"
+                  class="feature-image"
+                />
+              </div>
             </div>
-        </section>
 
-        <!-- Screenshots Gallery -->
-        <section class="screenshots" id="screenshots">
-            <div class="container">
-                <h2 class="section-title fade-in">App Screenshots Gallery</h2>
-                <div class="screenshots-grid">
-                    <div class="screenshot-card fade-in">
-                        <div class="phone-mockup-container">
-                            <div class="phone-mockup-frame">
-                                <div class="phone-screen-container">
-                                    <div class="screenshot-image">
-                                        <img src="image1.jpeg" alt="Home Dashboard">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="screenshot-info">
-                            <h4>Dashboard</h4>
-                            <p>Clean, intuitive interface for quick access to all campus services</p>
-                        </div>
-                    </div>
-
-                    <div class="screenshot-card fade-in">
-                        <div class="phone-mockup-container">
-                            <div class="phone-mockup-frame">
-                                <div class="phone-screen-container">
-                                    <div class="screenshot-image">
-                                        <img src="image11.jpeg" alt="Food Ordering">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="screenshot-info">
-                            <h4>Food Ordering</h4>
-                            <p>Browse menus and order from multiple campus restaurants</p>
-                        </div>
-                    </div>
-
-                    <div class="screenshot-card fade-in">
-                        <div class="phone-mockup-container">
-                            <div class="phone-mockup-frame">
-                                <div class="phone-screen-container">
-                                    <div class="screenshot-image">
-                                        <img src="image12.jpeg" alt="Lost & Found">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="screenshot-info">
-                            <h4>Lost & Found</h4>
-                            <p>Report and search for lost items with photo verification</p>
-                        </div>
-                    </div>
-
-                    <div class="screenshot-card fade-in">
-                        <div class="phone-mockup-container">
-                            <div class="phone-mockup-frame">
-                                <div class="phone-screen-container">
-                                    <div class="screenshot-image">
-                                        <img src="image13.jpeg" alt="Study Materials">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="screenshot-info">
-                            <h4>Study Resources</h4>
-                            <p>Access organized academic materials and previous year questions</p>
-                        </div>
-                    </div>
-
-                    <div class="screenshot-card fade-in">
-                        <div class="phone-mockup-container">
-                            <div class="phone-mockup-frame">
-                                <div class="phone-screen-container">
-                                    <div class="screenshot-image">
-                                        <img src="image14.jpeg" alt="Campus Clubs">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="screenshot-info">
-                            <h4>Campus Clubs</h4>
-                            <p>Discover and join student organizations and clubs</p>
-                        </div>
-                    </div>
-
-                    <div class="screenshot-card fade-in">
-                        <div class="phone-mockup-container">
-                            <div class="phone-mockup-frame">
-                                <div class="phone-screen-container">
-                                    <div class="screenshot-image">
-                                        <img src="image2.jpeg" alt="Repair Services">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="screenshot-info">
-                            <h4>Repair Tracking</h4>
-                            <p>Submit and track device repair requests with real-time updates</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-item fade-in">
+              <div class="feature-content">
+                <h3><i class="fas fa-search"></i> Lost & Found Hub</h3>
+                <p>
+                  Advanced lost and found system with photo verification,
+                  location-based search, and admin moderation. Connect with
+                  fellow students to recover lost items safely.
+                </p>
+                <ul class="feature-benefits">
+                  <li>Photo upload for item verification</li>
+                  <li>Location-based search functionality</li>
+                  <li>Admin moderation for authenticity</li>
+                  <li>Secure claim process</li>
+                  <li>Community-driven recovery system</li>
+                </ul>
+              </div>
+              <div class="feature-screenshot">
+                <img
+                  src="image4.jpg"
+                  alt="Lost & Found Interface"
+                  class="feature-image"
+                />
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- Additional Features Section -->
+      <section class="section additional-features" id="additional-features">
+        <div class="container">
+          <h2 class="section-title fade-in">Enhanced Campus Experience</h2>
+          <div class="feature-showcase">
+            <div class="feature-item fade-in">
+              <div class="feature-content">
+                <h3><i class="fas fa-book"></i> Study Materials Library</h3>
+                <p>
+                  Access organized academic resources including lecture notes,
+                  previous year questions, and assignment solutions. Integrated
+                  PDF viewer with offline caching and cloud sync.
+                </p>
+                <ul class="feature-benefits">
+                  <li>Year-wise and subject-wise organization</li>
+                  <li>In-app PDF viewer with offline caching</li>
+                  <li>Previous year questions database</li>
+                  <li>Teacher-specific content sections</li>
+                  <li>Cloud storage integration</li>
+                </ul>
+              </div>
+              <div class="feature-screenshot">
+                <img
+                  src="image5.jpg"
+                  alt="Study Materials Interface"
+                  class="feature-image"
+                />
+              </div>
+            </div>
+
+            <div class="feature-item fade-in">
+              <div class="feature-content">
+                <h3>
+                  <i class="fas fa-users"></i> Campus Clubs & Organizations
+                </h3>
+                <p>
+                  Discover and join student clubs with comprehensive profiles,
+                  event management, member directories, and activity feeds to
+                  enhance your campus social life.
+                </p>
+                <ul class="feature-benefits">
+                  <li>Complete club profiles and information</li>
+                  <li>Event scheduling and promotion</li>
+                  <li>Member directories and networking</li>
+                  <li>Activity feeds and updates</li>
+                  <li>Club communication tools</li>
+                </ul>
+              </div>
+              <div class="feature-screenshot">
+                <img
+                  src="image6.jpg"
+                  alt="Clubs Interface"
+                  class="feature-image"
+                />
+              </div>
+            </div>
+
+            <div class="feature-item fade-in">
+              <div class="feature-content">
+                <h3><i class="fas fa-shopping-cart"></i> Campus Marketplace</h3>
+                <p>
+                  Buy and sell used items within the VIT Chennai community. From
+                  textbooks to electronics, with seller verification and safety
+                  guidelines for secure transactions.
+                </p>
+                <ul class="feature-benefits">
+                  <li>Peer-to-peer commerce platform</li>
+                  <li>Category-wise item organization</li>
+                  <li>Student ID verification system</li>
+                  <li>Safety guidelines and tips</li>
+                  <li>Rating system for sellers</li>
+                </ul>
+              </div>
+              <div class="feature-screenshot">
+                <img
+                  src="image7.jpg"
+                  alt="Marketplace Interface"
+                  class="feature-image"
+                />
+              </div>
+            </div>
+
+            <div class="feature-item fade-in">
+              <div class="feature-content">
+                <h3>
+                  <i class="fas fa-chalkboard-teacher"></i> Faculty Directory
+                </h3>
+                <p>
+                  Complete faculty information system with profiles, ratings,
+                  contact details, office hours, and subject mapping for better
+                  student-teacher connectivity.
+                </p>
+                <ul class="feature-benefits">
+                  <li>Comprehensive faculty profiles</li>
+                  <li>Student rating and feedback system</li>
+                  <li>Office hours and contact information</li>
+                  <li>Subject and department mapping</li>
+                  <li>Direct communication features</li>
+                </ul>
+              </div>
+              <div class="feature-screenshot">
+                <img
+                  src="image8.jpg"
+                  alt="Faculty Directory Interface"
+                  class="feature-image"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Screenshots Gallery -->
+      <section class="screenshots" id="screenshots">
+        <div class="container">
+          <h2 class="section-title fade-in">App Screenshots Gallery</h2>
+          <div class="screenshots-grid">
+            <div class="screenshot-card fade-in">
+              <div class="phone-mockup-container">
+                <div class="phone-mockup-frame">
+                  <div class="phone-screen-container">
+                    <div class="screenshot-image">
+                      <img src="image1.jpg" alt="Home Dashboard" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="screenshot-info">
+                <h4>Dashboard</h4>
+                <p>
+                  Clean, intuitive interface for quick access to all campus
+                  services
+                </p>
+              </div>
+            </div>
+
+            <div class="screenshot-card fade-in">
+              <div class="phone-mockup-container">
+                <div class="phone-mockup-frame">
+                  <div class="phone-screen-container">
+                    <div class="screenshot-image">
+                      <img src="image3.jpg" alt="Food Ordering" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="screenshot-info">
+                <h4>Food Ordering</h4>
+                <p>Browse menus and order from multiple campus restaurants</p>
+              </div>
+            </div>
+
+            <div class="screenshot-card fade-in">
+              <div class="phone-mockup-container">
+                <div class="phone-mockup-frame">
+                  <div class="phone-screen-container">
+                    <div class="screenshot-image">
+                      <img src="image4.jpg" alt="Lost & Found" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="screenshot-info">
+                <h4>Lost & Found</h4>
+                <p>Report and search for lost items with photo verification</p>
+              </div>
+            </div>
+
+            <div class="screenshot-card fade-in">
+              <div class="phone-mockup-container">
+                <div class="phone-mockup-frame">
+                  <div class="phone-screen-container">
+                    <div class="screenshot-image">
+                      <img src="image13.jpeg" alt="Study Materials" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="screenshot-info">
+                <h4>Study Resources</h4>
+                <p>
+                  Access organized academic materials and previous year
+                  questions
+                </p>
+              </div>
+            </div>
+
+            <div class="screenshot-card fade-in">
+              <div class="phone-mockup-container">
+                <div class="phone-mockup-frame">
+                  <div class="phone-screen-container">
+                    <div class="screenshot-image">
+                      <img src="image6.jpg" alt="Campus Clubs" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="screenshot-info">
+                <h4>Campus Clubs</h4>
+                <p>Discover and join student organizations and clubs</p>
+              </div>
+            </div>
+
+            <div class="screenshot-card fade-in">
+              <div class="phone-mockup-container">
+                <div class="phone-mockup-frame">
+                  <div class="phone-screen-container">
+                    <div class="screenshot-image">
+                      <img src="image2.jpg" alt="Repair Services" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="screenshot-info">
+                <h4>Repair Tracking</h4>
+                <p>
+                  Submit and track device repair requests with real-time updates
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <h3>V HELPCC</h3>
-            <p>Transforming VIT Chennai campus life through innovative digital solutions. Built by students, for students - creating a unified ecosystem for all your campus needs.</p>
-            <div class="social-icons">
-                <a href="mailto:vhelpvitcc@gmail.com" class="social-icon" title="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <a href="#" class="social-icon" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="#" class="social-icon" title="LinkedIn">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="#" class="social-icon" title="Twitter">
-                    <i class="fab fa-twitter"></i>
-                </a>
-            </div>
-            <p style="margin-top: 40px; opacity: 0.6; font-size: 0.95rem;">
-                © 2025 V HELPCC. Made with ❤️ for VIT Chennai Community.<br>
-                Independent project - Not officially affiliated with VIT Chennai.
-            </p>
+      <div class="container">
+        <h3>V HELPCC</h3>
+        <p>
+          Transforming VIT Chennai campus life through innovative digital
+          solutions. Built by students, for students - creating a unified
+          ecosystem for all your campus needs.
+        </p>
+        <div class="social-icons">
+          <a
+            href="mailto:vhelpvitcc@gmail.com"
+            target="_blank"
+            class="social-icon"
+            title="Email"
+          >
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/vhelpchennai/"
+            target="_blank"
+            class="social-icon"
+            title="Instagram"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
         </div>
+        <p style="margin-top: 40px; opacity: 0.6; font-size: 0.95rem">
+          © 2025 V HELPCC. Made with ❤️ for VIT Chennai Community.<br />
+          Independent project - Not officially affiliated with VIT Chennai.
+        </p>
+      </div>
     </footer>
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" title="Back to Top">
-        <i class="fas fa-arrow-up"></i>
+      <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
-        // Enhanced JavaScript with performance optimizations
-        class VHelpccApp {
-            constructor() {
-                this.navbar = document.getElementById('navbar');
-                this.mobileMenuBtn = document.getElementById('mobileMenuBtn');
-                this.navLinks = document.getElementById('navLinks');
-                this.backToTop = document.getElementById('backToTop');
-                this.downloadBtn = document.getElementById('downloadBtn');
-                
-                this.init();
-            }
+      // Enhanced JavaScript with performance optimizations
+      class VHelpccApp {
+        constructor() {
+          this.navbar = document.getElementById("navbar");
+          this.mobileMenuBtn = document.getElementById("mobileMenuBtn");
+          this.navLinks = document.getElementById("navLinks");
+          this.backToTop = document.getElementById("backToTop");
+          this.downloadBtn = document.getElementById("downloadBtn");
 
-            init() {
-                this.setupScrollEffects();
-                this.setupMobileMenu();
-                this.setupSmoothScrolling();
-                this.setupIntersectionObserver();
-                this.setupDownloadHandler();
-                this.setupActiveNavigation();
-                this.setupBackToTop();
-            }
-
-            setupScrollEffects() {
-                let scrollTimeout;
-                window.addEventListener('scroll', () => {
-                    if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
-                    scrollTimeout = requestAnimationFrame(() => {
-                        const scrollY = window.scrollY;
-                        
-                        // Navbar effects
-                        if (scrollY > 50) {
-                            this.navbar.classList.add('scrolled');
-                            this.backToTop.classList.add('visible');
-                        } else {
-                            this.navbar.classList.remove('scrolled');
-                            this.backToTop.classList.remove('visible');
-                        }
-                    });
-                }, { passive: true });
-            }
-
-            setupMobileMenu() {
-                this.mobileMenuBtn.addEventListener('click', () => {
-                    this.mobileMenuBtn.classList.toggle('active');
-                    this.navLinks.classList.toggle('active');
-                });
-
-                // Close menu when clicking outside
-                document.addEventListener('click', (e) => {
-                    if (!this.navbar.contains(e.target) && this.navLinks.classList.contains('active')) {
-                        this.navLinks.classList.remove('active');
-                        this.mobileMenuBtn.classList.remove('active');
-                    }
-                });
-
-                // Close menu when link is clicked
-                this.navLinks.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        this.navLinks.classList.remove('active');
-                        this.mobileMenuBtn.classList.remove('active');
-                    });
-                });
-            }
-
-            setupSmoothScrolling() {
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const target = document.querySelector(anchor.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'start' 
-                            });
-                        }
-                    });
-                });
-            }
-
-            setupIntersectionObserver() {
-                const observerOptions = {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
-                };
-
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                            
-                            // Animate counters
-                            if (entry.target.classList.contains('stat-item')) {
-                                this.animateCounter(entry.target);
-                            }
-                        }
-                    });
-                }, observerOptions);
-
-                document.querySelectorAll('.fade-in, .stat-item').forEach(el => {
-                    observer.observe(el);
-                });
-            }
-
-            animateCounter(statItem) {
-                if (statItem.dataset.animated) return;
-                statItem.dataset.animated = true;
-                
-                const numberElement = statItem.querySelector('.stat-number');
-                const target = parseInt(statItem.dataset.target);
-                let current = 0;
-                const increment = Math.ceil(target / 100);
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    
-                    if (target >= 1000) {
-                        numberElement.textContent = (current / 1000).toFixed(1) + 'K+';
-                    } else {
-                        numberElement.textContent = current.toLocaleString() + '+';
-                    }
-                }, 30);
-            }
-
-            setupDownloadHandler() {
-                this.downloadBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.handleDownload();
-                });
-            }
-
-            async handleDownload() {
-                const originalText = this.downloadBtn.innerHTML;
-                
-                // Loading state
-                this.downloadBtn.classList.add('loading');
-                this.downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing Download...';
-                
-                try {
-                    // Simulate download preparation
-                    await new Promise(resolve => setTimeout(resolve, 1500));
-                    
-                    // Open download link
-                    const apkUrl = 'https://github.com/nikhilvitc/vhelpmainapp/releases/download/v1.0.0/V.HELPCC.apk';
-                    window.open(apkUrl, '_blank');
-                    
-                    // Show success notification
-                    this.showNotification('📱 Download started! Check your downloads folder.', 'success');
-                    
-                } catch (error) {
-                    this.showNotification('❌ Download failed. Please try again.', 'error');
-                } finally {
-                    // Reset button
-                    setTimeout(() => {
-                        this.downloadBtn.classList.remove('loading');
-                        this.downloadBtn.innerHTML = originalText;
-                    }, 2000);
-                }
-            }
-
-            showNotification(message, type = 'success') {
-                const notification = document.createElement('div');
-                notification.className = 'notification';
-                notification.innerHTML = message;
-                
-                if (type === 'error') {
-                    notification.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
-                }
-                
-                document.body.appendChild(notification);
-                
-                // Show animation
-                setTimeout(() => notification.classList.add('show'), 100);
-                
-                // Hide and remove
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                    setTimeout(() => notification.remove(), 300);
-                }, 3000);
-            }
-
-            setupActiveNavigation() {
-                const sections = document.querySelectorAll('section[id]');
-                const navItems = document.querySelectorAll('.nav-links a[data-section]');
-                
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const activeNavItem = document.querySelector(`[data-section="${entry.target.id}"]`);
-                            
-                            // Remove active class from all nav items
-                            navItems.forEach(item => item.classList.remove('active'));
-                            
-                            // Add active class to current nav item
-                            if (activeNavItem) {
-                                activeNavItem.classList.add('active');
-                            }
-                        }
-                    });
-                }, {
-                    threshold: 0.3,
-                    rootMargin: '-100px 0px -100px 0px'
-                });
-                
-                sections.forEach(section => observer.observe(section));
-            }
-
-            setupBackToTop() {
-                this.backToTop.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
+          this.init();
         }
 
-        // Initialize app when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            new VHelpccApp();
-        });
+        init() {
+          this.setupScrollEffects();
+          this.setupMobileMenu();
+          this.setupSmoothScrolling();
+          this.setupIntersectionObserver();
+          this.setupDownloadHandler();
+          this.setupActiveNavigation();
+          this.setupBackToTop();
+        }
 
-        // Performance optimization - Defer non-critical operations
-        window.addEventListener('load', () => {
-            // Add any additional load-dependent functionality here
-            console.log('V HELPCC Landing Page fully loaded! 🚀');
-        });
+        setupScrollEffects() {
+          let scrollTimeout;
+          window.addEventListener(
+            "scroll",
+            () => {
+              if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
+              scrollTimeout = requestAnimationFrame(() => {
+                const scrollY = window.scrollY;
+
+                // Navbar effects
+                if (scrollY > 50) {
+                  this.navbar.classList.add("scrolled");
+                  this.backToTop.classList.add("visible");
+                } else {
+                  this.navbar.classList.remove("scrolled");
+                  this.backToTop.classList.remove("visible");
+                }
+              });
+            },
+            { passive: true }
+          );
+        }
+
+        setupMobileMenu() {
+          this.mobileMenuBtn.addEventListener("click", () => {
+            this.mobileMenuBtn.classList.toggle("active");
+            this.navLinks.classList.toggle("active");
+          });
+
+          // Close menu when clicking outside
+          document.addEventListener("click", (e) => {
+            if (
+              !this.navbar.contains(e.target) &&
+              this.navLinks.classList.contains("active")
+            ) {
+              this.navLinks.classList.remove("active");
+              this.mobileMenuBtn.classList.remove("active");
+            }
+          });
+
+          // Close menu when link is clicked
+          this.navLinks.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+              this.navLinks.classList.remove("active");
+              this.mobileMenuBtn.classList.remove("active");
+            });
+          });
+        }
+
+        setupSmoothScrolling() {
+          document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener("click", (e) => {
+              e.preventDefault();
+              const target = document.querySelector(
+                anchor.getAttribute("href")
+              );
+              if (target) {
+                target.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            });
+          });
+        }
+
+        setupIntersectionObserver() {
+          const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px",
+          };
+
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+
+                // Animate counters
+                if (entry.target.classList.contains("stat-item")) {
+                  this.animateCounter(entry.target);
+                }
+              }
+            });
+          }, observerOptions);
+
+          document.querySelectorAll(".fade-in, .stat-item").forEach((el) => {
+            observer.observe(el);
+          });
+        }
+
+        animateCounter(statItem) {
+          if (statItem.dataset.animated) return;
+          statItem.dataset.animated = true;
+
+          const numberElement = statItem.querySelector(".stat-number");
+          const target = parseInt(statItem.dataset.target);
+          let current = 0;
+          const increment = Math.ceil(target / 100);
+
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+
+            if (target >= 1000) {
+              numberElement.textContent = (current / 1000).toFixed(1) + "K+";
+            } else {
+              numberElement.textContent = current.toLocaleString() + "+";
+            }
+          }, 30);
+        }
+
+        setupDownloadHandler() {
+          this.downloadBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.handleDownload();
+          });
+        }
+
+        async handleDownload() {
+          const originalText = this.downloadBtn.innerHTML;
+
+          // Loading state
+          this.downloadBtn.classList.add("loading");
+          this.downloadBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Preparing Download...';
+
+          try {
+            // Simulate download preparation
+            await new Promise((resolve) => setTimeout(resolve, 1500));
+
+            // Open download link
+            const apkUrl =
+              "https://github.com/nikhilvitc/vhelpmainapp/releases/download/v1.0.0/V.HELPCC.apk";
+            window.open(apkUrl, "_blank");
+
+            // Show success notification
+            this.showNotification(
+              "📱 Download started! Check your downloads folder.",
+              "success"
+            );
+          } catch (error) {
+            this.showNotification(
+              "❌ Download failed. Please try again.",
+              "error"
+            );
+          } finally {
+            // Reset button
+            setTimeout(() => {
+              this.downloadBtn.classList.remove("loading");
+              this.downloadBtn.innerHTML = originalText;
+            }, 2000);
+          }
+        }
+
+        showNotification(message, type = "success") {
+          const notification = document.createElement("div");
+          notification.className = "notification";
+          notification.innerHTML = message;
+
+          if (type === "error") {
+            notification.style.background =
+              "linear-gradient(135deg, #ef4444, #dc2626)";
+          }
+
+          document.body.appendChild(notification);
+
+          // Show animation
+          setTimeout(() => notification.classList.add("show"), 100);
+
+          // Hide and remove
+          setTimeout(() => {
+            notification.classList.remove("show");
+            setTimeout(() => notification.remove(), 300);
+          }, 3000);
+        }
+
+        setupActiveNavigation() {
+          const sections = document.querySelectorAll("section[id]");
+          const navItems = document.querySelectorAll(
+            ".nav-links a[data-section]"
+          );
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  const activeNavItem = document.querySelector(
+                    `[data-section="${entry.target.id}"]`
+                  );
+
+                  // Remove active class from all nav items
+                  navItems.forEach((item) => item.classList.remove("active"));
+
+                  // Add active class to current nav item
+                  if (activeNavItem) {
+                    activeNavItem.classList.add("active");
+                  }
+                }
+              });
+            },
+            {
+              threshold: 0.3,
+              rootMargin: "-100px 0px -100px 0px",
+            }
+          );
+
+          sections.forEach((section) => observer.observe(section));
+        }
+
+        setupBackToTop() {
+          this.backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        }
+      }
+
+      // Initialize app when DOM is loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        new VHelpccApp();
+      });
+
+      // Performance optimization - Defer non-critical operations
+      window.addEventListener("load", () => {
+        // Add any additional load-dependent functionality here
+        console.log("V HELPCC Landing Page fully loaded! 🚀");
+      });
     </script>
-</body>
+  </body>
 </html>
