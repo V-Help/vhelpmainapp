@@ -1468,22 +1468,22 @@
           try {
             // Fetch latest release from GitHub API
             const response = await fetch(
-              'https://api.github.com/repos/V-Help/VHELP-USER/releases/latest'
+              "https://api.github.com/repos/V-Help/VHELP-USER/releases/latest"
             );
 
             if (!response.ok) {
-              throw new Error('Failed to fetch latest release');
+              throw new Error("Failed to fetch latest release");
             }
 
             const release = await response.json();
-            
+
             // Find the APK asset (look for .apk file)
-            const apkAsset = release.assets.find(asset => 
-              asset.name.toLowerCase().endsWith('.apk')
+            const apkAsset = release.assets.find((asset) =>
+              asset.name.toLowerCase().endsWith(".apk")
             );
 
             if (!apkAsset) {
-              throw new Error('No APK file found in latest release');
+              throw new Error("No APK file found in latest release");
             }
 
             // Open download link
@@ -1495,14 +1495,14 @@
               "success"
             );
           } catch (error) {
-            console.error('Download error:', error);
-            
+            console.error("Download error:", error);
+
             // Fallback: Try to open releases page
             window.open(
-              'https://github.com/V-Help/VHELP-USER/releases/latest',
-              '_blank'
+              "https://github.com/V-Help/VHELP-USER/releases/latest",
+              "_blank"
             );
-            
+
             this.showNotification(
               "⚠️ Opening releases page. Please download manually.",
               "error"
