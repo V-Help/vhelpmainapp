@@ -215,21 +215,44 @@ class VHelpccApp {
 
     this.downloadBtn.classList.add("loading");
     this.downloadBtn.innerHTML =
-      '<i class="fas fa-spinner fa-spin"></i> Redirecting to Download...';
+      '<i class="fas fa-spinner fa-spin"></i> Fetching Latest Version...';
 
     try {
-      // Redirect to GitHub releases page
-      const githubReleasesUrl = "https://github.com/vhelpcc/VHELP-releases/releases/latest";
+      // Fetch latest release from GitHub API
+      const response = await fetch('https://api.github.com/repos/vhelpcc/VHELP-releases/releases/latest');
       
-      window.open(githubReleasesUrl, "_blank");
+      if (!response.ok) {
+        throw new Error('Failed to fetch latest release');
+      }
 
-      this.showNotification(`📱 Redirecting to latest V HELPCC release`, "success");
+      const release = await response.json();
+      
+      // Find the APK asset (should be named VHELP-v*.apk)
+      const apkAsset = release.assets.find(asset => 
+        asset.name.startsWith('VHELP-v') && asset.name.endsWith('.apk')
+      );
+
+      if (!apkAsset) {
+        throw new Error('APK file not found in latest release');
+      }
+
+      // Trigger direct download
+      this.downloadBtn.innerHTML =
+        '<i class="fas fa-spinner fa-spin"></i> Starting Download...';
+      
+      window.location.href = apkAsset.browser_download_url;
+
+      this.showNotification(`📱 Downloading V HELPCC ${release.tag_name}`, "success");
     } catch (error) {
       console.error("Download error:", error);
 
+      // Fallback to releases page if API fails
+      const githubReleasesUrl = "https://github.com/vhelpcc/VHELP-releases/releases/latest";
+      window.open(githubReleasesUrl, "_blank");
+
       this.showNotification(
-        "❌ Redirect failed. Please try again later.",
-        "error"
+        "⚠️ Redirecting to releases page. Please download manually.",
+        "warning"
       );
     } finally {
       setTimeout(() => {
