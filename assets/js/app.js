@@ -215,29 +215,20 @@ class VHelpccApp {
 
     this.downloadBtn.classList.add("loading");
     this.downloadBtn.innerHTML =
-      '<i class="fas fa-spinner fa-spin"></i> Fetching Latest Version...';
+      '<i class="fas fa-spinner fa-spin"></i> Redirecting to Download...';
 
     try {
-      const response = await fetch(
-        "https://firestore.googleapis.com/v1/projects/vhelp-user/databases/(default)/documents/app_config/version"
-      );
+      // Redirect to GitHub releases page
+      const githubReleasesUrl = "https://github.com/vhelpcc/VHELP-releases/releases/latest";
+      
+      window.open(githubReleasesUrl, "_blank");
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch version info");
-      }
-
-      const data = await response.json();
-      const downloadUrl = data.fields.downloadUrl.stringValue;
-      const version = data.fields.latestVersion.stringValue;
-
-      window.open(downloadUrl, "_blank");
-
-      this.showNotification(`📱 Downloading V HELPCC v${version}`, "success");
+      this.showNotification(`📱 Redirecting to latest V HELPCC release`, "success");
     } catch (error) {
       console.error("Download error:", error);
 
       this.showNotification(
-        "❌ Download failed. Please try again later.",
+        "❌ Redirect failed. Please try again later.",
         "error"
       );
     } finally {
