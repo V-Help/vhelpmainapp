@@ -195,62 +195,80 @@
     
     console.log('Share ID:', shareId);
     console.log('Current URL:', window.location.href);
+    console.log('User Agent:', navigator.userAgent);
     
     // Play Store link (update when app is published)
     const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.vhelp.app';
     
+    // Track if we've already tried to open the app
+    let hasTriedOpening = false;
+    
     // Function to try opening the app
     function tryOpenApp() {
-      const userAgent = navigator.userAgent.toLowerCase();
-      const isAndroid = userAgent.indexOf('android') > -1;
-      
-      if (!isAndroid) {
-        alert('This feature is currently only available on Android. Please visit app.vhelpcc.com to learn more.');
+      if (hasTriedOpening) {
+        console.log('Already tried opening app, skipping...');
         return;
       }
+      hasTriedOpening = true;
       
-      if (!shareId || shareId.length === 0) {
+      if (!shareId || shareId.length === 0 || shareId === 'index.html') {
+        console.error('Invalid share ID:', shareId);
         alert('Invalid share link. Please check the URL and try again.');
         return;
       }
       
-      // Show alert to user
-      alert('Opening V HELPCC app...\n\nIf the app doesn\'t open, please make sure it\'s installed on your device.');
+      console.log('Attempting to open app with share ID:', shareId);
       
       // Try custom scheme first (this will ALWAYS prompt "Open with VHelp")
       const customSchemeUrl = `vhelp://share/cart/${shareId}`;
+      console.log('Trying custom scheme:', customSchemeUrl);
       window.location.href = customSchemeUrl;
       
-      // Fallback to intent URL after 1 second
+      // Fallback to intent URL after 1.5 seconds
       setTimeout(function() {
         const intentUrl = `intent://share/cart/${shareId}#Intent;scheme=vhelp;package=com.vhelp.app;end`;
+        console.log('Trying intent URL:', intentUrl);
         window.location.href = intentUrl;
-      }, 1000);
+      }, 1500);
       
-      // Final fallback after 3 seconds
+      // Show message after 3 seconds if still on page
       setTimeout(function() {
-        alert('App not installed?\n\nPlease install V HELPCC from the Play Store to view shared carts.');
-        // Uncomment when app is on Play Store:
-        // window.location.href = playStoreUrl;
+        if (document.visibilityState === 'visible') {
+          console.log('App did not open, showing install message');
+          alert('App not installed?\n\nPlease install V HELPCC from the Play Store to view shared carts.');
+          // Uncomment when app is on Play Store:
+          // window.location.href = playStoreUrl;
+        }
       }, 3000);
     }
     
     // Update download button
     document.getElementById('downloadBtn').addEventListener('click', function(e) {
       e.preventDefault();
+      console.log('Download button clicked');
+      hasTriedOpening = false; // Reset flag to allow manual retry
       tryOpenApp();
     });
     
-    // Auto-trigger on page load for Android
+    // Auto-trigger on page load
     window.addEventListener('load', function() {
-      const userAgent = navigator.userAgent.toLowerCase();
-      const isAndroid = userAgent.indexOf('android') > -1;
+      console.log('Page loaded, checking if should auto-open app');
       
-      if (isAndroid && shareId && shareId.length > 0) {
+      if (shareId && shareId.length > 0 && shareId !== 'index.html') {
+        console.log('Valid share ID found, will attempt to open app');
         // Wait a bit for page to render, then try to open app
         setTimeout(function() {
           tryOpenApp();
-        }, 800);
+        }, 500);
+      } else {
+        console.log('No valid share ID, not auto-opening');
+      }
+    });
+    
+    // Handle visibility change (user came back from app attempt)
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible' && hasTriedOpening) {
+        console.log('User returned to page after app open attempt');
       }
     });
   </script>
