@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/share/cart/:code",
+      "destination": "/share/cart/index.html"
+    }
+  ]
+}
