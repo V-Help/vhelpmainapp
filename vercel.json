@@ -4,5 +4,16 @@
       "source": "/share/cart/:code",
       "destination": "/share/cart/index.html"
     }
+  ],
+  "headers": [
+    {
+      "source": "/.well-known/assetlinks.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    }
   ]
 }

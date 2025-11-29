@@ -4,7 +4,9 @@
     "namespace": "android_app",
     "package_name": "com.vhelp.app",
     "sha256_cert_fingerprints": [
-      "1E:ED:75:FB:34:E9:A2:70:62:01:74:3B:DF:2D:75:E0:B0:35:8E:83:A0:F2:B2:67:14:25:14:F1:F7:61:96:A9"
+      "1E:ED:75:FB:34:E9:A2:70:62:01:74:3B:DF:2D:75:E0:B0:35:8E:83:A0:F2:B2:67:14:25:14:F1:F7:61:96:A9",
+      "14:F5:35:2B:3C:0B:BC:AD:A6:C3:C1:24:DE:E2:8B:64:ED:82:83:04:D8:CB:47:2F:73:C7:E1:FA:4D:EC:36:65"
     ]
   }
 }]
+

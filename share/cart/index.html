@@ -189,17 +189,49 @@
   </div>
 
   <script>
-    // Try to detect if on Android and redirect to Play Store
-    // This page is shown when app is NOT installed
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isAndroid = userAgent.indexOf('android') > -1;
+    // Attempt to open the app automatically
+    (function() {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isAndroid = userAgent.indexOf('android') > -1;
+      const isIOS = /iphone|ipad|ipod/.test(userAgent);
+      
+      // Get the share ID from URL
+      const pathParts = window.location.pathname.split('/');
+      const shareId = pathParts[pathParts.length - 1];
+      
+      // Try to open the app immediately
+      if (shareId && shareId.length > 0) {
+        // For Android App Links, the system handles this automatically
+        // But we can also try a custom scheme as fallback
+        const appUrl = `vhelp://share/cart/${shareId}`;
+        const httpsUrl = `https://app.vhelpcc.com/share/cart/${shareId}`;
+        
+        // Try to open the app
+        window.location.href = httpsUrl;
+        
+        // If app doesn't open within 2 seconds, show download page
+        setTimeout(function() {
+          // User is still on this page, app probably not installed
+          console.log('App not detected, showing download page');
+        }, 2000);
+      }
+    })();
     
-    // You can add Play Store link here when available
-    // const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.vhelp.app';
+    // Play Store link (update when app is published)
+    const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.vhelp.app';
     
     document.getElementById('downloadBtn').addEventListener('click', function(e) {
-      // For now, redirect to main website
-      // Later, you can add platform-specific store links
+      e.preventDefault();
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isAndroid = userAgent.indexOf('android') > -1;
+      
+      if (isAndroid) {
+        // Redirect to Play Store when available
+        // window.location.href = playStoreUrl;
+        window.location.href = 'https://app.vhelpcc.com';
+      } else {
+        window.location.href = 'https://app.vhelpcc.com';
+      }
     });
   </script>
 </body>
