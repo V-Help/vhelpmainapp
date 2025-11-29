@@ -160,9 +160,9 @@
       please open this link in the V HELPCC app.
     </p>
     
-    <a href="https://app.vhelpcc.com" class="download-btn" id="downloadBtn">
-      <i class="fas fa-download"></i>
-      Download V HELPCC App
+    <a href="#" class="download-btn" id="downloadBtn">
+      <i class="fas fa-mobile-alt"></i>
+      Open in V HELPCC App
     </a>
     
     <a href="https://app.vhelpcc.com" class="secondary-btn">
@@ -189,48 +189,48 @@
   </div>
 
   <script>
-    // Attempt to open the app automatically
-    (function() {
-      const userAgent = navigator.userAgent.toLowerCase();
-      const isAndroid = userAgent.indexOf('android') > -1;
-      const isIOS = /iphone|ipad|ipod/.test(userAgent);
-      
-      // Get the share ID from URL
-      const pathParts = window.location.pathname.split('/');
-      const shareId = pathParts[pathParts.length - 1];
-      
-      // Try to open the app immediately
-      if (shareId && shareId.length > 0) {
-        // For Android App Links, the system handles this automatically
-        // But we can also try a custom scheme as fallback
-        const appUrl = `vhelp://share/cart/${shareId}`;
-        const httpsUrl = `https://app.vhelpcc.com/share/cart/${shareId}`;
-        
-        // Try to open the app
-        window.location.href = httpsUrl;
-        
-        // If app doesn't open within 2 seconds, show download page
-        setTimeout(function() {
-          // User is still on this page, app probably not installed
-          console.log('App not detected, showing download page');
-        }, 2000);
-      }
-    })();
+    // Get the share ID from URL
+    const pathParts = window.location.pathname.split('/');
+    const shareId = pathParts[pathParts.length - 1];
+    
+    console.log('Share ID:', shareId);
+    console.log('Current URL:', window.location.href);
     
     // Play Store link (update when app is published)
     const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.vhelp.app';
     
+    // Update download button to open app or go to Play Store
     document.getElementById('downloadBtn').addEventListener('click', function(e) {
       e.preventDefault();
       const userAgent = navigator.userAgent.toLowerCase();
       const isAndroid = userAgent.indexOf('android') > -1;
       
       if (isAndroid) {
-        // Redirect to Play Store when available
-        // window.location.href = playStoreUrl;
-        window.location.href = 'https://app.vhelpcc.com';
+        // Try to open the app with intent
+        const intentUrl = `intent://app.vhelpcc.com/share/cart/${shareId}#Intent;scheme=https;package=com.vhelp.app;end`;
+        window.location.href = intentUrl;
+        
+        // Fallback to Play Store after 2 seconds if app doesn't open
+        setTimeout(function() {
+          // Redirect to Play Store when available
+          // window.location.href = playStoreUrl;
+          alert('App not installed. Please install V HELPCC from Play Store.');
+        }, 2000);
       } else {
         window.location.href = 'https://app.vhelpcc.com';
+      }
+    });
+    
+    // Auto-trigger the download button click on page load for Android
+    window.addEventListener('load', function() {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isAndroid = userAgent.indexOf('android') > -1;
+      
+      if (isAndroid && shareId && shareId.length > 0) {
+        // Wait a bit for page to render, then try to open app
+        setTimeout(function() {
+          document.getElementById('downloadBtn').click();
+        }, 500);
       }
     });
   </script>
