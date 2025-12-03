@@ -8,7 +8,8 @@ class VHelpccApp {
 
     // Supabase config - using service role key for RLS bypass
     this.supabaseUrl = "https://umsauywmuibaqbgfumwg.supabase.co";
-    this.supabaseServiceKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVtc2F1eXdtdWliYXFiZ2Z1bXdnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MzU4NDY0OCwiZXhwIjoyMDY5MTYwNjQ4fQ.1QhA7UzwxmZZ7kr_mIkFZO6s9cOgq3g5-5wjqL7CrXo";
+    this.supabaseServiceKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVtc2F1eXdtdWliYXFiZ2Z1bXdnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MzU4NDY0OCwiZXhwIjoyMDY5MTYwNjQ4fQ.1QhA7UzwxmZZ7kr_mIkFZO6s9cOgq3g5-5wjqL7CrXo";
 
     this.init();
   }
@@ -95,7 +96,11 @@ class VHelpccApp {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
 
-          if (entry.target.classList.contains("stat-item")) {
+          // Only animate counter if stats have been loaded (data-target is set)
+          if (
+            entry.target.classList.contains("stat-item") &&
+            entry.target.dataset.target
+          ) {
             this.animateCounter(entry.target);
           }
         }
@@ -177,10 +182,14 @@ class VHelpccApp {
 
   animateCounter(statItem) {
     if (statItem.dataset.animated) return;
+
+    const target = parseInt(statItem.dataset.target);
+    // Skip animation if target is not a valid number
+    if (isNaN(target)) return;
+
     statItem.dataset.animated = true;
 
     const numberElement = statItem.querySelector(".stat-number");
-    const target = parseInt(statItem.dataset.target);
     const statKey = statItem.dataset.statKey;
     let current = 0;
     const increment = Math.ceil(target / 100);
@@ -219,35 +228,42 @@ class VHelpccApp {
 
     try {
       // Fetch latest release from GitHub API
-      const response = await fetch('https://api.github.com/repos/vhelpcc/VHELP-releases/releases/latest');
-      
+      const response = await fetch(
+        "https://api.github.com/repos/vhelpcc/VHELP-releases/releases/latest"
+      );
+
       if (!response.ok) {
-        throw new Error('Failed to fetch latest release');
+        throw new Error("Failed to fetch latest release");
       }
 
       const release = await response.json();
-      
+
       // Find the APK asset (should be named VHELP-v*.apk)
-      const apkAsset = release.assets.find(asset => 
-        asset.name.startsWith('VHELP-v') && asset.name.endsWith('.apk')
+      const apkAsset = release.assets.find(
+        (asset) =>
+          asset.name.startsWith("VHELP-v") && asset.name.endsWith(".apk")
       );
 
       if (!apkAsset) {
-        throw new Error('APK file not found in latest release');
+        throw new Error("APK file not found in latest release");
       }
 
       // Trigger direct download
       this.downloadBtn.innerHTML =
         '<i class="fas fa-spinner fa-spin"></i> Starting Download...';
-      
+
       window.location.href = apkAsset.browser_download_url;
 
-      this.showNotification(`📱 Downloading V HELPCC ${release.tag_name}`, "success");
+      this.showNotification(
+        `📱 Downloading V HELPCC ${release.tag_name}`,
+        "success"
+      );
     } catch (error) {
       console.error("Download error:", error);
 
       // Fallback to releases page if API fails
-      const githubReleasesUrl = "https://github.com/vhelpcc/VHELP-releases/releases/latest";
+      const githubReleasesUrl =
+        "https://github.com/vhelpcc/VHELP-releases/releases/latest";
       window.open(githubReleasesUrl, "_blank");
 
       this.showNotification(
