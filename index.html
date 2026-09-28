@@ -2,488 +2,301 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>V HELPCC - VIT Chennai Campus Services Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VHELP — Your VIT Chennai student companion</title>
+    <meta
+      name="description"
+      content="VHELP connects with VTOP to bring attendance, exams, marks and your class schedule into one app — alongside food outlets, repairs, lost &amp; found, hostel info and more for VIT Chennai students."
+    />
+    <meta name="theme-color" content="#0a0a0a" />
+    <link rel="canonical" href="https://app.vhelpcc.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="VHELP" />
+    <meta property="og:url" content="https://app.vhelpcc.com/" />
+    <meta property="og:title" content="VHELP — Your VIT life. One app." />
+    <meta property="og:description" content="Attendance, exams, marks and campus services for VIT Chennai students, in one app." />
+    <meta property="og:image" content="https://app.vhelpcc.com/assets/img/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235e8bff'/%3E%3Cpath d='M8 9l8 15 8-15' fill='none' stroke='%230a0a0a' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="preload" as="image" href="assets/img/today-720.webp" />
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <script>
+      document.documentElement.classList.add("loading");
+      setTimeout(() => document.documentElement.classList.remove("loading"), 2500);
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "VHELP",
+        "operatingSystem": "Android",
+        "applicationCategory": "EducationApplication",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+        "downloadUrl": "https://github.com/vhelpcc/VHELP-releases/releases/latest",
+        "description": "Student companion app for VIT Chennai: VTOP academics and campus services in one place."
+      }
+    </script>
   </head>
   <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-      <div class="nav-container">
-        <a href="#" class="logo">V HELPCC</a>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#about" data-section="about">About</a></li>
-          <li><a href="#features" data-section="features">Features</a></li>
-          <li>
-            <a href="#additional-features" data-section="additional-features"
-              >Services</a
-            >
-          </li>
-          <li><a href="#screenshots" data-section="screenshots">Gallery</a></li>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="nav" id="nav">
+      <a href="#top" class="brand" aria-label="VHELP home"><span class="logo" aria-hidden="true"><span class="logo-v">&gt;</span><span class="logo-t">help</span></span></a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#academics">Academics</a></li>
+          <li><a href="#campus">Campus</a></li>
+          <li><a href="#updates">Updates</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
-        <div class="mobile-menu-btn" id="mobileMenuBtn">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </nav>
+      </nav>
+      <a class="pill" href="https://github.com/vhelpcc/VHELP-releases/releases/latest" data-download>Get app</a>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <i class="fas fa-graduation-cap"></i> VIT Chennai Digital Ecosystem
+    <main id="main">
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="hero-in">
+          <div class="hero-phones" aria-hidden="true">
+            <div class="phone hp-l"><img src="assets/img/attendance-400.webp" width="400" height="832" alt="" /></div>
+            <div class="phone hp-r"><img src="assets/img/campus-400.webp" width="400" height="832" alt="" /></div>
+            <div class="phone hp-c">
+              <img src="assets/img/today-720.webp" srcset="assets/img/today-400.webp 400w, assets/img/today-720.webp 720w" sizes="(min-width: 900px) 300px, 56vw" width="720" height="1498" fetchpriority="high" alt="" />
+            </div>
+          </div>
+
+          <div class="hero-copy">
+            <p class="mono hero-meta" data-fade>VIT Chennai · Android</p>
+            <h1 class="display" data-lines>Your VIT life.<br />One app.</h1>
+          </div>
+          <div class="hero-side">
+            <p data-fade>Attendance, exams and marks from VTOP, next to everything else you use on campus.</p>
+            <a class="btn" href="https://github.com/vhelpcc/VHELP-releases/releases/latest" data-download data-fade>
+              Get VHELP <span aria-hidden="true">↓</span>
+            </a>
+          </div>
         </div>
-        <h1>V HELPCC</h1>
-        <p class="tagline">
-          Your comprehensive VIT Chennai campus services platform - Food
-          delivery, repairs, lost & found, study materials, clubs, and
-          marketplace - all in one app!
+      </section>
+
+      <!-- ACADEMICS: pinned phone -->
+      <section class="acad" id="academics" aria-labelledby="acad-h">
+        <div class="acad-pin">
+          <div class="acad-copy">
+            <p class="mono tag">01 — Academics</p>
+            <h2 id="acad-h" class="h-md">VTOP, synced.</h2>
+            <ol class="acad-list">
+              <li class="is-on"><span>Today</span><em>Your classes and rooms</em></li>
+              <li><span>Attendance</span><em>What you can skip</em></li>
+              <li><span>Calendar</span><em>Every working day</em></li>
+              <li><span>Exams</span><em>Room and seat</em></li>
+              <li><span>Marks</span><em>CGPA and credits</em></li>
+            </ol>
+          </div>
+          <div class="phone acad-phone">
+            <img src="assets/img/today-720.webp" srcset="assets/img/today-400.webp 400w, assets/img/today-720.webp 720w" sizes="(min-width: 900px) 320px, 60vw" width="720" height="1498" loading="lazy" alt="Today: classes with rooms and attendance" />
+            <img src="assets/img/attendance-720.webp" srcset="assets/img/attendance-400.webp 400w, assets/img/attendance-720.webp 720w" sizes="(min-width: 900px) 320px, 60vw" width="720" height="1498" loading="lazy" alt="Attendance per course with skip guidance" />
+            <img src="assets/img/calendar-720.webp" srcset="assets/img/calendar-400.webp 400w, assets/img/calendar-720.webp 720w" sizes="(min-width: 900px) 320px, 60vw" width="720" height="1498" loading="lazy" alt="Academic calendar" />
+            <img src="assets/img/exams-720.webp" srcset="assets/img/exams-400.webp 400w, assets/img/exams-720.webp 720w" sizes="(min-width: 900px) 320px, 60vw" width="720" height="1498" loading="lazy" alt="Exam schedule with room and seat" />
+            <img src="assets/img/marks-720.webp" srcset="assets/img/marks-400.webp 400w, assets/img/marks-720.webp 720w" sizes="(min-width: 900px) 320px, 60vw" width="720" height="1498" loading="lazy" alt="Marks with CGPA 8.61" />
+          </div>
+        </div>
+      </section>
+
+      <!-- STATEMENT -->
+      <section class="light statement">
+        <p class="big-read" data-read>
+          Attendance. Exams. The mess menu. A cracked screen. A lost AirPod. Everything a VIT student checks in a day — in one app.
         </p>
-        <div class="hero-buttons">
-          <button class="download-btn" id="downloadBtn">
-            <i class="fas fa-download"></i> Download App
-          </button>
-          <a href="#features" class="demo-btn">
-            <i class="fas fa-rocket"></i> Explore Features
-          </a>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <main>
-      <!-- Statistics Section -->
-      <section class="stats">
-        <div class="stats-grid">
-          <div class="stat-item" data-stat-key="targetStudents">
-            <span class="stat-number">-</span>
-            <span class="stat-label">Target Students</span>
+      <!-- CAMPUS: horizontal -->
+      <section class="light hscroll" id="campus" aria-labelledby="campus-h">
+        <div class="h-pin">
+          <div class="h-head">
+            <p class="mono tag">02 — Campus</p>
+            <h2 id="campus-h" class="h-md">Around campus.</h2>
           </div>
-          <div class="stat-item" data-stat-key="totalOrders">
-            <span class="stat-number">-</span>
-            <span class="stat-label">Total Orders Received</span>
-          </div>
-          <div class="stat-item" data-stat-key="totalUsers">
-            <span class="stat-number">-</span>
-            <span class="stat-label">Total Users</span>
-          </div>
+          <ul class="h-track">
+            <li><div class="phone"><img loading="lazy" src="assets/img/food-400.webp" width="400" height="832" alt="Food outlet menu" /></div><p>Food outlets</p></li>
+            <li><div class="phone"><img loading="lazy" src="assets/img/hostel-400.webp" width="400" height="832" alt="Hostel block with mess menu and laundry" /></div><p>Hostel &amp; mess</p></li>
+            <li><div class="phone"><img loading="lazy" src="assets/img/repair-400.webp" width="400" height="832" alt="Mobile repair request" /></div><p>Repairs</p></li>
+            <li><div class="phone"><img loading="lazy" src="assets/img/lostfound-400.webp" width="400" height="832" alt="Lost and found items" /></div><p>Lost &amp; found</p></li>
+            <li><div class="phone"><img loading="lazy" src="assets/img/carpool-400.webp" width="400" height="832" alt="Carpooling" /></div><p>Carpooling</p></li>
+            <li><div class="phone"><img loading="lazy" src="assets/img/clubs-400.webp" width="400" height="832" alt="Clubs directory" /></div><p>Clubs</p></li>
+            <li><div class="phone"><img loading="lazy" src="assets/img/notes-400.webp" width="400" height="832" alt="Module notes by subject" /></div><p>Study material</p></li>
+            <li><div class="phone"><img loading="lazy" src="assets/img/faculty-400.webp" width="400" height="832" alt="Faculty directory with cabins" /></div><p>Faculty</p></li>
+            <li><div class="phone"><img loading="lazy" src="assets/img/gallery-400.webp" width="400" height="832" alt="Campus gallery" /></div><p>Campus gallery</p></li>
+          </ul>
         </div>
       </section>
 
-      <!-- About Section -->
-      <section class="section about" id="about">
-        <div class="container">
-          <h2 class="section-title fade-in">
-            Revolutionizing VIT Chennai Campus Life
-          </h2>
-          <div class="about-content">
-            <div class="about-text fade-in">
-              <h3>Your Digital Campus Companion</h3>
-              <p>
-                V HELPCC is a comprehensive Flutter-based mobile application
-                designed to transform how VIT Chennai students interact with
-                campus services. Built with modern technology and user-centric
-                design, our platform serves over 15,000+ students with
-                integrated solutions.
-              </p>
-              <p>
-                From ordering food from multiple campus restaurants to finding
-                lost items, accessing study materials, joining clubs, and buying
-                used goods - V HELPCC is your one-stop solution for everything
-                campus-related. Built by students, for students.
-              </p>
-              <ul class="feature-benefits">
-                <li>Multi-restaurant food ordering with real-time tracking</li>
-                <li>
-                  Comprehensive repair services for devices and facilities
-                </li>
-                <li>Smart lost & found system with photo verification</li>
-                <li>Organized study materials and academic resources</li>
-                <li>Campus clubs and organizations directory</li>
-                <li>Peer-to-peer marketplace for used goods</li>
-                <li>Faculty information and communication system</li>
-                <li>Secure authentication with VIT email validation</li>
-              </ul>
-            </div>
-            <div class="phone-mockup fade-in">
-              <img
-                src="assets/images/image1.jpeg"
-                alt="V HELPCC App Dashboard"
-                class="feature-image"
-              />
-            </div>
+      <!-- DARK BAND -->
+      <section class="band" aria-labelledby="band-h">
+        <div class="band-in">
+          <div>
+            <p class="mono tag">Private by design</p>
+            <h2 id="band-h" class="h-lg" data-lines>Connect VTOP once.<br />Your password never leaves your phone.</h2>
           </div>
+          <svg class="band-v" viewBox="0 0 200 200" aria-hidden="true">
+            <path d="M30 40 L100 170 L170 40" />
+          </svg>
         </div>
       </section>
 
-      <!-- Core Features Section -->
-      <section class="section features" id="features">
-        <div class="container">
-          <h2 class="section-title fade-in">Core Campus Services</h2>
-          <div class="feature-showcase">
-            <div class="feature-item fade-in">
-              <div class="feature-content">
-                <h3><i class="fas fa-utensils"></i> Food Delivery System</h3>
-                <p>
-                  Order from multiple campus restaurants with real-time menu
-                  updates, smart cart management, and live order tracking. Rate
-                  and review restaurants to help the community make better
-                  choices.
-                </p>
-                <ul class="feature-benefits">
-                  <li>Multi-restaurant platform with live menus</li>
-                  <li>Real-time order tracking and notifications</li>
-                  <li>Smart cart with automatic restoration</li>
-                  <li>Community ratings and reviews</li>
-                  <li>Peak hour delivery optimization</li>
-                </ul>
-              </div>
-              <div class="feature-screenshot">
-                <img
-                  src="assets/images/image3.jpg"
-                  alt="Food Delivery Interface"
-                  class="feature-image"
-                />
-              </div>
-            </div>
+      <a class="marquee" href="https://github.com/vhelpcc/VHELP-releases/releases/latest" data-download aria-label="Get VHELP">
+        <span class="marquee-track" aria-hidden="true">
+          <span>Get VHELP <i>↓</i></span><span>Your VIT life, one app</span>
+          <span>Get VHELP <i>↓</i></span><span>Your VIT life, one app</span>
+          <span>Get VHELP <i>↓</i></span><span>Your VIT life, one app</span>
+        </span>
+      </a>
 
-            <div class="feature-item fade-in">
-              <div class="feature-content">
-                <h3><i class="fas fa-tools"></i> Device & Facility Repairs</h3>
-                <p>
-                  Submit repair requests for mobiles, laptops, and campus
-                  facilities. Track progress in real-time with photo
-                  documentation and direct communication with service providers.
-                </p>
-                <ul class="feature-benefits">
-                  <li>Mobile and laptop repair services</li>
-                  <li>Campus facility maintenance requests</li>
-                  <li>Real-time status tracking</li>
-                  <li>Photo documentation support</li>
-                  <li>Service provider communication</li>
-                </ul>
-              </div>
-              <div class="feature-screenshot">
-                <img
-                  src="assets/images/image2.jpg"
-                  alt="Repair Services Interface"
-                  class="feature-image"
-                />
-              </div>
-            </div>
-
-            <div class="feature-item fade-in">
-              <div class="feature-content">
-                <h3><i class="fas fa-search"></i> Lost & Found Hub</h3>
-                <p>
-                  Advanced lost and found system with photo verification,
-                  location-based search, and admin moderation. Connect with
-                  fellow students to recover lost items safely.
-                </p>
-                <ul class="feature-benefits">
-                  <li>Photo upload for item verification</li>
-                  <li>Location-based search functionality</li>
-                  <li>Admin moderation for authenticity</li>
-                  <li>Secure claim process</li>
-                  <li>Community-driven recovery system</li>
-                </ul>
-              </div>
-              <div class="feature-screenshot">
-                <img
-                  src="assets/images/image4.jpg"
-                  alt="Lost & Found Interface"
-                  class="feature-image"
-                />
-              </div>
-            </div>
-          </div>
+      <!-- UPDATES -->
+      <section class="light rows" id="updates" aria-labelledby="updates-h">
+        <div class="rows-head">
+          <p class="mono tag">03 — Updates</p>
+          <h2 id="updates-h" class="h-md">Still being built.</h2>
         </div>
+        <ul class="row-list">
+          <li><span class="mono">v1.3.10 · Sep 2026</span><span>Preview mode</span><span>Try the academic screens with sample data before connecting.</span></li>
+          <li><span class="mono">v1.3.0 · Aug 2026</span><span>VTOP integration</span><span>Attendance, calendar, exams, marks and grades.</span></li>
+          <li><span class="mono">Soon</span><span>Internships</span><span>Already waiting on the Campus tab.</span></li>
+        </ul>
+        <a class="line-link" href="https://github.com/vhelpcc/VHELP-releases/releases" target="_blank" rel="noopener">All releases <span aria-hidden="true">↗</span></a>
       </section>
 
-      <!-- Additional Features Section -->
-      <section class="section additional-features" id="additional-features">
-        <div class="container">
-          <h2 class="section-title fade-in">Enhanced Campus Experience</h2>
-          <div class="feature-showcase">
-            <div class="feature-item fade-in">
-              <div class="feature-content">
-                <h3><i class="fas fa-book"></i> Study Materials Library</h3>
-                <p>
-                  Access organized academic resources including lecture notes,
-                  previous year questions, and assignment solutions. Integrated
-                  PDF viewer with offline caching and cloud sync.
-                </p>
-                <ul class="feature-benefits">
-                  <li>Year-wise and subject-wise organization</li>
-                  <li>In-app PDF viewer with offline caching</li>
-                  <li>Previous year questions database</li>
-                  <li>Teacher-specific content sections</li>
-                  <li>Cloud storage integration</li>
-                </ul>
-              </div>
-              <div class="feature-screenshot">
-                <img
-                  src="assets/images/image5.jpg"
-                  alt="Study Materials Interface"
-                  class="feature-image"
-                />
-              </div>
-            </div>
-
-            <div class="feature-item fade-in">
-              <div class="feature-content">
-                <h3>
-                  <i class="fas fa-users"></i> Campus Clubs & Organizations
-                </h3>
-                <p>
-                  Discover and join student clubs with comprehensive profiles,
-                  event management, member directories, and activity feeds to
-                  enhance your campus social life.
-                </p>
-                <ul class="feature-benefits">
-                  <li>Complete club profiles and information</li>
-                  <li>Event scheduling and promotion</li>
-                  <li>Member directories and networking</li>
-                  <li>Activity feeds and updates</li>
-                  <li>Club communication tools</li>
-                </ul>
-              </div>
-              <div class="feature-screenshot">
-                <img
-                  src="assets/images/image6.jpg"
-                  alt="Clubs Interface"
-                  class="feature-image"
-                />
-              </div>
-            </div>
-
-            <div class="feature-item fade-in">
-              <div class="feature-content">
-                <h3><i class="fas fa-shopping-cart"></i> Campus Marketplace</h3>
-                <p>
-                  Buy and sell used items within the VIT Chennai community. From
-                  textbooks to electronics, with seller verification and safety
-                  guidelines for secure transactions.
-                </p>
-                <ul class="feature-benefits">
-                  <li>Peer-to-peer commerce platform</li>
-                  <li>Category-wise item organization</li>
-                  <li>Student ID verification system</li>
-                  <li>Safety guidelines and tips</li>
-                  <li>Rating system for sellers</li>
-                </ul>
-              </div>
-              <div class="feature-screenshot">
-                <img
-                  src="assets/images/image7.jpg"
-                  alt="Marketplace Interface"
-                  class="feature-image"
-                />
-              </div>
-            </div>
-
-            <div class="feature-item fade-in">
-              <div class="feature-content">
-                <h3>
-                  <i class="fas fa-chalkboard-teacher"></i> Faculty Directory
-                </h3>
-                <p>
-                  Complete faculty information system with profiles, ratings,
-                  contact details, office hours, and subject mapping for better
-                  student-teacher connectivity.
-                </p>
-                <ul class="feature-benefits">
-                  <li>Comprehensive faculty profiles</li>
-                  <li>Student rating and feedback system</li>
-                  <li>Office hours and contact information</li>
-                  <li>Subject and department mapping</li>
-                  <li>Direct communication features</li>
-                </ul>
-              </div>
-              <div class="feature-screenshot">
-                <img
-                  src="assets/images/image8.jpg"
-                  alt="Faculty Directory Interface"
-                  class="feature-image"
-                />
-              </div>
-            </div>
-          </div>
+      <!-- FAQ -->
+      <section class="light faq" id="faq" aria-labelledby="faq-h">
+        <div>
+          <p class="mono tag">04 — FAQ</p>
+          <h2 id="faq-h" class="h-md">Questions</h2>
         </div>
-      </section>
-
-      <!-- Screenshots Gallery -->
-      <section class="screenshots" id="screenshots">
-        <div class="container">
-          <h2 class="section-title fade-in">App Screenshots Gallery</h2>
-          <div class="screenshots-grid">
-            <div class="screenshot-card fade-in">
-              <div class="phone-mockup-container">
-                <div class="phone-mockup-frame">
-                  <div class="phone-screen-container">
-                    <div class="screenshot-image">
-                      <img
-                        src="assets/images/image1.jpeg"
-                        alt="Home Dashboard"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="screenshot-info">
-                <h4>Dashboard</h4>
-                <p>
-                  Clean, intuitive interface for quick access to all campus
-                  services
-                </p>
-              </div>
-            </div>
-
-            <div class="screenshot-card fade-in">
-              <div class="phone-mockup-container">
-                <div class="phone-mockup-frame">
-                  <div class="phone-screen-container">
-                    <div class="screenshot-image">
-                      <img src="assets/images/image3.jpg" alt="Food Ordering" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="screenshot-info">
-                <h4>Food Ordering</h4>
-                <p>Browse menus and order from multiple campus restaurants</p>
-              </div>
-            </div>
-
-            <div class="screenshot-card fade-in">
-              <div class="phone-mockup-container">
-                <div class="phone-mockup-frame">
-                  <div class="phone-screen-container">
-                    <div class="screenshot-image">
-                      <img src="assets/images/image4.jpg" alt="Lost & Found" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="screenshot-info">
-                <h4>Lost & Found</h4>
-                <p>Report and search for lost items with photo verification</p>
-              </div>
-            </div>
-
-            <div class="screenshot-card fade-in">
-              <div class="phone-mockup-container">
-                <div class="phone-mockup-frame">
-                  <div class="phone-screen-container">
-                    <div class="screenshot-image">
-                      <img
-                        src="assets/images/image13.jpeg"
-                        alt="Study Materials"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="screenshot-info">
-                <h4>Study Resources</h4>
-                <p>
-                  Access organized academic materials and previous year
-                  questions
-                </p>
-              </div>
-            </div>
-
-            <div class="screenshot-card fade-in">
-              <div class="phone-mockup-container">
-                <div class="phone-mockup-frame">
-                  <div class="phone-screen-container">
-                    <div class="screenshot-image">
-                      <img src="assets/images/image6.jpg" alt="Campus Clubs" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="screenshot-info">
-                <h4>Campus Clubs</h4>
-                <p>Discover and join student organizations and clubs</p>
-              </div>
-            </div>
-
-            <div class="screenshot-card fade-in">
-              <div class="phone-mockup-container">
-                <div class="phone-mockup-frame">
-                  <div class="phone-screen-container">
-                    <div class="screenshot-image">
-                      <img
-                        src="assets/images/image2.jpg"
-                        alt="Repair Services"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="screenshot-info">
-                <h4>Repair Tracking</h4>
-                <p>
-                  Submit and track device repair requests with real-time updates
-                </p>
-              </div>
-            </div>
-          </div>
+        <div class="faq-list">
+          <details>
+            <summary>Is VHELP official?</summary>
+            <p>No. It's an independent project built by VIT Chennai students, not affiliated with the university.</p>
+          </details>
+          <details>
+            <summary>What happens to my VTOP password?</summary>
+            <p>It's stored only on your phone, in the device keystore, and never sent to our servers. VHELP keeps the synced results (attendance, marks, schedule) so they show up in the app. Disconnect anytime from Account settings.</p>
+          </details>
+          <details>
+            <summary>Is it free?</summary>
+            <p>Yes.</p>
+          </details>
+          <details>
+            <summary>Is there an iPhone version?</summary>
+            <p>Not yet — VHELP is Android only for now.</p>
+          </details>
+          <details>
+            <summary>How do I install and update it?</summary>
+            <p>Tap Get VHELP, open the downloaded file and install it — Android may ask you to allow installs from your browser. When a new version is out, the app tells you. On an older 32-bit phone, pick <em>Older phones</em> in the download options.</p>
+          </details>
+          <details>
+            <summary>How do I sign in?</summary>
+            <p>With your VIT student email.</p>
+          </details>
         </div>
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <h3>V HELPCC</h3>
-        <p>
-          Transforming VIT Chennai campus life through innovative digital
-          solutions. Built by students, for students - creating a unified
-          ecosystem for all your campus needs.
-        </p>
-        <div class="social-icons">
-          <a
-            href="mailto:vhelpvitcc@gmail.com"
-            target="_blank"
-            class="social-icon"
-            title="Email"
-          >
-            <i class="fas fa-envelope"></i>
-          </a>
-          <a
-            href="https://www.instagram.com/vhelpchennai/"
-            target="_blank"
-            class="social-icon"
-            title="Instagram"
-          >
-            <i class="fab fa-instagram"></i>
-          </a>
+    <footer class="foot">
+      <div class="foot-top">
+        <div>
+          <h2 class="h-lg" data-lines>Your campus.<br />In your pocket.</h2>
+          <a class="btn" href="https://github.com/vhelpcc/VHELP-releases/releases/latest" data-download>Get VHELP <span aria-hidden="true">↓</span></a>
         </div>
-        <p style="margin-top: 40px; opacity: 0.6; font-size: 0.95rem">
-          © 2025 V HELPCC. Made with ❤️ for VIT Chennai Community.<br />
-          Independent project - Not officially affiliated with VIT Chennai.
-        </p>
+        <div class="foot-cols">
+          <ul>
+            <li class="mono">Contact</li>
+            <li>
+              <button class="copy" type="button" data-copy="vhelpvitcc@gmail.com">
+                <span class="copy-val">vhelpvitcc@gmail.com</span>
+                <span class="copy-hint mono" aria-hidden="true">Copy</span>
+              </button>
+            </li>
+            <li><a href="https://www.instagram.com/vhelpcc/" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a></li>
+          </ul>
+          <ul>
+            <li class="mono">App</li>
+            <li><a href="#academics">Academics</a></li>
+            <li><a href="#campus">Campus</a></li>
+            <li><a href="#updates">Updates</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="privacy/">Privacy</a></li>
+          </ul>
+        </div>
       </div>
+
+      <div class="devs">
+        <p class="mono tag">Built by</p>
+        <ul class="dev-list">
+          <li class="dev">
+            <img src="assets/img/dev-aditya.webp" width="160" height="160" alt="" loading="lazy" />
+            <div>
+              <p class="dev-name">Aditya Bharti</p>
+              <p class="dev-links">
+                <a href="https://www.instagram.com/ifnotadi/" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a>
+                <a href="https://github.com/dormeneur" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+              </p>
+            </div>
+          </li>
+          <li class="dev">
+            <img src="assets/img/dev-arhaan.webp" width="160" height="160" alt="" loading="lazy" />
+            <div>
+              <p class="dev-name">Arhaan</p>
+              <p class="dev-links">
+                <a href="https://www.instagram.com/arhaan.1411/" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a>
+                <a href="https://github.com/Arhaan-P" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <p class="foot-word" aria-hidden="true">VHELP</p>
+      <p class="foot-legal mono">© 2026 VHELP · Independent · Not affiliated with VIT Chennai · <a href="privacy/">Privacy policy</a></p>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" title="Back to Top">
-      <i class="fas fa-arrow-up"></i>
-    </button>
+    <p class="toast" id="toast" role="status" aria-live="polite"></p>
+    <div class="cursor" aria-hidden="true"></div>
 
-    <script src="assets/js/app.js"></script>
+    <dialog class="dl" id="dl" aria-labelledby="dl-h">
+      <form method="dialog" class="dl-in">
+        <div class="dl-top">
+          <p class="mono tag">Android · <span data-ver>latest</span></p>
+          <button class="dl-x" value="close" aria-label="Close">✕</button>
+        </div>
+        <h2 id="dl-h" class="h-md">Get VHELP</h2>
+        <fieldset class="seg">
+          <legend class="sr">Choose your device</legend>
+          <span class="seg-pill" aria-hidden="true"></span>
+          <label><input type="radio" name="abi" value="arm64" checked /><span>Most phones</span></label>
+          <label><input type="radio" name="abi" value="armeabi" /><span>Older phones</span></label>
+          <label><input type="radio" name="abi" value="x86_64" /><span>Chromebook</span></label>
+        </fieldset>
+        <p class="dl-desc" data-desc>Nearly every Android phone from the last several years.</p>
+        <a class="btn dl-go" id="dlGo" href="https://github.com/vhelpcc/VHELP-releases/releases/latest/download/VHELP-arm64.apk">
+          <span>Download</span><span class="dl-file mono" data-file>arm64</span><span aria-hidden="true">↓</span>
+        </a>
+        <p class="dl-fine">Your browser may warn that APK files can be harmful — choose <em>Download anyway</em>. Then open the file; Android may ask you to allow installs from your browser.</p>
+      </form>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
   </body>
 </html>
