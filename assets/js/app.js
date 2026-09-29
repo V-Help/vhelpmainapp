@@ -122,6 +122,26 @@ document.querySelectorAll("[data-copy]").forEach((btn) => {
   });
 });
 
+// ---- live demo: load the Flutter web build only when asked (it's several MB) ----
+// Phones follow the link to a new tab instead: a scrollable app inside a scrolling page traps the thumb.
+const launch = document.querySelector("[data-demo]");
+launch?.addEventListener("click", (e) => {
+  if (!matchMedia("(min-width: 900px)").matches) return;
+  e.preventDefault();
+  const frame = launch.closest(".demo-frame");
+  const iframe = Object.assign(document.createElement("iframe"), {
+    src: launch.href,
+    title: "VHELP live demo",
+    allow: "clipboard-write",
+  });
+  // The page's custom cursor can't follow the mouse inside the frame; hide it there.
+  iframe.addEventListener("mouseenter", () => document.querySelector(".cursor")?.classList.remove("is-on"));
+  // Show it straight away: the demo's own splash screen covers the Flutter boot.
+  frame.append(iframe);
+  frame.classList.add("is-live");
+  iframe.focus();
+});
+
 // ---- logo: ">" types "help", turns into the "v" of vhelp, then back (same loop as the app header) ----
 {
   const v = document.querySelector(".logo-v");
