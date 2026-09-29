@@ -481,15 +481,16 @@ html:not(.js) .h-pin { height: auto; padding: 96px 0; overflow-x: auto; }
 .demo-lede { margin-top: 24px; max-width: 36ch; font-size: 18px; color: var(--on-ink-muted); }
 .demo-newtab { margin-top: 28px; color: var(--on-ink); }
 .demo-frame { width: min(100%, 360px); justify-self: center; }
-.demo-frame img, .demo-frame iframe { display: block; width: 100%; aspect-ratio: 390 / 844; object-fit: cover; object-position: top; border: 0; border-radius: 24px; background: var(--ink-2); }
+.demo-frame img { display: block; width: 100%; aspect-ratio: 412 / 892; object-fit: cover; object-position: top; border-radius: 24px; background: var(--ink-2); }
 .demo-frame img { filter: brightness(0.45); transition: filter 0.5s var(--ease); }
 .demo-frame:hover img { filter: brightness(0.6); }
 .demo-launch { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); white-space: nowrap; }
 .demo-frame.is-live img, .demo-frame.is-live .demo-launch { display: none; }
-.has-cursor .demo-frame iframe { cursor: auto !important; }
+/* The app renders at a real phone width and is scaled to the frame (see app.js). */
+.demo-screen { position: relative; aspect-ratio: 412 / 892; overflow: hidden; border-radius: 24px; background: var(--ink-2); }
+.demo-screen iframe { position: absolute; top: 0; left: 0; border: 0; transform: scale(var(--s, 0.85)); transform-origin: 0 0; }
+.has-cursor .demo-frame.is-live, .has-cursor .demo-frame.is-live * { cursor: auto !important; }
 @media (min-width: 900px) {
   .demo { grid-template-columns: 1fr 1fr; gap: 40px; }
   .demo-frame { width: min(380px, calc((100svh - 120px) * 0.462)); }
 }
-.demo-frame iframe { position: absolute; inset: 6px; width: calc(100% - 12px); opacity: 0; }
-.demo-frame.is-live iframe { position: static; width: 100%; opacity: 1; transition: opacity 0.6s; }

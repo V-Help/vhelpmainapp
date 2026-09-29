@@ -124,21 +124,32 @@ document.querySelectorAll("[data-copy]").forEach((btn) => {
 
 // ---- live demo: load the Flutter web build only when asked (it's several MB) ----
 // Phones follow the link to a new tab instead: a scrollable app inside a scrolling page traps the thumb.
+// The app lays itself out for the iframe's own width, so it runs at a real phone size (412×892) and is
+// scaled down to fit the frame — otherwise a ~350px frame gives a cramped, truncated layout.
+const DEMO_W = 412;
+const DEMO_H = 892;
 const launch = document.querySelector("[data-demo]");
 launch?.addEventListener("click", (e) => {
   if (!matchMedia("(min-width: 900px)").matches) return;
   e.preventDefault();
   const frame = launch.closest(".demo-frame");
+  const screen = document.createElement("div");
+  screen.className = "demo-screen";
   const iframe = Object.assign(document.createElement("iframe"), {
     src: launch.href,
     title: "VHELP live demo",
     allow: "clipboard-write",
+    width: DEMO_W,
+    height: DEMO_H,
   });
-  // The page's custom cursor can't follow the mouse inside the frame; hide it there.
-  iframe.addEventListener("mouseenter", () => document.querySelector(".cursor")?.classList.remove("is-on"));
+  screen.append(iframe);
+  new ResizeObserver(([entry]) =>
+    screen.style.setProperty("--s", entry.contentRect.width / DEMO_W)
+  ).observe(screen);
   // Show it straight away: the demo's own splash screen covers the Flutter boot.
-  frame.append(iframe);
+  frame.append(screen);
   frame.classList.add("is-live");
+  frame.dispatchEvent(new Event("demo:live"));
   iframe.focus();
 });
 
@@ -312,15 +323,64 @@ if (window.gsap && window.ScrollTrigger && window.SplitText) {
       const y = gsap.quickTo(dot, "y", { duration: dur, ease: "power3" });
       window.cursorEnabled = true;
       document.documentElement.classList.add("has-cursor");
+      // The page gets no mouse events while the pointer is inside the live demo iframe, so the disc
+      // would freeze at the frame's edge. The whole live frame (border included) is a no-disc zone:
+      // the disc shrinks away as the pointer crosses into it and pops back out when it leaves. The zone
+      // is re-derived from every mousemove/mouseover target, so fast moves can't leave it stuck.
+      const frame = document.querySelector(".demo-frame");
+      let inFrame = false;
+      let hotScale = 1;
+      const setZone = (inside) => {
+        if (inside === inFrame) return;
+        inFrame = inside;
+        if (inside) gsap.to(dot, { scale: 0, duration: reduce ? 0 : 0.3, ease: "back.in(2)", overwrite: "auto" });
+        else gsap.fromTo(dot, { scale: 0 }, { scale: hotScale, duration: reduce ? 0 : 0.55, ease: "back.out(2.5)", overwrite: "auto" });
+      };
+      // Within 16px of the live frame counts as inside: the disc slips away just before the pointer
+      // reaches the phone. Any move slower than ~23px per event (margin + 7px border) is guaranteed
+      // to land an event in this zone; only a flick can skip it — see checkEntered below.
+      const inRect = (px, py, pad) => {
+        const r = frame.getBoundingClientRect();
+        return px > r.left - pad && px < r.right + pad && py > r.top - pad && py < r.bottom + pad;
+      };
+      const inLiveFrame = (e) =>
+        !!frame && frame.classList.contains("is-live") && (frame.contains(e.target) || inRect(e.clientX, e.clientY, 16));
+      frame?.addEventListener("demo:live", () => setZone(true));
+
+      // A flick can land inside the iframe with no event at all on this page. So when moves stop after
+      // a fast move (>500px/s), check where that velocity was heading: if it would have been inside the
+      // frame within 80ms, the pointer went in. Slow or resting pointers never trip this.
+      // ponytail: a heuristic — a postMessage from the demo page would make it exact.
+      let prev = null;
+      let last = null;
+      let watch;
+      const checkEntered = () => {
+        if (inFrame || !prev || !frame?.classList.contains("is-live")) return;
+        const dt = Math.max(last.t - prev.t, 1);
+        const vx = (last.x - prev.x) / dt;
+        const vy = (last.y - prev.y) / dt;
+        if (Math.hypot(vx, vy) < 0.5) return;
+        // Sample the path, not just its end: a very fast flick's 80ms endpoint can overshoot the frame.
+        for (let i = 1; i <= 16; i++) {
+          if (inRect(last.x + vx * 5 * i, last.y + vy * 5 * i, 0)) return setZone(true);
+        }
+      };
+
       addEventListener("mousemove", (e) => {
         x(e.clientX);
         y(e.clientY);
         dot.classList.add("is-on");
+        setZone(inLiveFrame(e));
+        prev = last;
+        last = { x: e.clientX, y: e.clientY, t: performance.now() };
+        clearTimeout(watch);
+        watch = setTimeout(checkEntered, 80);
       }, { passive: true });
       document.addEventListener("mouseleave", () => dot.classList.remove("is-on"));
       document.addEventListener("mouseover", (e) => {
-        const hot = e.target.closest("a, button, summary, label, .h-track li");
-        gsap.to(dot, { scale: hot ? 2.4 : 1, duration: 0.4, ease: "power3" });
+        setZone(inLiveFrame(e));
+        hotScale = e.target.closest("a, button, summary, label, .h-track li") ? 2.4 : 1;
+        if (!inFrame) gsap.to(dot, { scale: hotScale, duration: 0.4, ease: "power3", overwrite: "auto" });
       });
     }
 
